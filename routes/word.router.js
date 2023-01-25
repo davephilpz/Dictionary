@@ -5,7 +5,7 @@ const wordController = require("../controllers/word.controller");
 const router = express.Router();
 
 // router.get("/", wordController.findAllWords);
-// // router.get("/", wordController.findOneWord);
+// router.get("/", wordController.findOneWord);
 // router.post("/", wordController.createWord);
 
 router
@@ -13,10 +13,10 @@ router
   .get(wordController.findAllWords)
   .post(wordController.createWord);
 
-// router
-//   .route("/:id")
-//   .get(wordController.findWord)
-//   .patch(wordController.updateWord)
-//   .delete(wordController.deleteWord);
+router
+  .route("/words/:search")
+  .get(wordController.findOneWord)
+  .patch(wordController.updateWord)
+  .delete(wordController.deleteWord);
 
 module.exports = router;

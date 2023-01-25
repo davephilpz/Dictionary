@@ -18,18 +18,28 @@ exports.findAllWords = async (req, res, next) => {
   }
 };
 
-// exports.findOneWord = async (req, res) => {
-//   try {
-//     const word = await Word.findOne(req.body.word);
-//     console.log(word);
-//   } catch (err) {
-//     (err) => {
-//       res.status(400).json({ message: err.message });
-//       //400 means user error
-//       console.log(err);
-//     };
-//   }
-// };
+exports.findOneWord = async (req, res) => {
+  try {
+    res.render("searchResults", {
+      //word,
+      pageTitle: "Search Results",
+      path: "/words",
+    });
+    const word = await Word.findOne({ word: req.params.search });
+
+    if (word === null) {
+      console.log("Word not found.");
+    } else {
+      console.log(word);
+    }
+  } catch (err) {
+    (err) => {
+      res.status(400).json({ message: err.message });
+      //400 means user error
+      console.log(err);
+    };
+  }
+};
 
 exports.createWord = async (req, res) => {
   const enteredWord = new Word({
@@ -52,14 +62,14 @@ exports.createWord = async (req, res) => {
   }
 };
 
-// exports.updateWord = async (req, res) => {
-//   // const word = new Word({
-//   //   word: "",
-//   // });
-// };
+exports.updateWord = async (req, res) => {
+  // const word = new Word({
+  //   word: "",
+  // });
+};
 
-// exports.deleteWord = async (req, res) => {
-//   // const word = new Word({
-//   //   word: "",
-//   // });
-// };
+exports.deleteWord = async (req, res) => {
+  // const word = new Word({
+  //   word: "",
+  // });
+};
