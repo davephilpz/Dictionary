@@ -1,22 +1,22 @@
 const Word = require("../models/words.model");
 
-// exports.findAllWords = async (req, res, next) => {
-//   try {
-//     // const words = await Word.find();
-//     res.render("index", {
-//       // words,
-//       pageTitle: "Dictionary",
-//       path: "/",
-//     });
-//     // console.log(words);
-//   } catch (err) {
-//     (err) => {
-//       res.status(500).json({ message: err.message });
-//       //500 means server error
-//       console.log(err);
-//     };
-//   }
-// };
+exports.findAllWords = async (req, res, next) => {
+  try {
+    // const words = await Word.find();
+    res.render("index", {
+      // words,
+      pageTitle: "Dictionary",
+      path: "/",
+    });
+    // console.log(words);
+  } catch (err) {
+    (err) => {
+      res.status(500).json({ message: err.message });
+      //500 means server error
+      console.log(err);
+    };
+  }
+};
 
 // exports.findWord = async (req, res) => {
 //   // const word = new Word({
@@ -27,6 +27,9 @@ const Word = require("../models/words.model");
 exports.createWord = async (req, res) => {
   const enteredWord = new Word({
     word: req.body.word,
+    wordType: req.body.wordType,
+    nihongo: req.body.nihongo,
+    eigo: req.body.eigo,
   });
 
   try {

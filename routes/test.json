@@ -1,0 +1,24 @@
+{
+  "word": "test",
+  "nihongo": {
+    "furigana": ["1", "2"],
+    "hiragana": "hira",
+    "katakana": "kata",
+    "nihongoHinshi": {
+      "meishi": "dearu",
+      "doushi": "suru",
+      "keiyoushi": "na",
+      "fukushi": "ni"
+    },
+    "nihongoReibun": ["test sent 1", "test sent 2"]
+  },
+  "eigo": {
+    "eigoHinshi": {
+      "meishi": "to be",
+      "doushi": "do",
+      "keiyoushi": "ish",
+      "fukushi": "ly"
+    },
+    "eigoReibun": ["test sent 1", "test sent 2"]
+  }
+}

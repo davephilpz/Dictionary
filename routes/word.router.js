@@ -4,7 +4,7 @@ const wordController = require("../controllers/word.controller");
 
 const router = express.Router();
 
-// router.get("/", wordController.findAllWords);
+router.get("/", wordController.findAllWords);
 router.post("/", wordController.createWord);
 
 // router

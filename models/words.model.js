@@ -5,31 +5,39 @@ const slugify = require("slugify");
 const wordsSchema = new mongoose.Schema({
   word: {
     type: String,
-    required: true,
+    required: [true, "Japanese word required. Use kanji if applicable."],
   },
-  furigana: [String],
-  hiragana: String,
-  katakana: String,
-  hinshi: {
-    meishi: String,
-    doushi: String,
-    keiyoushi: String,
-    fukushi: String,
+  wordType: {
+    type: String,
+    enum: ["written", "spoken", "both", "unsure"],
+    default: "unsure",
+  },
+  nihongo: {
+    furigana: {
+      type: [String],
+    },
+    hiragana: {
+      type: String,
+      required: [true, "Must have hiragana as backup search for word."],
+    },
+    katakana: String,
+    nihongoHinshi: {
+      meishi: String,
+      doushi: String,
+      keiyoushi: String,
+      fukushi: String,
+    },
+    nihongoReibun: [String],
   },
   eigo: {
-    meishi: String,
-    doushi: String,
-    keiyoushi: String,
-    fukushi: String,
+    eigoHinshi: {
+      meishi: String,
+      doushi: String,
+      keiyoushi: String,
+      fukushi: String,
+    },
+    eigoReibun: [String],
   },
-  nihongoreibun: [String],
-  chuugokugo: {
-    meishi: String,
-    doushi: String,
-    keiyoushi: String,
-    fukushi: String,
-  },
-  chuugokugoreibun: [String],
   createdAt: {
     type: Date,
     immutable: true,
