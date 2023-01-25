@@ -18,10 +18,17 @@ exports.findAllWords = async (req, res, next) => {
   }
 };
 
-// exports.findWord = async (req, res) => {
-//   // const word = new Word({
-//   //   word: "",
-//   // });
+// exports.findOneWord = async (req, res) => {
+//   try {
+//     const word = await Word.findOne(req.body.word);
+//     console.log(word);
+//   } catch (err) {
+//     (err) => {
+//       res.status(400).json({ message: err.message });
+//       //400 means user error
+//       console.log(err);
+//     };
+//   }
 // };
 
 exports.createWord = async (req, res) => {
