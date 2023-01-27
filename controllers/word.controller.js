@@ -45,7 +45,6 @@ exports.findOneWord = async (req, res) => {
 exports.createWord = async (req, res) => {
   const enteredWord = new Word({
     word: req.body.word,
-    wordType: req.body.wordType,
     nihongo: req.body.nihongo,
     eigo: req.body.eigo,
   });
