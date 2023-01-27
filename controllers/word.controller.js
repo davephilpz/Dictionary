@@ -20,18 +20,18 @@ exports.findAllWords = async (req, res, next) => {
 
 exports.findOneWord = async (req, res) => {
   try {
-    res.render("searchResults", {
-      //word,
-      pageTitle: "Search Results",
-      path: "/words",
-    });
     const word = await Word.findOne({ word: req.params.search });
 
     if (word === null) {
       console.log("Word not found.");
     } else {
       console.log(word);
-      res.redirect("/");
+      res.render("searchResults", {
+        word,
+        pageTitle: "Search Results",
+        path: "/words",
+      });
+      // res.redirect("/");
     }
   } catch (err) {
     (err) => {
@@ -64,23 +64,40 @@ exports.createWord = async (req, res) => {
 };
 
 exports.updateWord = async (req, res) => {
-  const { word, wordType, nihongo, eigo } = req.body;
-
-  try {
-    const wordToUpdate = await Word.findOne({ word: req.params.search });
-    if (wordToUpdate === null) {
-      console.log("Word not found.");
-    } else {
-      Word.updateOne({ word, wordType, nihongo, eigo });
-      // res.redirect("/words");
-    }
-  } catch (err) {
-    (err) => {
-      res.status(400).json({ message: err.message });
-
-      console.log(err);
-    };
-  }
+  // try {
+  //   const wordToUpdate = await Word.findByIdAndUpdate(
+  //     req.body.search,
+  //     req.body,
+  //     {
+  //       new: true,
+  //       runValidators: true,
+  //     }
+  //   );
+  //   if (!wordToUpdate) {
+  //     console.log("Word not found.");
+  //   }
+  // } catch (err) {
+  //   (err) => {
+  //     res.status(400).json({ message: err.message });
+  //     //400 means user error
+  //     console.log(err);
+  //   };
+  // }
+  // const { word, wordType, nihongo, eigo } = req.body;
+  // try {
+  //   const wordToUpdate = await Word.findOne({ word: req.params.search });
+  //   if (wordToUpdate === null) {
+  //     console.log("Word not found.");
+  //   } else {
+  //     Word.updateOne({ word, wordType, nihongo, eigo }, {});
+  //     // res.redirect("/words");
+  //   }
+  // } catch (err) {
+  //   (err) => {
+  //     res.status(400).json({ message: err.message });
+  //     console.log(err);
+  //   };
+  // }
 };
 
 exports.deleteWord = async (req, res) => {
