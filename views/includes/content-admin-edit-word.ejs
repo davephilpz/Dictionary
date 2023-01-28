@@ -1,0 +1,17 @@
+<section class="section-admin-edit-word">
+  <h1 class="section-admin__title">Admin Edit Word</h1>
+
+  <form
+    class="form-word-search"
+    action="/admin/edit-word/:search"
+    method="POST"
+  >
+    <div class="form__search">
+      <label for="wordToSearch"></label>
+      <input class="form__search-input" type="text" name="wordToSearch"
+      id="wordToSearch" placeholder="Search word" alt="Search word in kanji,
+      hiragana, katakana, romaji or English."
+    </div>
+    <button class="form__btn" type="submit">Search</button>
+  </form>
+</section>

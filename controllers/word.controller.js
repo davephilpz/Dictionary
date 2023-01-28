@@ -4,7 +4,8 @@ exports.findAllWords = async (req, res, next) => {
   try {
     const words = await Word.find();
     res.render("index", {
-      // words,
+      //index is the ejs template and path is the url
+      words,
       pageTitle: "Dictionary",
       path: "/",
     });
@@ -20,18 +21,17 @@ exports.findAllWords = async (req, res, next) => {
 
 exports.findOneWord = async (req, res) => {
   try {
-    const word = await Word.findOne({ word: req.params.search });
+    // const word = await Word.findOne({ word: req.params.search });
 
     if (word === null) {
       console.log("Word not found.");
     } else {
-      console.log(word);
-      res.render("searchResults", {
-        word,
+      // console.log(word);
+      res.render("words", {
+        // word,
         pageTitle: "Search Results",
-        path: "/words",
+        path: "/words/:search",
       });
-      // res.redirect("/");
     }
   } catch (err) {
     (err) => {
@@ -42,7 +42,27 @@ exports.findOneWord = async (req, res) => {
   }
 };
 
-exports.createWord = async (req, res) => {
+exports.wordLiveSearch = async (req, res, next) => {
+  let payload = req.body.payload.trim();
+  console.log(payload);
+};
+
+//admin functions
+exports.getAdminControls = async (req, res, next) => {
+  res.render("admin/admin", {
+    pageTitle: "Admin Controls",
+    path: "/admin",
+  });
+};
+
+exports.getCreateWord = async (req, res, next) => {
+  res.render("admin/admin-add-word", {
+    pageTitle: "Add Word",
+    path: "/admin/add-word",
+  });
+};
+
+exports.postCreateWord = async (req, res) => {
   const enteredWord = new Word({
     word: req.body.word,
     nihongo: req.body.nihongo,
@@ -62,7 +82,14 @@ exports.createWord = async (req, res) => {
   }
 };
 
-exports.updateWord = async (req, res) => {
+exports.getUpdateWord = async (req, res, next) => {
+  res.render("admin/admin-edit-word", {
+    pageTitle: "Edit Word",
+    path: "/admin/edit-word",
+  });
+};
+
+exports.postUpdateWord = async (req, res) => {
   // try {
   //   const wordToUpdate = await Word.findByIdAndUpdate(
   //     req.body.search,
@@ -99,7 +126,14 @@ exports.updateWord = async (req, res) => {
   // }
 };
 
-exports.deleteWord = async (req, res) => {
+exports.getDeleteWord = async (req, res, next) => {
+  res.render("admin/admin-delete-word", {
+    pageTitle: "Delete Word",
+    path: "/admin/delete-word",
+  });
+};
+
+exports.postDeleteWord = async (req, res) => {
   try {
     // res.render("searchResults", {
     //   //word,
