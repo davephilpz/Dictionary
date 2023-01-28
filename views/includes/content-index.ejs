@@ -15,12 +15,33 @@
     <button class="search__btn" type="submit">Search</button>
   </form>
 </section>
-<section class="search-results" id="search-results"></section>
+<section class="section-search-results">
+  <div
+    class="search-predictions"
+    id="search-predictions"
+    role="search predictions"
+    aria-label="list of words in database matching input that user may be searching for"
+  ></div>
+
+  <% if (searchResults.length > 0) { %>
+  <ul class="search-results">
+    <% for (let searchResult of searchResults) { %>
+    <li class="search-result">
+      <h2><%= searchResult.word %></h2>
+      <h3><%= searchResult.nihongo.hiragana %></h3>
+      <span><%= searchResult.nihongo.hinshi %></span>
+    </li>
+    <% } %>
+  </ul>
+  <% } else { %>
+  <h2>No Products Found!</h2>
+  <% } %>
+</section>
 
 <script>
   function sendData(e) {
     const input = document.getElementById("search-box").value;
     console.log(input);
-    document.getElementById("search-results").innerHTML = input;
+    document.getElementById("search-predictions").innerHTML = input;
   }
 </script>
