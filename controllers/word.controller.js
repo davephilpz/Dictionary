@@ -1,15 +1,14 @@
 const Word = require("../models/words.model");
 
-exports.findAllWords = async (req, res, next) => {
+exports.getSearchWord = async (req, res, next) => {
   try {
-    const words = await Word.find();
+    // const words = await Word.find();
     res.render("index", {
-      //index is the ejs template and path is the url
-      words,
+      // words,
       pageTitle: "Dictionary",
       path: "/",
     });
-    console.log(words);
+    // console.log(words);
   } catch (err) {
     (err) => {
       res.status(500).json({ message: err.message });
@@ -19,20 +18,39 @@ exports.findAllWords = async (req, res, next) => {
   }
 };
 
-exports.findOneWord = async (req, res) => {
-  try {
-    // const word = await Word.findOne({ word: req.params.search });
+// exports.getSearchWord = async (req, res) => {
+//   try {
+//     // const word = await Word.findOne({ word: req.params.search });
+//     // console.log(word);
+//     // if (word === null) {
+//     //   console.log("Word not found.");
+//     // } else {
+//     // console.log(word);
+//     res.render("index", {
+//       // word,
+//       pageTitle: "Search Results",
+//       path: "/search:word",
+//     });
+//     // }
+//   } catch (err) {
+//     (err) => {
+//       res.status(400).json({ message: err.message });
+//       //400 means user error
+//       console.log(err);
+//     };
+//   }
+// };
 
-    if (word === null) {
-      console.log("Word not found.");
-    } else {
-      // console.log(word);
-      res.render("words", {
-        // word,
-        pageTitle: "Search Results",
-        path: "/words/:search",
-      });
-    }
+exports.postSearchWord = async (req, res, next) => {
+  try {
+    let searchString = req.body.searchString.trim();
+    console.log(searchString);
+    //   let searchResult = await Word.find({
+    //     word: { $regex: new RegExp("^" + searchString + ".*", "i") },
+    //   }).exec();
+
+    //   //limit search results to 5
+    //   searchResult = searchResult.slice(0, 5);
   } catch (err) {
     (err) => {
       res.status(400).json({ message: err.message });
@@ -42,10 +60,10 @@ exports.findOneWord = async (req, res) => {
   }
 };
 
-exports.wordLiveSearch = async (req, res, next) => {
-  let payload = req.body.payload.trim();
-  console.log(payload);
-};
+// exports.wordLiveSearch = async (req, res, next) => {
+//   let payload = req.body.payload.trim();
+//   console.log(payload);
+// };
 
 //admin functions
 exports.getAdminControls = async (req, res, next) => {

@@ -4,6 +4,7 @@ const get404 = require("./controllers/get404.controller");
 
 const wordRouter = require("./routes/word.router");
 const adminRouter = require("./routes/admin.router");
+const loginRouter = require("./routes/login.router");
 
 const app = express();
 app.use(express.json());
@@ -30,6 +31,9 @@ app.use((req, res, next) => {
 
 //admin routes
 app.use(adminRouter);
+
+//login routes
+app.use(loginRouter);
 
 //search routes
 app.use(wordRouter);
