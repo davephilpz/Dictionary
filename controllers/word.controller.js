@@ -45,12 +45,13 @@ exports.postSearchWord = async (req, res, next) => {
   try {
     let searchString = req.body.searchString.trim();
     console.log(searchString);
-    //   let searchResult = await Word.find({
-    //     word: { $regex: new RegExp("^" + searchString + ".*", "i") },
-    //   }).exec();
+    let searchResult = await Word.find({
+      word: { $regex: new RegExp("^" + searchString + ".*", "i") },
+    }).exec();
 
-    //   //limit search results to 5
-    //   searchResult = searchResult.slice(0, 5);
+    //limit search results to 3
+    searchResult = searchResult.slice(0, 3);
+    console.log(searchResult);
   } catch (err) {
     (err) => {
       res.status(400).json({ message: err.message });

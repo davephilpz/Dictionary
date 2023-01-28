@@ -1,10 +1,16 @@
 <section class="section-search">
-  <form class="form-word-search" action="/search:word">
+  <form
+    class="form-word-search"
+    action="/"
+    method="POST"
+    role="search window"
+    aria-label="word search window"
+  >
     <div class="form__search">
       <label for="search-box"></label>
-      <input class="form__search-input" type="text" name="search"
+      <input class="form__search-input" type="text" name="searchString"
       id="search-box" placeholder="Search word" alt="Search word in kanji,
-      hiragana, katakana, romaji or English." onkeyup="sendData(this)"
+      hiragana, katakana, romaji or English." onkeyup="sendData()"
     </div>
     <button class="search__btn" type="submit">Search</button>
   </form>
@@ -16,10 +22,5 @@
     const input = document.getElementById("search-box").value;
     console.log(input);
     document.getElementById("search-results").innerHTML = input;
-    fetch("/search:word", {
-      method: "POST",
-      headers: { "Content-Type": "application-json" },
-      body: JSON.stringify({ searchString: input }),
-    });
   }
 </script>
