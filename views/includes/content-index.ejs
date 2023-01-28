@@ -23,7 +23,12 @@
     aria-label="list of words in database matching input that user may be searching for"
   ></div>
 
-  <% if (searchResults.length > 0) { %>
+  <% if (searchString.length === 0) { %>
+  <ul class="search__results"></ul>
+      <h1 class="search__title">Must Enter Search</h1>
+    </ul>
+
+    <% } else if (searchResults.length > 0) { %>
   <ul class="search__results">
     <h1 class="search__title">Search Results for: (<%= searchString %>)</h1>
     <% for (let searchResult of searchResults) { %>
