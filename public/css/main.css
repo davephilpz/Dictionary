@@ -703,7 +703,7 @@ strong {
   padding: 1rem;
 }
 
-.form__btn {
+.search__btn {
   position: absolute;
   color: var(--color-dark);
   background-color: var(--color-accent);
@@ -790,4 +790,73 @@ strong {
   text-align: center;
   font-size: 2rem;
   margin-top: 40rem;
+}
+
+/* FORM TEMP */
+
+form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  background-color: gainsboro;
+  padding: 3rem;
+  width: 60%;
+  font-size: 2rem;
+  border-radius: 40px;
+  margin: 0 auto;
+}
+
+input:not([type="submit"]) {
+  width: 80%;
+  height: 4rem;
+  font-size: 2rem;
+  border-radius: 5px;
+  border: transparent;
+  padding: 2px 0 2px 5px;
+  margin: 10px 0;
+}
+
+input[type="submit"] {
+  font-size: 1.2em;
+  border: none;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+
+.form__input {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+form p {
+  font-size: 2rem;
+}
+
+.margin-right {
+  margin-right: 3rem;
+}
+
+.form__btn {
+  color: var(--color-dark);
+  background-color: var(--color-accent);
+  font-weight: 700;
+  font-size: 2rem;
+  height: 5rem;
+  border-radius: 1rem;
+  padding: 1rem 3rem;
+  transition: all 300ms;
+}
+
+.form__btn:hover {
+  color: var(--color-light);
+  background-color: var(--color-dark);
+  font-weight: 700;
+  font-size: 2rem;
+  height: 5rem;
+  border-radius: 1rem;
+  padding: 1rem 3rem;
 }

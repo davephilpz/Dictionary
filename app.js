@@ -7,8 +7,13 @@ const adminRouter = require("./routes/admin.router");
 const loginRouter = require("./routes/login.router");
 
 const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json()); //built in middleware that parses post requests with json in body
+//looks for header: Content-Type: application/json
+//content-type is the mime type of the data being sent; text/html image/png etc.
+//if no body to parse, or does not type or an error code, the req body will be an empty object
+app.use(express.urlencoded({ extended: true })); //parses post requests with urlencoded payloads. express expects key/value pairs: username=Test&password=MyPasSword!
+//mime type = application/x-www-form-urlencoded
+//extended true allows objects and arrays to be formatted too. allows this data to be accessed similarly to json data.
 
 //ejs templating engine
 app.set("view engine", "ejs");

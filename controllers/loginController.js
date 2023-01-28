@@ -6,3 +6,12 @@ exports.getLogin = async (req, res, next) => {
     path: "/login",
   });
 };
+
+exports.postLogin = async (req, res, next) => {
+  console.log(
+    `username ${req.body.username} password ${req.body.password} email ${req.body.email} reference ${req.body.reference}`
+  );
+  // res.send(
+  //   `username ${req.body.username} password ${req.body.password} email ${req.body.email} reference ${req.body.reference}`
+  // );
+};

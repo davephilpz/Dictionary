@@ -1,12 +1,44 @@
 <section class="section-login">
-  <form action="/login" method="POST" class="login">
+  <form
+    action="/login"
+    method="POST"
+    class="login"
+    role="form"
+    aria-label="user login form"
+  >
     <h1>User Login</h1>
-    <label for="username">Username:</label>
-    <input type="text" name="username" id="username" />
+    <label for="username"></label>
+    <input
+      type="text"
+      name="username"
+      id="username"
+      autocomplete="username"
+      placeholder="Username"
+    />
+    <label for="password"></label>
+    <input
+      type="text"
+      name="password"
+      id="password"
+      autocomplete="password"
+      placeholder="Password"
+    />
+    <label for="email"></label>
+    <input
+      type="email"
+      name="email"
+      id="email"
+      autocomplete="email"
+      placeholder="name@example.com"
+    />
     <p>Where did you hear about us?</p>
-    <label for="theInternet">The Internet</label>
-    <input type="radio" name="reference" id="theInternet" />
-    <label for="other">Other</label>
-    <input type="radio" name="reference" id="other" />
+    <div class="form__input">
+      <input type="radio" name="reference" id="theInternet" />
+      <label for="theInternet">The Internet</label>
+      <input type="radio" name="reference" id="other" />
+      <label for="other">Other</label>
+    </div>
+
+    <input class="form__btn" type="submit" value="Login" />
   </form>
 </section>
