@@ -4,15 +4,15 @@ const slugify = require("slugify");
 //only save and create use Mongoose validation so chain them onto find methods etc.
 const wordsSchema = new mongoose.Schema({
   word: {
-    type: [String],
+    type: String,
     required: [true, "Japanese word required. Use kanji if applicable."],
     unique: [true, "duplicate entries are not allowed."],
   },
   nihongo: {
     wordType: {
       type: String,
-      enum: ["written", "spoken", "both", "unsure"],
-      default: "unsure",
+      enum: ["文語", "口語", "両方", "未定"],
+      // default: "unsure",
       message: "type must be written, spoken, both or unsure.",
     },
     furigana: {
@@ -26,7 +26,7 @@ const wordsSchema = new mongoose.Schema({
     romaji: String, //turn hiragana into this
     hinshi: {
       type: String,
-      enum: ["meishi", "doushi", "keiyoushi", "fukushi", "sonota"],
+      enum: ["名詞", "動詞", "形容詞", "副詞", "その他"],
       required: [true, "Must input part of speech."],
     },
     joshi: {
@@ -42,11 +42,12 @@ const wordsSchema = new mongoose.Schema({
     reibun: [String],
   },
   eigo: {
+    teigi: String,
     nijitekiTeigi: [String], //this is for listing another word in English for the same word in Japanese
     fukusuuTeigi: [String], //this is for listing another definition in English because the Japanese word has multiple definitions
     hinshi: {
       type: String,
-      enum: ["meishi", "doushi", "keiyoushi", "fukushi", "sonota"],
+      enum: ["noun", "verb", "adjective", "adverb", "other"],
       required: [true, "Must input part of speech."],
     },
     reibun: [String],

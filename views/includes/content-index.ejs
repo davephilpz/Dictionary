@@ -33,8 +33,24 @@
         <span class="search__result--part-of-speech"
           ><%= searchResult.nihongo.hinshi %></span
         >
+        <span class="search__result--part-of-speech"
+          >(<%= searchResult.nihongo.joshi %>)</span
+        >
       </div>
-      <h3><%= searchResult.nihongo.hiragana %></h3>
+      <div class="search__result--second-row">
+        <span class="search__result--hiragana"><%= searchResult.nihongo.hiragana %></span>
+        <span class="search__result--katakana"><%= searchResult.nihongo.katakana %></span>
+        <span class="search__result--romaji"><%= searchResult.nihongo.romaji %></span>
+      </div>
+      <div class="search__result--third-row">
+        <span class="search__result--english"><%= searchResult.eigo.teigi %></span>
+        <span class="search__result--part-of-speech"
+          ><%= searchResult.eigo.hinshi %></span
+        >
+      </div>
+      <div class="search__result--forth-row">
+        <span class="search__result--nihongo-reibun"><%= searchResult.nihongo.reibun %></span>
+      </div>
     </li>
     <% } %>
   </ul>
