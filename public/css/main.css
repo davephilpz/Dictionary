@@ -364,6 +364,30 @@ strong {
 .errorMessage {
   text-align: center;
   font-weight: 700;
+  font-size: 3rem;
+  margin-bottom: 5rem;
+}
+
+.redirect__btn {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  width: 20% !important;
+  text-align: center;
+  margin: 0 auto !important;
+  color: var(--color-dark);
+  background-color: var(--color-accent-primary);
+  font-weight: 700;
+  font-size: 2rem;
+  height: 5rem;
+  border-radius: 1rem;
+  padding: 1rem 3rem;
+  transition: all 300ms ease-in-out;
+}
+
+.redirect__btn:hover {
+  color: var(--color-light);
+  background-color: var(--color-dark);
 }
 
 /********************/
@@ -707,6 +731,7 @@ strong {
 }
 
 .search__btn {
+  cursor: pointer;
   position: absolute;
   color: var(--color-dark);
   background-color: var(--color-accent-primary);
@@ -905,7 +930,9 @@ strong {
 .footer {
   text-align: center;
   font-size: 2rem;
-  margin-top: 40rem;
+  margin-top: 50rem;
+  background-color: var(--color-dark);
+  color: var(--color-light);
 }
 
 /* FORM TEMP */
@@ -965,6 +992,7 @@ form p {
   border-radius: 1rem;
   padding: 1rem 3rem;
   transition: all ease-in-out;
+  cursor: pointer;
 }
 
 .form__btn:hover {

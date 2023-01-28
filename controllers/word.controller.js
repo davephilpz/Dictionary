@@ -51,11 +51,12 @@ exports.postSearchWord = async (req, res, next) => {
 
     //limit search results to 5
     searchResults = searchResults.slice(0, 5);
-    res.render("index", {
+
+    res.render("search", {
       searchResults,
       searchString,
-      pageTitle: "Dictionary",
-      path: "/",
+      pageTitle: `search: ${searchString}`,
+      path: `/search`,
     });
     console.log(searchResults);
   } catch (err) {
@@ -66,11 +67,6 @@ exports.postSearchWord = async (req, res, next) => {
     };
   }
 };
-
-// exports.wordLiveSearch = async (req, res, next) => {
-//   let payload = req.body.payload.trim();
-//   console.log(payload);
-// };
 
 //admin functions
 exports.getAdminControls = async (req, res, next) => {

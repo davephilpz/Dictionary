@@ -1,7 +1,7 @@
 <section class="section-search">
   <form
     class="form-word-search"
-    action="/"
+    action="/search"
     method="POST"
     role="search window"
     aria-label="word search window"
@@ -23,53 +23,11 @@
     aria-label="list of words in database matching input that user may be searching for"
   ></div>
 
-  <% if (searchString.length === 0) { %>
-  <ul class="search__results"></ul>
-      <h1 class="search__title">Must Enter Search</h1>
-    </ul>
-
-    <% } else if (searchResults.length > 0) { %>
-  <ul class="search__results">
-    <h1 class="search__title">Search Results for: (<%= searchString %>)</h1>
-    <% for (let searchResult of searchResults) { %>
-    <li class="search__result">
-      <div class="search__result--top-row">
-        <h2><%= searchResult.word %></h2>
-        <span class="search__result--part-of-speech"
-          ><%= searchResult.nihongo.hinshi %></span
-        >
-        <span class="search__result--part-of-speech"
-          >(<%= searchResult.nihongo.joshi %>)</span
-        >
-      </div>
-      <div class="search__result--second-row">
-        <span class="search__result--hiragana"><%= searchResult.nihongo.hiragana %></span>
-        <span class="search__result--katakana"><%= searchResult.nihongo.katakana %></span>
-        <span class="search__result--romaji"><%= searchResult.nihongo.romaji %></span>
-      </div>
-      <div class="search__result--third-row">
-        <span class="search__result--english"><%= searchResult.eigo.teigi %></span>
-        <span class="search__result--part-of-speech"
-          ><%= searchResult.eigo.hinshi %></span
-        >
-      </div>
-      <div class="search__result--forth-row">
-        <span class="search__result--nihongo-reibun"><%= searchResult.nihongo.reibun %></span>
-      </div>
-    </li>
-    <% } %>
-  </ul>
-  <% } else { %>
-     <ul class="search__results"></ul>
-      <h1 class="search__title">No Words Found</h1>
-    </ul>
-  <% } %>
+  <script>
+    function sendData(e) {
+      const input = document.getElementById("search-box").value;
+      console.log(input);
+      document.getElementById("search-predictions").innerHTML = input;
+    }
+  </script>
 </section>
-
-<script>
-  function sendData(e) {
-    const input = document.getElementById("search-box").value;
-    console.log(input);
-    document.getElementById("search-predictions").innerHTML = input;
-  }
-</script>

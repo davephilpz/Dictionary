@@ -1,1 +1,17 @@
-<h1 class="errorMessage">Page not found</h1>
+<h1 class="errorMessage">Oops! Page not found</h1>
+
+<form
+  action="/login"
+  method="POST"
+  class="login"
+  role="form"
+  aria-label="user login form"
+>
+  <input class="redirect__btn" onclick="goBack()" value="Return" />
+</form>
+
+<script>
+  function goBack() {
+    window.history.back();
+  }
+</script>
