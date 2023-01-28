@@ -49,10 +49,11 @@ exports.postSearchWord = async (req, res, next) => {
       word: { $regex: new RegExp("^" + searchString + ".*", "i") },
     }).exec();
 
-    //limit search results to 3
-    searchResults = searchResults.slice(0, 3);
+    //limit search results to 5
+    searchResults = searchResults.slice(0, 5);
     res.render("index", {
       searchResults,
+      searchString,
       pageTitle: "Dictionary",
       path: "/",
     });

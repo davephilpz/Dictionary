@@ -17,24 +17,31 @@
 </section>
 <section class="section-search-results">
   <div
-    class="search-predictions"
+    class="search__predictions"
     id="search-predictions"
     role="search predictions"
     aria-label="list of words in database matching input that user may be searching for"
   ></div>
 
   <% if (searchResults.length > 0) { %>
-  <ul class="search-results">
+  <ul class="search__results">
+    <h1 class="search__title">Search Results for: (<%= searchString %>)</h1>
     <% for (let searchResult of searchResults) { %>
-    <li class="search-result">
-      <h2><%= searchResult.word %></h2>
+    <li class="search__result">
+      <div class="search__result--top-row">
+        <h2><%= searchResult.word %></h2>
+        <span class="search__result--part-of-speech"
+          ><%= searchResult.nihongo.hinshi %></span
+        >
+      </div>
       <h3><%= searchResult.nihongo.hiragana %></h3>
-      <span><%= searchResult.nihongo.hinshi %></span>
     </li>
     <% } %>
   </ul>
   <% } else { %>
-  <h2>No Products Found!</h2>
+     <ul class="search__results"></ul>
+      <h1 class="search__title">No Words Found</h1>
+    </ul>
   <% } %>
 </section>
 

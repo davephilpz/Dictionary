@@ -676,6 +676,7 @@ strong {
   text-align: center;
   align-items: center;
   gap: 5rem;
+  margin-bottom: 5rem;
 }
 
 .form-word-search {
@@ -731,6 +732,72 @@ strong {
   padding: 1rem 3rem;
   right: 0;
   transition: all 300ms ease-in-out;
+}
+
+/********************/
+/* Section Search */
+/********************/
+
+.section-search-results {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  gap: 5rem;
+  margin-bottom: 5rem;
+}
+
+.search__predictions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.search__title {
+  text-align: center;
+  font-weight: 700;
+  font-size: 3rem;
+  margin-bottom: 3rem;
+}
+
+.search__results {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+  align-self: left;
+  align-content: left;
+  justify-items: left;
+  justify-self: left;
+  text-align: left;
+  font-size: 2rem;
+  /* gap: 5rem; */
+}
+
+.search__result {
+  padding: 4rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  line-height: 1;
+  border-top: 0.2rem solid rgba(0, 0, 0, 0.3);
+}
+
+.search__result--top-row {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+}
+
+.search__result--part-of-speech {
+  color: #333;
+  opacity: 80%;
 }
 
 /********************/
