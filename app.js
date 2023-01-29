@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 //test middleware
 app.use((req, res, next) => {
-  console.log("hello from the middleware");
+  // console.log("hello from the middleware");
   next();
 });
 app.use((req, res, next) => {

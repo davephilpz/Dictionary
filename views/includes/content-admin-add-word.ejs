@@ -1,9 +1,116 @@
-<form class="form-word-search" action="/words/:search" method="POST">
-  <div class="form__search">
-    <label for="wordToSearch"></label>
-    <input class="form__search-input" type="text" name="wordToSearch"
-    id="wordToSearch" placeholder="Search word" alt="Search word in kanji,
-    hiragana, katakana, romaji or English."
-  </div>
-  <button class="form__btn" type="submit">Search</button>
-</form>
+<section class="section-admin-add-word">
+  <form
+    action="/admin/add-word"
+    method="POST"
+    class="input-form"
+    role="form"
+    aria-label="user login form"
+  >
+    <label for="word"></label>
+    <input
+      type="text"
+      name="word"
+      id="word"
+      placeholder="日本語単語"
+      required
+    />
+
+    <div class="form__row">
+      <div class="form__row--item">
+        <label for="gorui">語類</label>
+        <select type="text" name="gorui" id="gorui" required>
+          <option value="mitei">未定</option>
+          <option value="bungo">文語</option>
+          <option value="kougo">口語</option>
+          <option value="ryouhou">両方</option>
+        </select>
+      </div>
+
+      <div class="form__row--item">
+        <label for="nihongoHinshi">日本語品詞</label>
+        <select type="text" name="nihongoHinshi" id="nihongoHinshi" required>
+          <option value="meishi">名詞</option>
+          <option value="doushi">動詞</option>
+          <option value="keiyoushi">形容詞</option>
+          <option value="fukushi">副詞</option>
+          <option value="ryouhou">其の他</option>
+        </select>
+      </div>
+
+      <div class="form__row--item">
+        <label for="eigoHinshi">英語品詞</label>
+        <select type="text" name="eigoHinshi" id="eigoHinshi" required>
+          <option value="meishi">名詞</option>
+          <option value="doushi">動詞</option>
+          <option value="keiyoushi">形容詞</option>
+          <option value="fukushi">副詞</option>
+          <option value="ryouhou">其の他</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form__row">
+      <div class="form__row--item">
+        <label for="hiragana"></label>
+        <input
+          type="text"
+          name="hiragana"
+          id="hiragana"
+          placeholder="平仮名"
+          required
+        />
+      </div>
+
+      <div class="form__row--item">
+        <label for="ryaku"></label>
+        <input type="text" name="ryaku" id="ryaku" placeholder="略" />
+      </div>
+    </div>
+
+    <label for="nihongoReibun"></label>
+    <input
+      type="text"
+      name="nihongoReibun"
+      id="nihongoReibun"
+      placeholder="例文"
+    />
+    <label for="bikouran"></label>
+    <input type="text" name="bikouran" id="bikouran" placeholder="備考" />
+
+    <label for="eigoTeigi"></label>
+    <input
+      type="text"
+      name="eigoTeigi"
+      id="eigoTeigi"
+      placeholder="英単語"
+      required
+    />
+
+    <div class="form__row">
+      <div class="form__row--item">
+        <label for="eigoNijitekiTeigi"></label>
+        <input
+          type="text"
+          name="eigoNijitekiTeigi"
+          id="eigoNijitekiTeigi"
+          placeholder="二次的定義"
+        />
+      </div>
+
+      <div class="form__row--item">
+        <label for="eigoFukusuuTeigi"></label>
+        <input
+          type="text"
+          name="eigoFukusuuTeigi"
+          id="eigoFukusuuTeigi"
+          placeholder="複数定義"
+        />
+      </div>
+    </div>
+
+    <label for="eigoReibun"></label>
+    <input type="text" name="eigoReibun" id="eigoReibun" placeholder="例文" />
+
+    <input class="form__btn" type="submit" value="Add Word" />
+  </form>
+</section>
