@@ -17,19 +17,21 @@ exports.getCreateWord = async (req, res, next) => {
 };
 
 exports.postCreateWord = async (req, res) => {
-  const enteredWord = new Word({
-    word: req.body.word,
-    nihongo: req.body.nihongo,
-    eigo: req.body.eigo,
-  });
+  // const enteredWord = new Word({
+  //   word: req.body.word,
+  //   nihongo: req.body.nihongo,
+  //   eigo: req.body.eigo,
+  // });
 
   try {
-    const newWord = await enteredWord.save();
-    res.status(201).render("admin/admin-add-word", {
-      pageTitle: "Add Word",
-      contentTitle: "Admin Controls: Add Word",
-      path: "/admin/add-word",
-    });
+    // const newWord = await enteredWord.save();
+    res.status(201).redirect("/admin/add-word");
+    console.log(req.body);
+    //   .render("admin/admin-add-word", {
+    //   pageTitle: "Add Word",
+    //   contentTitle: "Admin Controls: Add Word",
+    //   path: "/admin/add-word",
+    // });
     //201 means successful post and should be used over 200 the default
   } catch (err) {
     (err) => {
