@@ -1,4 +1,4 @@
-const Word = require("../models/words.model");
+const Word = require("../models/word.model");
 
 exports.getSearchWord = async (req, res, next) => {
   try {

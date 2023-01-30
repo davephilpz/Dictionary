@@ -31,7 +31,6 @@ const wordsSchema = new mongoose.Schema({
     },
     joshi: {
       type: [String],
-      required: [true, "Must input particle type."],
     },
     ryaku: {
       type: [String],
@@ -42,12 +41,15 @@ const wordsSchema = new mongoose.Schema({
     reibun: [String],
   },
   eigo: {
-    teigi: String,
+    teigi: {
+      type: String,
+      required: [true, "Must enter word meaning in English."],
+    },
     nijitekiTeigi: [String], //this is for listing another word in English for the same word in Japanese
     fukusuuTeigi: [String], //this is for listing another definition in English because the Japanese word has multiple definitions
     hinshi: {
       type: String,
-      enum: ["noun", "verb", "adjective", "adverb", "other"],
+      enum: ["名詞", "動詞", "形容詞", "副詞", "その他"],
       required: [true, "Must input part of speech."],
     },
     reibun: [String],

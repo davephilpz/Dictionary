@@ -1,6 +1,6 @@
 const wanakana = require("wanakana");
 
-const Word = require("../models/words.model");
+const Word = require("../models/word.model");
 
 exports.getAdminControls = async (req, res, next) => {
   res.render("admin/admin", {
@@ -38,39 +38,51 @@ exports.postCreateWord = async (req, res) => {
     eigoHinshi,
     eigoReibun,
   } = req.body;
-  const katakana = wanakana.toKatakana(hiragana);
-  const romaji = wanakana.toRomaji(hiragana);
-
-  console.log(`katakana ${katakana}, romaji: ${romaji}`);
-
-  const enteredWord = new Word({
-    word: word,
-    nihongo: {
-      wordType: gorui,
-      furigana: "",
-      hiragana: hiragana,
-      katakana: katakana,
-      romaji: romaji,
-      hinshi: nihongoHinshi,
-      joshi: joshi,
-      ryaku: ryaku,
-      bikouran: bikouran,
-      reibun: nihongoReibun,
-    },
-    eigo: {
-      teigi: eigoTeigi,
-      nijitekiTeigi: nijitekiTeigi,
-      fukusuuTeigi: fukusuuTeigi,
-      hinshi: eigoHinshi,
-      reibun: eigoReibun,
-    },
-  });
-  JSON.stringify(enteredWord);
-
-  console.log(enteredWord);
 
   try {
-    const newWord = await enteredWord.insertOne();
+    const katakana = wanakana.toKatakana(hiragana);
+    const romaji = wanakana.toRomaji(hiragana);
+
+    console.log(`katakana ${katakana}, romaji: ${romaji}`);
+
+    const newWord = {
+      word: req.body.word,
+      nihongo: {
+        hiragana: req.body.hiragana,
+        hinshi: req.body.nihongoHinshi,
+      },
+      eigo: {
+        teigi: req.body.eigoTeigi,
+        hinshi: req.body.eigoHinshi,
+      },
+    };
+
+    // const enteredWord = new Word({
+    //   word: word,
+    //   nihongo: {
+    //     wordType: gorui,
+    //     furigana: "",
+    //     hiragana: hiragana,
+    //     katakana: katakana,
+    //     romaji: romaji,
+    //     hinshi: nihongoHinshi,
+    //     joshi: joshi,
+    //     ryaku: ryaku,
+    //     bikouran: bikouran,
+    //     reibun: nihongoReibun,
+    //   },
+    //   eigo: {
+    //     teigi: eigoTeigi,
+    //     nijitekiTeigi: nijitekiTeigi,
+    //     fukusuuTeigi: fukusuuTeigi,
+    //     hinshi: eigoHinshi,
+    //     reibun: eigoReibun,
+    //   },
+    // });
+
+    console.log(newWord);
+    await new Word(newWord).save();
+    // await newWord.save();
     // req.flash("message", `${req.body.word} successfully added`);
     res.status(201).redirect("/admin/add-word");
     // console.log(req.body);
