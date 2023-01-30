@@ -3,69 +3,68 @@ const slugify = require("slugify");
 
 //only save and create use Mongoose validation so chain them onto find methods etc.
 const wordsSchema = new mongoose.Schema({
-  word: {
-    type: String,
-    required: [true, "Japanese word required. Use kanji if applicable."],
-    unique: [true, "duplicate entries are not allowed."],
-  },
-  nihongo: {
-    wordType: {
+  日本語: {
+    日本語単語: {
+      type: String,
+      required: [true, "Japanese word required. Use kanji if applicable."],
+      unique: [true, "duplicate entries are not allowed."],
+    },
+    語類: {
       type: String,
       enum: ["文語", "口語", "両方", "未定"],
-      // default: "unsure",
       message: "type must be written, spoken, both or unsure.",
     },
-    furigana: {
+    振り仮名: {
       type: [String], // have a space deliminated string for furigana for each word
     },
-    hiragana: {
+    平仮名: {
       type: String,
       required: [true, "Must have hiragana as backup search for word."],
     },
-    katakana: String, //turn hiragana into this
-    romaji: String, //turn hiragana into this
-    hinshi: {
+    片仮名: String, //turn hiragana into this
+    ローマ字: String, //turn hiragana into this
+    日本語品詞: {
       type: String,
       enum: ["名詞", "動詞", "形容詞", "副詞", "その他"],
       required: [true, "Must input part of speech."],
     },
-    joshi: {
+    助詞: {
       type: [String],
     },
-    ryaku: {
+    略語: {
       type: [String],
     },
-    bikouran: {
+    備考欄: {
       type: [String], //comments or explanation of definition because concept does not exist in English etc.
     },
-    reibun: [String],
+    日本語例文: [String],
   },
-  eigo: {
-    teigi: {
+  英語: {
+    英単語: {
       type: String,
       required: [true, "Must enter word meaning in English."],
     },
-    nijitekiTeigi: [String], //this is for listing another word in English for the same word in Japanese
-    fukusuuTeigi: [String], //this is for listing another definition in English because the Japanese word has multiple definitions
-    hinshi: {
+    二次的定義: [String], //this is for listing another word in English for the same word in Japanese
+    複数定義: [String], //this is for listing another definition in English because the Japanese word has multiple definitions
+    英語品詞: {
       type: String,
       enum: ["名詞", "動詞", "形容詞", "副詞", "その他"],
       required: [true, "Must input part of speech."],
     },
-    reibun: [String],
+    英語例文: [String],
   },
-  createdAt: {
+  作成日時: {
     type: Date,
     immutable: true,
     default: Date.now(),
     select: false, //turns off appearances in queries
   },
-  updatedAt: {
+  更新日時: {
     type: Date,
     default: Date.now(),
     select: false, //turns off appearances in queries
   },
-  slug: String,
+  スラグ: String,
 });
 
 module.exports = mongoose.model("Word", wordsSchema);

@@ -4,43 +4,43 @@
     method="POST"
     class="input-form"
     role="form"
-    aria-label="user login form"
+    aria-label="admin add word form"
   >
-    <label for="word"></label>
+    <label for="日本語単語"></label>
     <input
       type="text"
-      name="word"
-      id="word"
+      name="日本語単語"
+      id="日本語単語"
       placeholder="日本語単語"
       required
     />
 
-    <label for="eigoTeigi"></label>
+    <label for="英単語"></label>
     <input
       type="text"
-      name="eigoTeigi"
-      id="eigoTeigi"
+      name="英単語"
+      id="英単語"
       placeholder="英単語"
       required
     />
 
     <div class="form__row">
       <div class="form__row--item">
-        <label for="eigoNijitekiTeigi"></label>
+        <label for="二次的定義"></label>
         <input
           type="text"
-          name="eigoNijitekiTeigi"
-          id="eigoNijitekiTeigi"
+          name="二次的定義"
+          id="二次的定義"
           placeholder="英語二次的定義"
         />
       </div>
 
       <div class="form__row--item">
-        <label for="eigoFukusuuTeigi"></label>
+        <label for="複数定義"></label>
         <input
           type="text"
-          name="eigoFukusuuTeigi"
-          id="eigoFukusuuTeigi"
+          name="複数定義"
+          id="複数定義"
           placeholder="英語複数定義"
         />
       </div>
@@ -48,8 +48,8 @@
 
     <div class="form__row">
       <div class="form__row--item">
-        <label for="gorui">語類</label>
-        <select type="text" name="gorui" id="gorui" required>
+        <label for="語類">語類</label>
+        <select type="text" name="語類" id="語類" required>
           <option value="未定">未定</option>
           <option value="文語">文語</option>
           <option value="口語">口語</option>
@@ -58,8 +58,8 @@
       </div>
 
       <div class="form__row--item">
-        <label for="nihongoHinshi">日本語品詞</label>
-        <select type="text" name="nihongoHinshi" id="nihongoHinshi" required>
+        <label for="日本語品詞">日本語品詞</label>
+        <select type="text" name="日本語品詞" id="日本語品詞" required>
           <option value="名詞">名詞</option>
           <option value="動詞">動詞</option>
           <option value="形容詞">形容詞</option>
@@ -69,8 +69,8 @@
       </div>
 
       <div class="form__row--item">
-        <label for="eigoHinshi">英語品詞</label>
-        <select type="text" name="eigoHinshi" id="eigoHinshi" required>
+        <label for="英語品詞">英語品詞</label>
+        <select type="text" name="英語品詞" id="英語品詞" required>
           <option value="名詞">名詞</option>
           <option value="動詞">動詞</option>
           <option value="形容詞">形容詞</option>
@@ -82,45 +82,40 @@
 
     <div class="form__row">
       <div class="form__row--item">
-        <label for="hiragana"></label>
+        <label for="平仮名"></label>
         <input
           type="text"
-          name="hiragana"
-          id="hiragana"
+          name="平仮名"
+          id="平仮名"
           placeholder="平仮名"
           required
         />
       </div>
 
       <div class="form__row--item">
-        <label for="ryaku"></label>
-        <input type="text" name="ryaku" id="ryaku" placeholder="略" />
+        <label for="略語"></label>
+        <input type="text" name="略語" id="略語" placeholder="略語" />
       </div>
 
       <div class="form__row--item">
-        <label for="joshi"></label>
-        <input type="text" name="joshi" id="joshi" placeholder="助詞" />
+        <label for="助詞"></label>
+        <input type="text" name="助詞" id="助詞" placeholder="助詞" />
       </div>
     </div>
 
-    <label for="nihongoReibun"></label>
+    <label for="日本語例文"></label>
     <input
       type="text"
-      name="nihongoReibun"
-      id="nihongoReibun"
+      name="日本語例文"
+      id="日本語例文"
       placeholder="日本語例文"
     />
 
-    <label for="eigoReibun"></label>
-    <input
-      type="text"
-      name="eigoReibun"
-      id="eigoReibun"
-      placeholder="英語例文"
-    />
+    <label for="英語例文"></label>
+    <input type="text" name="英語例文" id="英語例文" placeholder="英語例文" />
 
-    <label for="bikouran"></label>
-    <input type="text" name="bikouran" id="bikouran" placeholder="備考欄" />
+    <label for="備考欄"></label>
+    <input type="text" name="備考欄" id="備考欄" placeholder="備考欄" />
 
     <input class="form__btn" type="submit" value="Add Word" />
   </form>

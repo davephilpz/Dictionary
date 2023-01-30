@@ -24,65 +24,75 @@ exports.getCreateWord = async (req, res, next) => {
 
 exports.postCreateWord = async (req, res) => {
   const {
-    word,
-    gorui,
-    hiragana,
-    nihongoHinshi,
-    joshi,
-    ryaku,
-    bikouran,
-    nihongoReibun,
-    eigoTeigi,
-    nijitekiTeigi,
-    fukusuuTeigi,
-    eigoHinshi,
-    eigoReibun,
+    日本語単語,
+    語類,
+    平仮名,
+    日本語品詞,
+    助詞,
+    略語,
+    備考欄,
+    日本語例文,
+    英単語,
+    二次的定義,
+    複数定義,
+    英語品詞,
+    英語例文,
   } = req.body;
 
   try {
-    const katakana = wanakana.toKatakana(hiragana);
-    const romaji = wanakana.toRomaji(hiragana);
-
-    console.log(`katakana ${katakana}, romaji: ${romaji}`);
-
-    const newWord = {
-      word: req.body.word,
-      nihongo: {
-        hiragana: req.body.hiragana,
-        hinshi: req.body.nihongoHinshi,
-      },
-      eigo: {
-        teigi: req.body.eigoTeigi,
-        hinshi: req.body.eigoHinshi,
-      },
-    };
+    const katakana = wanakana.toKatakana(平仮名);
+    const romaji = wanakana.toRomaji(平仮名);
 
     // const enteredWord = new Word({
-    //   word: word,
-    //   nihongo: {
-    //     wordType: gorui,
-    //     furigana: "",
-    //     hiragana: hiragana,
-    //     katakana: katakana,
-    //     romaji: romaji,
-    //     hinshi: nihongoHinshi,
-    //     joshi: joshi,
-    //     ryaku: ryaku,
-    //     bikouran: bikouran,
-    //     reibun: nihongoReibun,
+    //   日本語: {
+    //     日本語単語: 日本語単語,
+    //     語類: 語類,
+    //     平仮名: 平仮名,
+    //     片仮名: katakana,
+    //     ローマ字: romaji,
+    //     日本語品詞: 日本語品詞,
+    //     助詞: 助詞,
+    //     略語: 略語,
+    //     備考欄: 備考欄,
+    //     日本語例文: 日本語例文,
     //   },
-    //   eigo: {
-    //     teigi: eigoTeigi,
-    //     nijitekiTeigi: nijitekiTeigi,
-    //     fukusuuTeigi: fukusuuTeigi,
-    //     hinshi: eigoHinshi,
-    //     reibun: eigoReibun,
+    //   英語: {
+    //     英単語: 英単語,
+    //     二次的定義: 二次的定義,
+    //     複数定義: 複数定義,
+    //     英語品詞: 英語品詞,
+    //     英語例文: 英語例文,
     //   },
     // });
 
-    console.log(newWord);
-    await new Word(newWord).save();
-    // await newWord.save();
+    let enteredWord = new Word({
+      日本語: {
+        日本語単語: 日本語単語,
+        語類: 語類,
+        平仮名: 平仮名,
+        片仮名: katakana,
+        ローマ字: romaji,
+        日本語品詞: 日本語品詞,
+        助詞: 助詞,
+        略語: 略語,
+        備考欄: 備考欄,
+        日本語例文: 日本語例文,
+      },
+      英語: {
+        英単語: 英単語,
+        二次的定義: 二次的定義,
+        複数定義: 複数定義,
+        英語品詞: 英語品詞,
+        英語例文: 英語例文,
+      },
+    });
+
+    console.log(enteredWord);
+
+    let newWord = await enteredWord.save().catch((err) => {
+      console.log(`error: ${err}`);
+    });
+
     // req.flash("message", `${req.body.word} successfully added`);
     res.status(201).redirect("/admin/add-word");
     // console.log(req.body);
