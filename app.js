@@ -1,6 +1,10 @@
 const express = require("express");
 const path = require("path");
 const get404 = require("./controllers/get404.controller");
+const cookieParser = require("cookie-parser");
+//flash message dependencies:
+const session = require("express-session");
+const connectFlash = require("connect-flash");
 
 const wordRouter = require("./routes/word.router");
 const adminRouter = require("./routes/admin.router");
@@ -21,6 +25,18 @@ app.set("views", "views");
 
 //public access middleware
 app.use(express.static(path.join(__dirname, "public")));
+
+//flash message middleware
+// app.use(cookieParser("secretCookieString"));
+// app.use(
+//   session({
+//     secret: "secretSessionString",
+//     cookie: { maxAge: 60000 },
+//     resave: true, //true forces sessions to be saved back to session store, even if the session was never modified during the request
+//     saveUninitialized: true, //true forces sessions that is initialized to be saved to the store
+//   })
+// );
+// app.use(connectFlash());
 
 //test middleware
 app.use((req, res, next) => {

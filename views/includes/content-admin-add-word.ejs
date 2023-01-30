@@ -15,36 +15,67 @@
       required
     />
 
+    <label for="eigoTeigi"></label>
+    <input
+      type="text"
+      name="eigoTeigi"
+      id="eigoTeigi"
+      placeholder="英単語"
+      required
+    />
+
+    <div class="form__row">
+      <div class="form__row--item">
+        <label for="eigoNijitekiTeigi"></label>
+        <input
+          type="text"
+          name="eigoNijitekiTeigi"
+          id="eigoNijitekiTeigi"
+          placeholder="英語二次的定義"
+        />
+      </div>
+
+      <div class="form__row--item">
+        <label for="eigoFukusuuTeigi"></label>
+        <input
+          type="text"
+          name="eigoFukusuuTeigi"
+          id="eigoFukusuuTeigi"
+          placeholder="英語複数定義"
+        />
+      </div>
+    </div>
+
     <div class="form__row">
       <div class="form__row--item">
         <label for="gorui">語類</label>
         <select type="text" name="gorui" id="gorui" required>
-          <option value="mitei">未定</option>
-          <option value="bungo">文語</option>
-          <option value="kougo">口語</option>
-          <option value="ryouhou">両方</option>
+          <option value="未定">未定</option>
+          <option value="文語">文語</option>
+          <option value="口語">口語</option>
+          <option value="両方">両方</option>
         </select>
       </div>
 
       <div class="form__row--item">
         <label for="nihongoHinshi">日本語品詞</label>
         <select type="text" name="nihongoHinshi" id="nihongoHinshi" required>
-          <option value="meishi">名詞</option>
-          <option value="doushi">動詞</option>
-          <option value="keiyoushi">形容詞</option>
-          <option value="fukushi">副詞</option>
-          <option value="ryouhou">其の他</option>
+          <option value="名詞">名詞</option>
+          <option value="動詞">動詞</option>
+          <option value="形容詞">形容詞</option>
+          <option value="副詞">副詞</option>
+          <option value="両方">其の他</option>
         </select>
       </div>
 
       <div class="form__row--item">
         <label for="eigoHinshi">英語品詞</label>
         <select type="text" name="eigoHinshi" id="eigoHinshi" required>
-          <option value="meishi">名詞</option>
-          <option value="doushi">動詞</option>
-          <option value="keiyoushi">形容詞</option>
-          <option value="fukushi">副詞</option>
-          <option value="ryouhou">其の他</option>
+          <option value="名詞">名詞</option>
+          <option value="動詞">動詞</option>
+          <option value="形容詞">形容詞</option>
+          <option value="副詞">副詞</option>
+          <option value="両方">其の他</option>
         </select>
       </div>
     </div>
@@ -65,6 +96,11 @@
         <label for="ryaku"></label>
         <input type="text" name="ryaku" id="ryaku" placeholder="略" />
       </div>
+
+      <div class="form__row--item">
+        <label for="joshi"></label>
+        <input type="text" name="joshi" id="joshi" placeholder="助詞" />
+      </div>
     </div>
 
     <label for="nihongoReibun"></label>
@@ -72,44 +108,19 @@
       type="text"
       name="nihongoReibun"
       id="nihongoReibun"
-      placeholder="例文"
+      placeholder="日本語例文"
     />
-    <label for="bikouran"></label>
-    <input type="text" name="bikouran" id="bikouran" placeholder="備考" />
-
-    <label for="eigoTeigi"></label>
-    <input
-      type="text"
-      name="eigoTeigi"
-      id="eigoTeigi"
-      placeholder="英単語"
-      required
-    />
-
-    <div class="form__row">
-      <div class="form__row--item">
-        <label for="eigoNijitekiTeigi"></label>
-        <input
-          type="text"
-          name="eigoNijitekiTeigi"
-          id="eigoNijitekiTeigi"
-          placeholder="二次的定義"
-        />
-      </div>
-
-      <div class="form__row--item">
-        <label for="eigoFukusuuTeigi"></label>
-        <input
-          type="text"
-          name="eigoFukusuuTeigi"
-          id="eigoFukusuuTeigi"
-          placeholder="複数定義"
-        />
-      </div>
-    </div>
 
     <label for="eigoReibun"></label>
-    <input type="text" name="eigoReibun" id="eigoReibun" placeholder="例文" />
+    <input
+      type="text"
+      name="eigoReibun"
+      id="eigoReibun"
+      placeholder="英語例文"
+    />
+
+    <label for="bikouran"></label>
+    <input type="text" name="bikouran" id="bikouran" placeholder="備考欄" />
 
     <input class="form__btn" type="submit" value="Add Word" />
   </form>

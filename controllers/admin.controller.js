@@ -1,3 +1,5 @@
+const wanakana = require("wanakana");
+
 const Word = require("../models/words.model");
 
 exports.getAdminControls = async (req, res, next) => {
@@ -9,24 +11,74 @@ exports.getAdminControls = async (req, res, next) => {
 };
 
 exports.getCreateWord = async (req, res, next) => {
+  //flash message for success or fail
+  // const flashMessage = req.flash("message");
+
   res.render("admin/admin-add-word", {
     pageTitle: "Add Word",
     contentTitle: "Admin Controls: Add Word",
     path: "/admin/add-word",
+    // message: flashMessage,
   });
 };
 
 exports.postCreateWord = async (req, res) => {
-  // const enteredWord = new Word({
-  //   word: req.body.word,
-  //   nihongo: req.body.nihongo,
-  //   eigo: req.body.eigo,
-  // });
+  const {
+    word,
+    gorui,
+    hiragana,
+    nihongoHinshi,
+    joshi,
+    ryaku,
+    bikouran,
+    nihongoReibun,
+    eigoTeigi,
+    nijitekiTeigi,
+    fukusuuTeigi,
+    eigoHinshi,
+    eigoReibun,
+  } = req.body;
+  const katakana = wanakana.toKatakana(hiragana);
+  const romaji = wanakana.toRomaji(hiragana);
+
+  console.log(`katakana ${katakana}, romaji: ${romaji}`);
+
+  const enteredWord = new Word({
+    word: word,
+    nihongo: {
+      wordType: gorui,
+      furigana: "",
+      hiragana: hiragana,
+      katakana: katakana,
+      romaji: romaji,
+      hinshi: nihongoHinshi,
+      joshi: joshi,
+      ryaku: ryaku,
+      bikouran: bikouran,
+      reibun: nihongoReibun,
+    },
+    eigo: {
+      teigi: eigoTeigi,
+      nijitekiTeigi: nijitekiTeigi,
+      fukusuuTeigi: fukusuuTeigi,
+      hinshi: eigoHinshi,
+      reibun: eigoReibun,
+    },
+  });
+  JSON.stringify(enteredWord);
+
+  console.log(enteredWord);
 
   try {
-    // const newWord = await enteredWord.save();
+    const newWord = await enteredWord.insertOne();
+    // req.flash("message", `${req.body.word} successfully added`);
     res.status(201).redirect("/admin/add-word");
-    console.log(req.body);
+    // console.log(req.body);
+    // window.alert(`${req.body.word} successfully added`);
+
+    // if (res.status === 201) {
+    //   ;
+    // }
     //   .render("admin/admin-add-word", {
     //   pageTitle: "Add Word",
     //   contentTitle: "Admin Controls: Add Word",
