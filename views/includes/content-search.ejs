@@ -75,7 +75,7 @@
       </div>
       <% if (searchResult.英語.二次的定義 == '' && searchResult.英語.複数定義 ==
       '' && searchResult.日本語.日本語例文 == '' && searchResult.英語.英語例文
-      == '' ) { %>
+      == '' ) { %> <% } else { %>
       <div class="accordian-hidden">
         <% if (searchResult.英語.二次的定義 == '' ) { %>
         <div class="accordian__item"></div>
@@ -130,7 +130,7 @@
           d="M15.75 19.5L8.25 12l7.5-7.5"
         />
       </svg>
-      <% } else { %> <% } %>
+      <% } %>
     </li>
     <% } %>
   </ul>
