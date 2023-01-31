@@ -308,6 +308,8 @@
   --color-accent-opacity-light: rgba(82, 82, 82, 0.2);
   --color-accent-opacity-dark: rgba(82, 82, 82, 0.99);
   --box-shadow: 5rem, 5rem 5rem rgba(0, 0, 0, 0.8);
+  --flash-success: rgba(170, 222, 135, 0.5);
+  --flash-error: rgba(204, 92, 92, 0.5);
 }
 
 html {
@@ -390,24 +392,31 @@ strong {
   background-color: var(--color-dark);
 }
 
-/* .flash-message {
+.flash-message {
   position: absolute;
   font-size: 2rem;
   font-weight: 700;
   margin: 0 auto;
-  background-color: var(--color-accent-secondary);
+  background-color: var(--flash-success);
   color: var(--color-dark);
   text-align: center;
-  border-bottom-left-radius: 1rem;
-  border-bottom-right-radius: 1rem;
+  border: 0.1rem solid var(--color-accent-primary);
+  box-shadow: 0, 0, 4rem, 1rem rgba(0, 0, 0, 0.3);
+  border-radius: 1rem;
+  /* border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem; */
   width: 70%;
-  top: 12rem;
+  top: 13rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: -1;
-} */
+}
 
-.flash-message {
+.flash-message:empty {
+  display: none;
+}
+
+/* .flash-message {
   position: fixed;
   top: 0;
   left: 50%;
@@ -423,10 +432,12 @@ strong {
   padding: 1.6rem 15rem;
   -webkit-box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
   box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
-}
+} */
+
 .flash-message--success {
   background-color: #20bf6b;
 }
+
 .flash-message--error {
   background-color: #eb4d4b;
 }
@@ -856,12 +867,17 @@ strong {
 }
 
 .search__result {
+  position: relative;
   padding: 4rem 3rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
   line-height: 1;
   border-top: 0.2rem solid rgba(0, 0, 0, 0.3);
+}
+.search__result:hover {
+  /* transform: scale(1.1); */
+  background-color: #f0f0f0c9;
 }
 
 .search__result--top-row {
@@ -904,6 +920,20 @@ strong {
   display: flex;
   align-items: center;
   gap: 5rem;
+}
+
+.search__result--english {
+  font-weight: 700;
+}
+
+.accordian-icon {
+  position: absolute;
+  right: 3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5rem;
+  height: 5rem;
+  stroke: var(--color-accent-primary);
 }
 
 /********************/

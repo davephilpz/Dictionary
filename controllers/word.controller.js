@@ -46,10 +46,17 @@ exports.postSearchWord = async (req, res, next) => {
   try {
     let searchString = req.body.searchString.trim();
     console.log(searchString);
+    // let searchResults = await Word.find({
+    //   日本語: {
+    //     日本語単語: { $regex: new RegExp("^" + searchString + ".*", "i") },
+    //   },
+    // }).exec();
+    // let searchResults = await Word.find({ "日本語.日本語単語": searchString });　//working version without wildcard.
     let searchResults = await Word.find({
-      word: { $regex: new RegExp("^" + searchString + ".*", "i") },
-    }).exec();
-
+      "日本語.日本語単語": {
+        $regex: new RegExp("^" + searchString + ".*", "i"),
+      },
+    });
     //limit search results to 5
     searchResults = searchResults.slice(0, 5);
 

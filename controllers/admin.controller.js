@@ -12,13 +12,13 @@ exports.getAdminControls = async (req, res, next) => {
 
 exports.getCreateWord = async (req, res, next) => {
   //flash message for success or fail
-  // const flashMessage = req.flash("message");
+  const flashMessage = req.flash("message");
 
   res.render("admin/admin-add-word", {
     pageTitle: "Add Word",
     contentTitle: "Admin Controls: Add Word",
     path: "/admin/add-word",
-    // message: flashMessage,
+    message: flashMessage,
   });
 };
 
@@ -42,30 +42,12 @@ exports.postCreateWord = async (req, res) => {
   try {
     const katakana = wanakana.toKatakana(平仮名);
     const romaji = wanakana.toRomaji(平仮名);
+    const nihongoReibun = 日本語例文.split(";").join(",");
+    const nijitekiTeigi = 二次的定義.split(";").join(",");
+    const fukusuuTeigi = 複数定義.split(";").join(",");
+    const eigoReibun = 英語例文.split(";").join(",");
 
-    // const enteredWord = new Word({
-    //   日本語: {
-    //     日本語単語: 日本語単語,
-    //     語類: 語類,
-    //     平仮名: 平仮名,
-    //     片仮名: katakana,
-    //     ローマ字: romaji,
-    //     日本語品詞: 日本語品詞,
-    //     助詞: 助詞,
-    //     略語: 略語,
-    //     備考欄: 備考欄,
-    //     日本語例文: 日本語例文,
-    //   },
-    //   英語: {
-    //     英単語: 英単語,
-    //     二次的定義: 二次的定義,
-    //     複数定義: 複数定義,
-    //     英語品詞: 英語品詞,
-    //     英語例文: 英語例文,
-    //   },
-    // });
-
-    let enteredWord = new Word({
+    const enteredWord = new Word({
       日本語: {
         日本語単語: 日本語単語,
         語類: 語類,
@@ -76,37 +58,43 @@ exports.postCreateWord = async (req, res) => {
         助詞: 助詞,
         略語: 略語,
         備考欄: 備考欄,
-        日本語例文: 日本語例文,
+        日本語例文: nihongoReibun,
       },
       英語: {
         英単語: 英単語,
-        二次的定義: 二次的定義,
-        複数定義: 複数定義,
+        二次的定義: nijitekiTeigi,
+        複数定義: fukusuuTeigi,
         英語品詞: 英語品詞,
-        英語例文: 英語例文,
+        英語例文: eigoReibun,
       },
     });
 
     console.log(enteredWord);
 
-    let newWord = await enteredWord.save().catch((err) => {
-      console.log(`error: ${err}`);
+    const newWord = await enteredWord.save((err) => {
+      if (!err) {
+        req.flash("message", `Successfully added: (${req.body.日本語単語})`);
+        res.status(201).redirect("/admin/add-word");
+      } else {
+        if (err.code === 11000) {
+          req.flash(
+            "message",
+            `Duplicate word not allowed: (${req.body.日本語単語})`
+          );
+        }
+        res.status(400).redirect("/admin/add-word");
+        console.log(`error: ${err}`);
+        console.log(`error: ${err.name}`);
+        console.log(`error: ${err.code}`);
+      }
     });
+    // .catch((err) => {});
 
-    // req.flash("message", `${req.body.word} successfully added`);
-    res.status(201).redirect("/admin/add-word");
-    // console.log(req.body);
-    // window.alert(`${req.body.word} successfully added`);
+    //display success flash message if no errors found
+    // if (!err)
+    //   req.flash("message", `Successfully added: (${req.body.日本語単語})`);
 
-    // if (res.status === 201) {
-    //   ;
-    // }
-    //   .render("admin/admin-add-word", {
-    //   pageTitle: "Add Word",
-    //   contentTitle: "Admin Controls: Add Word",
-    //   path: "/admin/add-word",
-    // });
-    //201 means successful post and should be used over 200 the default
+    // res.status(201).redirect("/admin/add-word");
   } catch (err) {
     (err) => {
       res.status(400).json({ message: err.message });

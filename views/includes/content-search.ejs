@@ -24,45 +24,98 @@
   ></div>
 
   <% if (searchString.length === 0) { %>
-  <ul class="search__results"></ul>
-      <h1 class="search__title">Must Enter Search</h1>
-    </ul>
+  <ul class="search__results">
+    <h1 class="search__title">Must Enter Search</h1>
+  </ul>
 
-    <% } else if (searchResults.length > 0) { %>
+  <% } else if (searchResults.length > 0) { %>
   <ul class="search__results">
     <h1 class="search__title">Search Results for: (<%= searchString %>)</h1>
     <% for (let searchResult of searchResults) { %>
     <li class="search__result">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="accordian-icon"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M15.75 19.5L8.25 12l7.5-7.5"
+        />
+      </svg>
       <div class="search__result--top-row">
-        <h2><%= searchResult.word %></h2>
+        <h2><%= searchResult.日本語.日本語単語 %></h2>
         <span class="search__result--part-of-speech"
-          ><%= searchResult.nihongo.hinshi %></span
+          ><%= searchResult.日本語.日本語品詞 %></span
         >
+        <% if (searchResult.日本語.助詞 === ['']) { %>
+        <span class="search__result--part-of-speech"></span>
+        <% } else { %>
         <span class="search__result--part-of-speech"
-          >(<%= searchResult.nihongo.joshi %>)</span
+          >(<%= searchResult.日本語.助詞[0] %>)</span
         >
+        <% } %> <% switch (searchResult.日本語.語類) { case "文語": %>
+        <span class="search__result--word-type">(文)</span>
+        <% break; case "口語": %>
+        <span class="search__result--word-type">(口)</span>
+        <% break; case "両方": %>
+        <span class="search__result--word-type">(文口)</span>
+        <% break; case "未定": %>
+        <span class="search__result--word-type"></span>
+        <% break; default: break; } %>
       </div>
       <div class="search__result--second-row">
-        <span class="search__result--hiragana"><%= searchResult.nihongo.hiragana %></span>
-        <span class="search__result--katakana"><%= searchResult.nihongo.katakana %></span>
-        <span class="search__result--romaji"><%= searchResult.nihongo.romaji %></span>
-      </div>
-      <div class="search__result--third-row">
-        <span class="search__result--english"><%= searchResult.eigo.teigi %></span>
-        <span class="search__result--part-of-speech"
-          ><%= searchResult.eigo.hinshi %></span
+        <span class="search__result--hiragana"
+          ><%= searchResult.日本語.平仮名 %></span
+        >
+        <span class="search__result--katakana"
+          ><%= searchResult.日本語.片仮名 %></span
+        >
+        <span class="search__result--romaji"
+          ><%= searchResult.日本語.ローマ字 %></span
         >
       </div>
-      <div class="search__result--forth-row">
-        <span class="search__result--nihongo-reibun"><%= searchResult.nihongo.reibun %></span>
+      <div class="search__result--third-row">
+        <span class="search__result--english"
+          ><%= searchResult.英語.英単語 %></span
+        >
+        <span class="search__result--part-of-speech"
+          ><%= searchResult.英語.英語品詞 %></span
+        >
+      </div>
+      <div class="search__result--accordian">
+        <div class="search__result--forth-row">
+          <span class="search__result--nihongo-reibun"
+            ><%= searchResult.日本語.日本語例文 %></span
+          >
+        </div>
+        <div class="search__result--forth-row">
+          <span class="search__result--nihongo-reibun"
+            ><%= searchResult.英語.二次的定義 %></span
+          >
+        </div>
+        <div class="search__result--forth-row">
+          <span class="search__result--nihongo-reibun"
+            ><%= searchResult.英語.複数定義 %></span
+          >
+        </div>
+        <div class="search__result--forth-row">
+          <span class="search__result--nihongo-reibun"
+            ><%= searchResult.英語.英語例文 %></span
+          >
+        </div>
       </div>
     </li>
     <% } %>
   </ul>
   <% } else { %>
-     <ul class="search__results"></ul>
-      <h1 class="search__title">No Words Found</h1>
-    </ul>
+  <ul class="search__results">
+    <h1 class="search__title">No Words Found</h1>
+  </ul>
   <% } %>
 </section>
 

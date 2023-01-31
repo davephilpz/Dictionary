@@ -1,7 +1,17 @@
-// const flashMessage = document.getElementById("flash-message");
+// import "@babel/polyfill";
+// import "axios";
+// import "./alert";
 
-// if (flashMessage) {
-//   window.setTimeout((flashMessage.style.display = "none"), 6000);
-// }
+// document.addEventListener("DOMContentLoaded", () => {
+//   let flashMessage = document.querySelector(".flash-message");
+
+//   if (flashMessage.innerHTML !== "") {
+//     setTimeout(() => {
+//       flashMessage.innerHTML = "";
+//     }, 3000);
+//   }
+// });
 
 // console.log("test");
+
+// console.log("Hello from parcel");

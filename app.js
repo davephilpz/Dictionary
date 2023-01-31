@@ -27,16 +27,18 @@ app.set("views", "views");
 app.use(express.static(path.join(__dirname, "public")));
 
 //flash message middleware
-// app.use(cookieParser("secretCookieString"));
-// app.use(
-//   session({
-//     secret: "secretSessionString",
-//     cookie: { maxAge: 60000 },
-//     resave: true, //true forces sessions to be saved back to session store, even if the session was never modified during the request
-//     saveUninitialized: true, //true forces sessions that is initialized to be saved to the store
-//   })
-// );
-// app.use(connectFlash());
+app.use(cookieParser("secretCookieString"));
+
+//must initialize session to allow connect-flash to work
+app.use(
+  session({
+    secret: "secretSessionString",
+    cookie: { maxAge: 60000 },
+    resave: true, //true forces sessions to be saved back to session store, even if the session was never modified during the request
+    saveUninitialized: true, //true forces sessions that is initialized to be saved to the store
+  })
+);
+app.use(connectFlash());
 
 //test middleware
 app.use((req, res, next) => {
