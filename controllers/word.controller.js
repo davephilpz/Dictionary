@@ -2,14 +2,12 @@ const Word = require("../models/word.model");
 
 exports.getSearchWord = async (req, res, next) => {
   try {
-    // const words = await Word.find();
     res.render("index", {
-      // words,
       pageTitle: "Dictionary",
       contentTitle: "Word Search",
       path: "/",
+      // output: req.params.id,
     });
-    // console.log(words);
   } catch (err) {
     (err) => {
       res.status(500).json({ message: err.message });
@@ -19,53 +17,50 @@ exports.getSearchWord = async (req, res, next) => {
   }
 };
 
-// exports.getSearchWord = async (req, res) => {
-//   try {
-//     // const word = await Word.findOne({ word: req.params.search });
-//     // console.log(word);
-//     // if (word === null) {
-//     //   console.log("Word not found.");
-//     // } else {
-//     // console.log(word);
-//     res.render("index", {
-//       // word,
-//       pageTitle: "Search Results",
-//       path: "/search:word",
-//     });
-//     // }
-//   } catch (err) {
-//     (err) => {
-//       res.status(400).json({ message: err.message });
-//       //400 means user error
-//       console.log(err);
-//     };
-//   }
-// };
-
 exports.postSearchWord = async (req, res, next) => {
+  let searchString = req.body.searchString.trim();
+
   try {
-    let searchString = req.body.searchString.trim();
+    console.log(req.body);
     console.log(searchString);
+
+    // let searchResults = await Word.find({ "日本語.日本語単語": searchString }); //working version without wildcard.
     // let searchResults = await Word.find({
-    //   日本語: {
-    //     日本語単語: { $regex: new RegExp("^" + searchString + ".*", "i") },
+    //   "日本語.日本語単語": {
+    //     $regex: new RegExp("^" + searchString + ".*"),
+    //     $options: "i",
     //   },
-    // }).exec();
-    // let searchResults = await Word.find({ "日本語.日本語単語": searchString });　//working version without wildcard.
+    // }); //wildcard, but not fully working
+
+    // let searchResults = await Word.find({
+    //   "日本語.日本語単語": {
+    //     $regex: new RegExp(searchString),
+    //     $options: "i",
+    //   },
+    // });
+
+    //query to find in any field
     let searchResults = await Word.find({
-      "日本語.日本語単語": {
-        $regex: new RegExp("^" + searchString + ".*", "i"),
-      },
+      $or: [
+        { "日本語.日本語単語": searchString },
+        { "日本語.平仮名": searchString },
+        { "日本語.片仮名": searchString },
+        { "日本語.ローマ字": searchString },
+        { "英語.英単語": searchString },
+      ],
     });
+    //this works, but needs wildcard feature added.
+
     //limit search results to 5
     searchResults = searchResults.slice(0, 5);
 
-    res.render("search", {
+    res.render(`search`, {
       searchResults,
       searchString,
-      pageTitle: `search: ${searchString}`,
+      pageTitle: `${searchString}`,
       contentTitle: "Word Search",
       path: `/search`,
+      // path: `/search/:${searchString}`,
     });
     console.log(searchResults);
   } catch (err) {
