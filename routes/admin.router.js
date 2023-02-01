@@ -12,12 +12,12 @@ router
   .post(adminController.postCreateWord);
 
 router
-  .route("/admin/edit-word")
+  .route("/admin/edit-word/:id")
   .get(adminController.getUpdateWord)
   .patch(adminController.postUpdateWord);
 
 router
-  .route("/admin/delete-word")
+  .route("/admin/delete-word/:id")
   .get(adminController.getDeleteWord)
   .delete(adminController.postDeleteWord);
 

@@ -23,6 +23,7 @@ exports.getCreateWord = async (req, res, next) => {
 };
 
 exports.postCreateWord = async (req, res) => {
+  console.log(req.body);
   const {
     日本語単語,
     語類,
@@ -153,27 +154,29 @@ exports.getDeleteWord = async (req, res, next) => {
   res.render("admin/admin-delete-word", {
     pageTitle: "Delete Word",
     contentTitle: "Admin Controls: Delete Word",
-    path: "/admin/delete-word",
+    path: `/admin/delete-word/${req.params.id}`,
   });
 };
 
 exports.postDeleteWord = async (req, res) => {
   try {
-    // res.render("searchResults", {
-    //   //word,
-    //   pageTitle: "Search Results",
-    //   path: "/words",
-    // });
-    const word = await Word.findOne({ word: req.params.search });
+    let searchString = req.body.searchString.trim();
+    console.log(searchString);
 
-    if (word === null) {
-      console.log("Word not found.");
-    } else {
-      word.deleteOne();
-      console.log(`${word.word} successfully deleted from database.`);
-      console.log(word);
-      res.status(202).redirect("/");
-    }
+    let searchResults = await Word.find({
+      "日本語.日本語単語": { searchString },
+    });
+    //limit search results to 5
+    searchResults = searchResults.slice(0, 5);
+
+    res.render("/admin/admin-delete-word", {
+      searchResults,
+      searchString,
+      pageTitle: `search: ${searchString}`,
+      contentTitle: "Word Search",
+      path: `/admin/admin-delete-word/:id`,
+    });
+    console.log(searchResults);
   } catch (err) {
     (err) => {
       res.status(400).json({ message: err.message });
