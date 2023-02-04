@@ -5,5 +5,3 @@ for (let i = 0; i < accordianToggle.length; i++) {
     this.classList.toggle("accordian-open");
   });
 }
-
-console.log("accordian loaded");

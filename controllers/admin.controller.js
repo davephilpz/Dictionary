@@ -7,6 +7,7 @@ exports.getAdminControls = async (req, res, next) => {
     pageTitle: "Admin Controls",
     contentTitle: "Admin Controls",
     path: "/admin",
+    isAuthenticated: req.isLoggedIn,
   });
 };
 
@@ -18,6 +19,7 @@ exports.getCreateWord = async (req, res, next) => {
     pageTitle: "Add Word",
     contentTitle: "Admin Controls: Add Word",
     path: "/admin/add-word",
+    isAuthenticated: req.isLoggedIn,
     message: flashMessage,
   });
 };
@@ -110,6 +112,7 @@ exports.getUpdateWord = async (req, res, next) => {
     pageTitle: "Edit Word",
     contentTitle: "Admin Controls: Edit Word",
     path: "/admin/edit-word",
+    isAuthenticated: req.isLoggedIn,
   });
 };
 
@@ -155,6 +158,7 @@ exports.getDeleteWord = async (req, res, next) => {
     pageTitle: "Delete Word",
     contentTitle: "Admin Controls: Delete Word",
     path: `/admin/delete-word/${req.params.id}`,
+    isAuthenticated: req.isLoggedIn,
   });
 };
 
@@ -175,6 +179,7 @@ exports.postDeleteWord = async (req, res) => {
       pageTitle: `search: ${searchString}`,
       contentTitle: "Word Search",
       path: `/admin/admin-delete-word/:id`,
+      isAuthenticated: req.isLoggedIn,
     });
     console.log(searchResults);
   } catch (err) {

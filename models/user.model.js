@@ -11,7 +11,6 @@ const usersSchema = new mongoose.Schema({
     required: [true, "Must input an email address."],
     unique: true,
     lowercase: true, //will transform string to lowercase
-    // validate: [validator.isEmail, "Please provide a valid email address."],
   },
   role: {
     type: String,

@@ -3,5 +3,8 @@ exports.get404 = (req, res, next) => {
     pageTitle: "Page Not Found",
     contentTitle: "",
     path: "/404",
+    isAuthenticated: req.isLoggedIn,
   });
 };
+
+//app.use handles all http requests and not specifying a route means that anything that is not matched to above routes (ran in order) will be caught in this middleware.

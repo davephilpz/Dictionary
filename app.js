@@ -8,7 +8,7 @@ const connectFlash = require("connect-flash");
 
 const wordRouter = require("./routes/word.router");
 const adminRouter = require("./routes/admin.router");
-const loginRouter = require("./routes/login.router");
+const authRouter = require("./routes/auth.router");
 
 const app = express();
 app.use(express.json()); //built in middleware that parses post requests with json in body
@@ -27,7 +27,7 @@ app.set("views", "views");
 app.use(express.static(path.join(__dirname, "public")));
 
 //flash message middleware
-app.use(cookieParser("secretCookieString"));
+app.use(cookieParser("secretCookieString")); //need to enter some string
 
 //must initialize session to allow connect-flash to work
 app.use(
@@ -52,14 +52,24 @@ app.use((req, res, next) => {
   next();
 });
 
+//find test user and save them into req object
+// app.use((req, res, next) => {
+//   User.findById("admin@example.com")
+//     .then((user) => {
+//       req.user = user;
+//       next();
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// });
+
 //admin routes
-app.use(adminRouter);
-
-//login routes
-app.use(loginRouter);
-
+app.use("/admin", adminRouter);
 //search routes
 app.use(wordRouter);
+//login routes
+app.use(authRouter);
 
 //return 404 page when content not found.
 app.use(get404.get404);
