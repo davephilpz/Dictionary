@@ -6,7 +6,10 @@
   <body>
     <%- include('./includes/header.ejs') %>
 
-    <main><%- include('./includes/content-search.ejs') %></main>
+    <main>
+      <%- include('./includes/content-search-bar.ejs') %> <%-
+      include('./includes/content-search-results.ejs') %>
+    </main>
 
     <%- include('./includes/footer.ejs') %>
   </body>
