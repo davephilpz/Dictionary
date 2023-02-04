@@ -44,7 +44,7 @@ exports.postSearchWord = async (req, res, next) => {
     console.log("query:", query);
     console.log("query.searchString:", query.searchString);
 
-    // // Find the words in the database that match the query
+    // Find words matching query
     let searchResults = await Word.find({
       //search kanji, hiragana, katakana, romaji and English and return all results
       $or: [

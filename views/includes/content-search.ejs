@@ -7,14 +7,39 @@
     aria-label="word search window"
   >
     <div class="form__search">
+      <picture class="tooltip__icon">
+        <source srcset="../img/icons/tooltip.webp" type="image/webp" />
+        <source srcset="../img/icons/tooltip.png" type="image/png" />
+        <img
+          src="../img/icons/tooltip.png"
+          alt="Tooltip icon for more information on search criteria."
+        />
+      </picture>
       <label for="search-box"></label>
-      <input class="form__search-input" type="text" name="searchString"
-      id="search-box" placeholder="Search word" alt="Search word in kanji,
-      hiragana, katakana, romaji or English." onkeyup="sendData()"
+      <input
+        class="form__search-input"
+        type="text"
+        name="searchString"
+        id="search-box"
+        placeholder="Search word"
+        alt="Search word in kanji,
+      hiragana, katakana, romaji or English."
+        onkeyup="sendData()"
+      />
+      <button class="search__btn" type="submit">Search</button>
     </div>
-    <button class="search__btn" type="submit">Search</button>
   </form>
+  <div class="tooltip-wrapper" id="tooltip" role="tooltip" aria-hidden="true">
+    <div class="tooltip">
+      <p class="tooltip__text">
+        Search may be performed in English or any Japanese alphabet. You may
+        include a (*＊) in front or behind letters to perform a wildcard search.
+      </p>
+      <button class="tooltip__close-button">X</button>
+    </div>
+  </div>
 </section>
+
 <section class="section-search-results">
   <div
     class="search__predictions"
