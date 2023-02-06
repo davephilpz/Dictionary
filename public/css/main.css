@@ -363,6 +363,10 @@ strong {
   font-weight: var(--font-weight-bold);
 }
 
+button {
+  border: none;
+}
+
 .btn-dark:hover {
   color: var(--color-dark) !important;
 }
@@ -1088,7 +1092,6 @@ form p {
 
 .form__btn {
   width: 30%;
-  border: none;
   color: var(--color-dark);
   background-color: var(--color-accent-primary);
   font-weight: 700;
@@ -1161,7 +1164,6 @@ form p {
 }
 
 .tooltip__close-button {
-  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1172,4 +1174,185 @@ form p {
   border-radius: 0.4rem;
   background-color: var(--color-grey-dark);
   cursor: pointer;
+}
+
+/********************/
+/* Section Review */
+/********************/
+
+.section-review {
+  margin: 0 auto;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 3rem;
+}
+
+.review__card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-grey-light);
+  padding: 4rem 3rem;
+  border-radius: 1rem;
+  border: 0.2rem solid var(--color-grey-dark);
+  box-shadow: 1rem 2rem 3rem rgba(0, 0, 0, 0.1);
+  gap: 6rem;
+}
+
+.review__card--review-type {
+  display: flex;
+  gap: 2rem;
+}
+
+.review__card--button-new,
+.review__card--button-review {
+  cursor: pointer;
+  color: var(--color-dark);
+  background-color: var(--color-accent-primary);
+  font-weight: 700;
+  font-size: 1.5rem;
+  height: 3.5rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  transition: transform 300ms ease-in-out;
+}
+
+.review__card--button-new:hover,
+.review__card--button-review:hover {
+  color: var(--color-light);
+  background-color: var(--color-dark);
+}
+
+.review__card--word {
+  font-size: 4rem;
+}
+
+.review__card--yomikata,
+.review__card--english {
+  font-size: 2rem;
+}
+
+.review__card--submit {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* gap: 4rem; */
+}
+
+.review__card--button-red {
+  cursor: pointer;
+  content: "";
+  color: var(--color-dark);
+  background-color: hsla(0, 100%, 50%, 0.8);
+  font-weight: 700;
+  font-size: 2rem;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 1rem;
+  border: 0.2rem solid transparent;
+  transition: transform 300ms ease-in-out;
+}
+
+.review__card--button-red:hover {
+  background-color: hsla(0, 100%, 50%, 0.5);
+  border: 0.2rem solid var(--color-dark);
+}
+.review__card--button-orange {
+  cursor: pointer;
+  content: "";
+  color: var(--color-dark);
+  background-color: hsla(38, 84%, 49%, 0.8);
+  font-weight: 700;
+  font-size: 2rem;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 1rem;
+  transition: transform 300ms ease-in-out;
+}
+
+.review__card--button-orange:hover {
+  background-color: hsla(38, 84%, 49%, 0.5);
+}
+.review__card--button-yellow {
+  cursor: pointer;
+  content: "";
+  color: var(--color-dark);
+  background-color: hsla(58, 86%, 58%, 0.8);
+  font-weight: 700;
+  font-size: 2rem;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 1rem;
+  transition: transform 300ms ease-in-out;
+}
+
+.review__card--button-yellow:hover {
+  background-color: hsla(58, 86%, 58%, 0.5);
+}
+.review__card--button-green {
+  cursor: pointer;
+  content: "";
+  color: var(--color-dark);
+  background-color: hsla(105, 77%, 46%, 0.8);
+  font-weight: 700;
+  font-size: 2rem;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 1rem;
+  transition: transform 300ms ease-in-out;
+}
+
+.review__card--button-green:hover {
+  background-color: hsla(105, 77%, 46%, 0.5);
+}
+
+.review__pagination {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.pag-btn {
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  background-color: var(--color-accent-primary);
+  border: 1px solid var(--color-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.pag-icon {
+  height: 2rem;
+  width: 2rem;
+  stroke: var(--color-light);
+}
+.pag-btn:hover {
+  background-color: var(--color-light);
+}
+.pag-btn:hover .pag-icon {
+  background-color: var(--color-light);
+  stroke: var(--color-accent-primary);
+}
+
+.pag-link:link,
+.pag-link:visited {
+  font-size: 2rem;
+  height: 3rem;
+  width: 3rem;
+  color: #343a40;
+  text-decoration: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pag-link:hover,
+.pag-link:active,
+.pag-link.pag-link--current {
+  color: var(--color-light);
+  background-color: var(--color-dark);
 }

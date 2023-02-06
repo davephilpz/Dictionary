@@ -6,8 +6,9 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const connectFlash = require("connect-flash");
 
-const wordRouter = require("./routes/word.router");
 const adminRouter = require("./routes/admin.router");
+const wordRouter = require("./routes/word.router");
+const reviewRouter = require("./routes/review.router");
 const authRouter = require("./routes/auth.router");
 
 const app = express();
@@ -68,6 +69,8 @@ app.use((req, res, next) => {
 app.use("/admin", adminRouter);
 //search routes
 app.use(wordRouter);
+//review routes
+app.use(reviewRouter);
 //login routes
 app.use(authRouter);
 

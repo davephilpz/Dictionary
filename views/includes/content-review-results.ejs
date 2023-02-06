@@ -1,0 +1,118 @@
+<% const itemsPerPage = 1; let currentPage = 1; let startIndex = (currentPage -
+1) * itemsPerPage; let endIndex = 9; let paginatedResults =
+searchResults.slice(startIndex, endIndex); %> <%
+document.getElementById("previous-word").addEventListener("click", function() {
+if (currentPage > 0) { currentPage--; } });
+document.getElementById("next-word").addEventListener("click", function() { if
+(currentPage < searchResults.length - 1) { currentPage++; } }); %>
+
+<section class="section-review">
+  <div class="review__card">
+    <div class="review__card--review-type">
+      <form
+        class="form-word-search"
+        action="/review"
+        method="POST"
+        role="search window"
+        aria-label="word search window"
+      >
+        <button
+          id="new-words"
+          name="newWords"
+          type="submit"
+          value="newWords"
+          class="review__card--button-new"
+        >
+          New Words
+        </button>
+        <button
+          id="review-words"
+          name="reviewWords"
+          type="submit"
+          value="reviewWords"
+          class="review__card--button-review"
+        >
+          Review Words
+        </button>
+      </form>
+    </div>
+
+    <% if (paginatedResults.length > 0) { %>
+    <h2 class="review__card--word">
+      <%= paginatedResults[0].日本語.日本語単語 %>
+    </h2>
+    <div class="review__card--answer">
+      <h3 class="review__card--yomikata">
+        <%= paginatedResults[0].日本語.平仮名 %>
+      </h3>
+      <h3 class="review__card--english">
+        <%= paginatedResults[0].英語.英単語 %>
+      </h3>
+    </div>
+    <% } %>
+
+    <div class="review__card--submit">
+      <button class="review__card--button-red"></button>
+      <button class="review__card--button-orange"></button>
+      <button class="review__card--button-yellow"></button>
+      <button class="review__card--button-green"></button>
+    </div>
+  </div>
+  <div class="review__pagination">
+    <% if (currentPage > 1) { %>
+    <button class="pag-btn" id="previous-word">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="pag-icon l1"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M15.75 19.5L8.25 12l7.5-7.5"
+        />
+      </svg>
+    </button>
+    <% } %>
+
+    <a href="#" class="pag-link pag-link--current">1</a>
+    <a href="#" class="pag-link">2</a>
+    <a href="#" class="pag-link">3</a>
+
+    <% if (endIndex < searchResults.length) { %>
+    <button class="pag-btn" id="next-word">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="pag-icon r2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M8.25 4.5l7.5 7.5-7.5 7.5"
+        />
+      </svg>
+    </button>
+    <% } %>
+  </div>
+</section>
+
+<script defer>
+  const button = document.querySelector("#new-words");
+  button.addEventListener("click", () => {
+    fetch("/review", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: "newWords" }),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
+  });
+</script>

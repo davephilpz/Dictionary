@@ -93,10 +93,9 @@ exports.postSearchWord = async (req, res, next) => {
       pageTitle: `${searchString}`,
       contentTitle: "Word Search",
       path: `/search`,
-      // path: `/search/:${searchString}`,
       isAuthenticated: req.isLoggedIn,
     });
-    console.log("Seearch Results:", searchResults);
+    console.log("Search Results:", searchResults);
   } catch (err) {
     (err) => {
       res.status(400).json({ message: err.message });
