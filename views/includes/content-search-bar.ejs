@@ -26,15 +26,11 @@
       hiragana, katakana, romaji or English."
         onkeyup="sendData()"
       />
-      <button class="search__btn" type="submit">Search</button>
+      <button class="search__btn" type="submit" onClick="addParams()">
+        Search
+      </button>
     </div>
   </form>
-  <div
-    class="search__predictions"
-    id="search-predictions"
-    role="search predictions"
-    aria-label="list of words in database matching input that user may be searching for"
-  ></div>
   <div class="tooltip-wrapper" id="tooltip" role="tooltip" aria-hidden="true">
     <div class="tooltip">
       <p class="tooltip__text">
@@ -44,4 +40,10 @@
       <button class="tooltip__close-button">X</button>
     </div>
   </div>
+  <div
+    class="search__predictions"
+    id="search-predictions"
+    role="search predictions"
+    aria-label="list of words in database matching input that user may be searching for"
+  ></div>
 </section>

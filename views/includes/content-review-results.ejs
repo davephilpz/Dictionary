@@ -1,7 +1,3 @@
-<% const itemsPerPage = 1; let currentPage = 1; let startIndex = (currentPage -
-1) * itemsPerPage; let endIndex = 9; let paginatedResults =
-searchResults.slice(startIndex, endIndex); %>
-
 <section class="section-review">
   <div class="review__card">
     <div class="review__card--review-type">
@@ -33,17 +29,15 @@ searchResults.slice(startIndex, endIndex); %>
       </form>
     </div>
 
-    <% if (paginatedResults.length > 0) { %>
+    <% for (let i = 0; i < searchResults.length; i++) { %>
     <h2 class="review__card--word">
-      <%= paginatedResults[0].日本語.日本語単語 %>
+      <%= searchResults[i].日本語.日本語単語 %>
     </h2>
     <div class="review__card--answer">
       <h3 class="review__card--yomikata">
-        <%= paginatedResults[0].日本語.平仮名 %>
+        <%= searchResults[i].日本語.平仮名 %>
       </h3>
-      <h3 class="review__card--english">
-        <%= paginatedResults[0].英語.英単語 %>
-      </h3>
+      <h3 class="review__card--english"><%= searchResults[i].英語.英単語 %></h3>
     </div>
     <% } %>
 
@@ -71,11 +65,11 @@ searchResults.slice(startIndex, endIndex); %>
         />
       </svg>
     </button>
-
+    <% for ( let a=1; a < pages; a++) { %>
     <a href="#" class="pag-link pag-link--current">1</a>
     <a href="#" class="pag-link">2</a>
     <a href="#" class="pag-link">3</a>
-
+    <% } %>
     <button class="pag-btn" id="next-word">
       <svg
         xmlns="http://www.w3.org/2000/svg"
