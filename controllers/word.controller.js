@@ -1,12 +1,11 @@
 const Word = require("../models/word.model");
 const mongoose = require("mongoose");
 
-exports.getSearchWord = async (req, res, next) => {
+exports.getSearchPage = async (req, res, next) => {
   try {
     res.render("index", {
       pageTitle: "Dictionary",
       contentTitle: "Word Search",
-      path: "/",
       isAuthenticated: req.isLoggedIn,
     });
   } catch (err) {
@@ -19,13 +18,13 @@ exports.getSearchWord = async (req, res, next) => {
 };
 
 exports.postSearchWord = async (req, res, next) => {
-  const searchString = req.params.word;
-  // const searchString = req.body.searchString.trim();
+  // const searchString = req.params.word;
+  const searchString = req.body.searchString.trim();
   const sanitizedSearchString = searchString.replace(/[＊*]/g, "");
   const query = {};
-  const params = req.params.search;
+  // let url = `/search/${searchString}`;
 
-  console.log("url params:", params);
+  console.log("url params:", searchString);
 
   try {
     console.log("req.body:", req.body);
@@ -91,12 +90,18 @@ exports.postSearchWord = async (req, res, next) => {
     // limit search results to 5
     searchResults = searchResults.slice(0, 50);
 
+    // res.redirect(url, {
+    //   searchResults,
+    //   searchString,
+    //   pageTitle: `${searchString}`,
+    //   contentTitle: "Word Search",
+    //   isAuthenticated: req.isLoggedIn,
+    // });
     res.render(`search`, {
       searchResults,
       searchString,
       pageTitle: `${searchString}`,
       contentTitle: "Word Search",
-      path: `/search/${searchString}`,
       isAuthenticated: req.isLoggedIn,
     });
     console.log("Search Results:", searchResults);
@@ -108,3 +113,13 @@ exports.postSearchWord = async (req, res, next) => {
     };
   }
 };
+
+// exports.getSearchWord = async (req, res) => {
+//   let searchString = req.params.word;
+
+//   res.render("search", {
+//     pageTitle: `${searchString}`,
+//     contentTitle: "Word Search",
+//     isAuthenticated: req.isLoggedIn,
+//   });
+// };
