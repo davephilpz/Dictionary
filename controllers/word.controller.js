@@ -91,12 +91,12 @@ exports.postSearchWord = async (req, res, next) => {
     // limit search results to 5
     searchResults = searchResults.slice(0, 50);
 
-    res.render(`search/${searchString}`, {
+    res.render(`search`, {
       searchResults,
       searchString,
       pageTitle: `${searchString}`,
       contentTitle: "Word Search",
-      path: `/search`,
+      path: `/search/${searchString}`,
       isAuthenticated: req.isLoggedIn,
     });
     console.log("Search Results:", searchResults);
