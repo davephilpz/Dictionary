@@ -1,10 +1,6 @@
 <% const itemsPerPage = 1; let currentPage = 1; let startIndex = (currentPage -
 1) * itemsPerPage; let endIndex = 9; let paginatedResults =
-searchResults.slice(startIndex, endIndex); %> <%
-document.getElementById("previous-word").addEventListener("click", function() {
-if (currentPage > 0) { currentPage--; } });
-document.getElementById("next-word").addEventListener("click", function() { if
-(currentPage < searchResults.length - 1) { currentPage++; } }); %>
+searchResults.slice(startIndex, endIndex); %>
 
 <section class="section-review">
   <div class="review__card">
@@ -59,7 +55,6 @@ document.getElementById("next-word").addEventListener("click", function() { if
     </div>
   </div>
   <div class="review__pagination">
-    <% if (currentPage > 1) { %>
     <button class="pag-btn" id="previous-word">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -76,13 +71,11 @@ document.getElementById("next-word").addEventListener("click", function() { if
         />
       </svg>
     </button>
-    <% } %>
 
     <a href="#" class="pag-link pag-link--current">1</a>
     <a href="#" class="pag-link">2</a>
     <a href="#" class="pag-link">3</a>
 
-    <% if (endIndex < searchResults.length) { %>
     <button class="pag-btn" id="next-word">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +92,6 @@ document.getElementById("next-word").addEventListener("click", function() { if
         />
       </svg>
     </button>
-    <% } %>
   </div>
 </section>
 
