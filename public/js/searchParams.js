@@ -1,7 +1,7 @@
 function addParams() {
   var inputValue = document.getElementById("search-box").value;
   var currentUrl = window.location.href;
-  var newUrl = currentUrl + "?searchString=" + inputValue;
+  var newUrl = currentUrl + "?search=" + inputValue;
   window.history.pushState({ path: newUrl }, "", newUrl);
   console.log("param func used");
 }

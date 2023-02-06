@@ -19,9 +19,13 @@ exports.getSearchWord = async (req, res, next) => {
 };
 
 exports.postSearchWord = async (req, res, next) => {
-  const searchString = req.body.searchString.trim();
+  const searchString = req.params.word;
+  // const searchString = req.body.searchString.trim();
   const sanitizedSearchString = searchString.replace(/[＊*]/g, "");
   const query = {};
+  const params = req.params.search;
+
+  console.log("url params:", params);
 
   try {
     console.log("req.body:", req.body);
@@ -87,7 +91,7 @@ exports.postSearchWord = async (req, res, next) => {
     // limit search results to 5
     searchResults = searchResults.slice(0, 50);
 
-    res.render(`search`, {
+    res.render(`search/${searchString}`, {
       searchResults,
       searchString,
       pageTitle: `${searchString}`,
