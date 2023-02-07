@@ -6,8 +6,15 @@
 
   <% } else if (searchResults.length > 0) { %>
   <ul class="search__results">
-    <h1 class="search__title">Search Results for: (<%= searchString %>)</h1>
-    <% for (let searchResult of searchResults) { %>
+    <% if (searchResults.length === 1) { %>
+    <h1 class="search__title">
+      <%= searchResults.length %> Search Result for: (<%= searchString %>)
+    </h1>
+    <% } else { %>
+    <h1 class="search__title">
+      <%= searchResults.length %> Search Results for: (<%= searchString %>)
+    </h1>
+    <% } %> <% for (let searchResult of searchResults) { %>
     <li class="search__result">
       <div class="search__result--top-row">
         <h2><%= searchResult.日本語.日本語単語 %></h2>
