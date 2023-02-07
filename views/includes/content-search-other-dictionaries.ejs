@@ -1,12 +1,21 @@
+<% if (searchResults.length === 0) { %>
+<section class="section-search-other-dictionaries"></section>
+<% } else { %>
+
 <section class="section-search-other-dictionaries">
-  <h3 class="other-dictionaries__title">Search other online dictionaries for (<%= searchString %>)</h3>
+  <h3 class="other-dictionaries__title">
+    Search other online dictionaries for (<%= searchString %>)
+  </h3>
   <ul
     class="other-dictionaries__list"
     role="menu"
     aria-label="Search other online dictionaries"
   >
     <li class="other-dictionary__link">
-      <a href="https://eow.alc.co.jp/search?q=<%= searchString %>" target="_blank">
+      <a
+        href="https://eow.alc.co.jp/search?q=<%= searchString %>"
+        target="_blank"
+      >
         <picture>
           <source
             srcset="../img/other-dictionary-icons/alc.webp"
@@ -17,7 +26,7 @@
             type="image/png"
           />
           <img
-          class="other-dictionary__icon"
+            class="other-dictionary__icon"
             src="../img/other-dictionary-icons/alc.png"
             alt="Alc dictionary icon"
             aria-label="Search <%= searchString %> on Alc online dictionary"
@@ -26,7 +35,10 @@
       </a>
     </li>
     <li class="other-dictionary__link">
-      <a href="https://dictionary.goo.ne.jp/srch/all/<%= searchString %>/m0u/" target="_blank">
+      <a
+        href="https://dictionary.goo.ne.jp/srch/all/<%= searchString %>/m0u/"
+        target="_blank"
+      >
         <picture>
           <source
             srcset="../img/other-dictionary-icons/goo.webp"
@@ -37,16 +49,19 @@
             type="image/png"
           />
           <img
-          class="other-dictionary__icon"
+            class="other-dictionary__icon"
             src="../img/other-dictionary-icons/goo.png"
             alt="Goo dictionary icon"
             aria-label="Search <%= searchString %> on Goo online dictionary"
           />
         </picture>
       </a>
-    </li class="other-dictionary__link">
-    <li>
-      <a href="https://www.google.com/search?q=<%= searchString %>+%E8%8B%B1%E8%AA%9E&oq=<%= searchString %>+%E8%8B%B1%E8%AA%9E&aqs=chrome..69i57j0i546.6043j0j15&sourceid=chrome&ie=UTF-8" target="_blank">
+    </li>
+    <li class="other-dictionary__link">
+      <a
+        href="https://www.google.com/search?q=<%= searchString %>+%E8%8B%B1%E8%AA%9E&oq=<%= searchString %>+%E8%8B%B1%E8%AA%9E&aqs=chrome..69i57j0i546.6043j0j15&sourceid=chrome&ie=UTF-8"
+        target="_blank"
+      >
         <picture>
           <source
             srcset="../img/other-dictionary-icons/google.webp"
@@ -57,15 +72,19 @@
             type="image/png"
           />
           <img
-          class="other-dictionary__icon"
+            class="other-dictionary__icon"
             src="../img/other-dictionary-icons/google.png"
             alt="Google dictionary icon"
             aria-label="Search <%= searchString %> on Google online dictionary"
           />
         </picture>
       </a>
-    </li class="other-dictionary__link">
-      <a href="https://ejje.weblio.jp/content/<%= searchString %>" target="_blank">
+    </li>
+    <li class="other-dictionary__link">
+      <a
+        href="https://ejje.weblio.jp/content/<%= searchString %>"
+        target="_blank"
+      >
         <picture>
           <source
             srcset="../img/other-dictionary-icons/weblio.webp"
@@ -76,7 +95,7 @@
             type="image/png"
           />
           <img
-          class="other-dictionary__icon"
+            class="other-dictionary__icon"
             src="../img/other-dictionary-icons/weblio.png"
             alt="Weblio dictionary icon"
             aria-label="Search <%= searchString %> on Weblio online dictionary"
@@ -86,3 +105,4 @@
     </li>
   </ul>
 </section>
+<% } %>
