@@ -88,7 +88,7 @@ exports.postSearchWord = async (req, res, next) => {
     //this works, but needs wildcard feature added.
 
     // limit search results to 5
-    searchResults = searchResults.slice(0, 50);
+    searchResults = searchResults.slice(0, 9999);
 
     // res.redirect(url, {
     //   searchResults,
