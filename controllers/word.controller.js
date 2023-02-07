@@ -1,5 +1,4 @@
 const Word = require("../models/word.model");
-const mongoose = require("mongoose");
 
 exports.getSearchPage = async (req, res, next) => {
   try {
@@ -18,11 +17,12 @@ exports.getSearchPage = async (req, res, next) => {
 };
 
 exports.postSearchWord = async (req, res, next) => {
+  //get query from params
   const searchString = req.params.word;
+
   // const searchString = req.body.searchString.trim();
   const sanitizedSearchString = searchString.replace(/[＊*]/g, "");
   const query = {};
-  let url = `/search/${searchString}`;
 
   console.log("url params:", searchString);
 
@@ -59,44 +59,9 @@ exports.postSearchWord = async (req, res, next) => {
       ],
     });
 
-    // let searchResults = await Word.find({ "日本語.日本語単語": searchString }); //working version without wildcard.
-    // let searchResults = await Word.find({
-    //   "日本語.日本語単語": {
-    //     $regex: new RegExp("^" + searchString + ".*"),
-    //     $options: "i",
-    //   },
-    // }); //wildcard, but not fully working
-    // const page = req.
-    //     let limit = 5;
-
-    // let searchResults = await Word.find({
-    //   "日本語.日本語単語": searchString,
-    // });
-    // .skip((page - 1) * limit)
-    // .limit(limit);
-
-    //query to find in any field
-    // let searchResults = await Word.find({
-    //   $or: [
-    //     { "日本語.日本語単語": searchString },
-    //     { "日本語.平仮名": searchString },
-    //     { "日本語.片仮名": searchString },
-    //     { "日本語.ローマ字": searchString },
-    //     { "英語.英単語": searchString },
-    //   ],
-    // });
-    //this works, but needs wildcard feature added.
-
     // limit search results to 5
     searchResults = searchResults.slice(0, 9999);
 
-    // res.redirect(url, {
-    //   searchResults,
-    //   searchString,
-    //   pageTitle: `${searchString}`,
-    //   contentTitle: "Word Search",
-    //   isAuthenticated: req.isLoggedIn,
-    // });
     res.render(`search`, {
       searchResults,
       searchString,
@@ -113,13 +78,3 @@ exports.postSearchWord = async (req, res, next) => {
     };
   }
 };
-
-// exports.getSearchWord = async (req, res) => {
-//   let searchString = req.params.word;
-
-//   res.render("search", {
-//     pageTitle: `${searchString}`,
-//     contentTitle: "Word Search",
-//     isAuthenticated: req.isLoggedIn,
-//   });
-// };
