@@ -18,11 +18,11 @@ exports.getSearchPage = async (req, res, next) => {
 };
 
 exports.postSearchWord = async (req, res, next) => {
-  // const searchString = req.params.word;
-  const searchString = req.body.searchString.trim();
+  const searchString = req.params.word;
+  // const searchString = req.body.searchString.trim();
   const sanitizedSearchString = searchString.replace(/[＊*]/g, "");
   const query = {};
-  // let url = `/search/${searchString}`;
+  let url = `/search/${searchString}`;
 
   console.log("url params:", searchString);
 

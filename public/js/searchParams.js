@@ -11,3 +11,15 @@
 //   var inputValue = document.getElementById("search-box").value;
 //   // Make post request to Express.js server
 // }
+
+const form = document.querySelector("#search-form");
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  console.log("invoked");
+
+  const searchInput = document.querySelector("#search-box").value;
+  form.action = `/search/${searchInput}`;
+
+  form.submit();
+});
