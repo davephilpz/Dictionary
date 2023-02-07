@@ -59,6 +59,29 @@ exports.postSearchWord = async (req, res, next) => {
       ],
     });
 
+    //can add this later for case sensitivity issues or the below DRYer version
+    //     { "日本語.日本語単語": { $regex: query.searchString, $options: "i" } },
+    // { "日本語.平仮名": { $regex: query.searchString, $options: "i" } },
+    // { "日本語.片仮名": { $regex: query.searchString, $options: "i" } },
+    // { "日本語.ローマ字": { $regex: query.searchString, $options: "i" } },
+    // { "英語.英単語": { $regex: query.searchString, $options: "i" } },
+
+    // const fields = [
+    //   "日本語.日本語単語",
+    //   "日本語.平仮名",
+    //   "日本語.片仮名",
+    //   "日本語.ローマ字",
+    //   "英語.英単語",
+    // ];
+
+    // const query = {
+    //   $or: fields.map((field) => ({
+    //     [field]: { $regex: query.searchString, $options: "i" },
+    //   })),
+    // };
+
+    // let searchResults = await Word.find(query);
+
     // limit search results to 5
     searchResults = searchResults.slice(0, 9999);
 

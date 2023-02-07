@@ -91,17 +91,9 @@ exports.postCreateWord = async (req, res) => {
         console.log(`error: ${err.code}`);
       }
     });
-    // .catch((err) => {});
-
-    //display success flash message if no errors found
-    // if (!err)
-    //   req.flash("message", `Successfully added: (${req.body.日本語単語})`);
-
-    // res.status(201).redirect("/admin/add-word");
   } catch (err) {
     (err) => {
       res.status(400).json({ message: err.message });
-      //400 means user error
       console.log(err);
     };
   }
