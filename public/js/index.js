@@ -1,6 +1,8 @@
 //DOM elements
 const searchForm = document.querySelector("#search-form");
 const editForm = document.querySelector("#edit-form");
+const updateWord = document.querySelector("#update-word");
+const deleteWord = document.querySelector("#delete-word");
 
 let accordianToggle = document.getElementsByClassName("search__result");
 const tooltipIcon = document.querySelector(".tooltip__icon");
@@ -38,6 +40,23 @@ if (editForm) {
   });
 }
 
+if (deleteWord) {
+  editForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const wordToDelete = this.getAttribute("data-value");
+    console.log(wordToDelete);
+
+    // const editInput = document.querySelector("#edit-box").value;
+
+    if (wordToDelete === "") {
+      return;
+    } else {
+      editForm.action = `/admin/edit-word/?word=${wordToDelete}`;
+      editForm.submit();
+    }
+  });
+}
+
 if (accordianToggle) {
   for (let i = 0; i < accordianToggle.length; i++) {
     accordianToggle[i].addEventListener("click", function () {
@@ -48,21 +67,23 @@ if (accordianToggle) {
 
 //desktop search tooltip handling
 if (tooltipIcon) {
+  //open
   tooltipIcon.addEventListener("mouseover", function () {
     tooltip.style.visibility = "visible";
   });
+  //close
   tooltipIcon.addEventListener("mouseout", function () {
     tooltip.style.visibility = "hidden";
   });
 
-  //mobile search tooltip handling
+  //mobile search tooltip open
   tooltipIcon.addEventListener("click", function () {
     tooltip.style.visibility = "visible";
   });
 }
 
 if (closeButton) {
-  //mobile search tooltip handling
+  //mobile search tooltip close
   closeButton.addEventListener("click", function () {
     tooltip.style.visibility = "hidden";
   });

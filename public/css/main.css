@@ -876,6 +876,28 @@ button {
   background-color: #f0f0f0c9;
 }
 
+.edit__btn {
+  cursor: pointer;
+  color: var(--color-dark);
+  background-color: var(--color-accent-primary);
+  font-weight: 700;
+  font-size: 2rem;
+  height: 6rem;
+  border-radius: 1rem;
+  padding: 1rem 3rem;
+  transition: transform 300ms ease-in-out;
+}
+
+.edit__btn:hover {
+  color: var(--color-light);
+  background-color: var(--color-dark);
+}
+
+.search__result--edit-row {
+  display: flex;
+  gap: 5rem;
+}
+
 .search__result--top-row {
   display: flex;
   align-items: center;

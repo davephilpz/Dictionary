@@ -12,9 +12,12 @@ router
   .get(adminController.getCreateWord)
   .post(adminController.postCreateWord);
 
-//update routes
-router.route("/edit-word").get(adminController.getUpdateWord);
-router.route("/edit-word").post(adminController.postUpdateWord);
+//edit routes
+router
+  .route("/edit-word")
+  .get(adminController.getEditWord)
+  .post(adminController.postEditWord)
+  .delete(adminController.postDeleteWord);
 
 //delete routes
 router

@@ -99,7 +99,7 @@ exports.postCreateWord = async (req, res) => {
   }
 };
 
-exports.getUpdateWord = async (req, res, next) => {
+exports.getEditWord = async (req, res, next) => {
   res.render("admin/admin-edit-word", {
     pageTitle: "Edit Word",
     contentTitle: "Admin Controls: Edit Word",
@@ -108,7 +108,7 @@ exports.getUpdateWord = async (req, res, next) => {
   });
 };
 
-exports.postUpdateWord = async (req, res) => {
+exports.postEditWord = async (req, res) => {
   //get query from params
   // const searchString = req.params.word;
   const searchString = req.query.word.toString();
@@ -183,11 +183,11 @@ exports.postUpdateWord = async (req, res) => {
 
     console.log("word ids:", idStrings);
 
-    res.render(`admin/admin-edit-word`, {
+    res.render(`admin/admin-edit-word-search`, {
       searchResults,
       searchString,
       pageTitle: `${searchString}`,
-      contentTitle: "Word Search",
+      contentTitle: "Add New Word or Search to Update or Delete",
       isAuthenticated: req.isLoggedIn,
     });
     console.log("Search Results:", searchResults);
@@ -198,6 +198,11 @@ exports.postUpdateWord = async (req, res) => {
       console.log(err);
     };
   }
+};
+
+exports.postUpdateWord = async (req, res) => {
+  const searchString = req.query.word.toString();
+  console.log("query:", searchString);
 };
 
 exports.getDeleteWord = async (req, res, next) => {
