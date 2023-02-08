@@ -84,6 +84,9 @@ exports.postSearchWord = async (req, res, next) => {
 
     // limit search results to 5
     searchResults = searchResults.slice(0, 9999);
+    const idStrings = searchResults.map((result) => result._id.toString());
+
+    console.log("word ids:", idStrings);
 
     res.render(`search`, {
       searchResults,

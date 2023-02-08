@@ -109,40 +109,95 @@ exports.getUpdateWord = async (req, res, next) => {
 };
 
 exports.postUpdateWord = async (req, res) => {
-  // try {
-  //   const wordToUpdate = await Word.findByIdAndUpdate(
-  //     req.body.search,
-  //     req.body,
-  //     {
-  //       new: true,
-  //       runValidators: true,
-  //     }
-  //   );
-  //   if (!wordToUpdate) {
-  //     console.log("Word not found.");
-  //   }
-  // } catch (err) {
-  //   (err) => {
-  //     res.status(400).json({ message: err.message });
-  //     //400 means user error
-  //     console.log(err);
-  //   };
-  // }
-  // const { word, wordType, nihongo, eigo } = req.body;
-  // try {
-  //   const wordToUpdate = await Word.findOne({ word: req.params.search });
-  //   if (wordToUpdate === null) {
-  //     console.log("Word not found.");
-  //   } else {
-  //     Word.updateOne({ word, wordType, nihongo, eigo }, {});
-  //     // res.redirect("/words");
-  //   }
-  // } catch (err) {
-  //   (err) => {
-  //     res.status(400).json({ message: err.message });
-  //     console.log(err);
-  //   };
-  // }
+  //get query from params
+  // const searchString = req.params.word;
+  const searchString = req.query.word.toString();
+  console.log("query:", searchString);
+  // console.log("query:", searchQuery);
+
+  // const searchString = req.body.searchString.trim();
+  const sanitizedSearchString = searchString.replace(/[＊*]/g, "");
+  const query = {};
+
+  console.log("url params:", searchString);
+
+  try {
+    console.log("req.body:", req.body);
+    console.log("search string:", searchString);
+    console.log("sanitized search string:", sanitizedSearchString);
+
+    if (searchString[0] === "*" || searchString[0] === "＊") {
+      // If * is at the beginning, match any characters after the word
+      query.searchString = new RegExp(sanitizedSearchString + "$");
+    } else if (
+      searchString[searchString.length - 1] === "*" ||
+      searchString[searchString.length - 1] === "＊"
+    ) {
+      // If * is at the end, match any characters before the word
+      query.searchString = new RegExp("^" + sanitizedSearchString + ".*");
+    } else {
+      // Otherwise, match exactly
+      query.searchString = sanitizedSearchString;
+    }
+    console.log("query:", query);
+    console.log("query.searchString:", query.searchString);
+
+    // Find words matching query
+    let searchResults = await Word.find({
+      //search kanji, hiragana, katakana, romaji and English and return all results
+      $or: [
+        { "日本語.日本語単語": query.searchString },
+        { "日本語.平仮名": query.searchString },
+        { "日本語.片仮名": query.searchString },
+        { "日本語.ローマ字": query.searchString },
+        { "英語.英単語": query.searchString },
+      ],
+    });
+
+    //can add this later for case sensitivity issues or the below DRYer version
+    //     { "日本語.日本語単語": { $regex: query.searchString, $options: "i" } },
+    // { "日本語.平仮名": { $regex: query.searchString, $options: "i" } },
+    // { "日本語.片仮名": { $regex: query.searchString, $options: "i" } },
+    // { "日本語.ローマ字": { $regex: query.searchString, $options: "i" } },
+    // { "英語.英単語": { $regex: query.searchString, $options: "i" } },
+
+    // const fields = [
+    //   "日本語.日本語単語",
+    //   "日本語.平仮名",
+    //   "日本語.片仮名",
+    //   "日本語.ローマ字",
+    //   "英語.英単語",
+    // ];
+
+    // const query = {
+    //   $or: fields.map((field) => ({
+    //     [field]: { $regex: query.searchString, $options: "i" },
+    //   })),
+    // };
+
+    // let searchResults = await Word.find(query);
+
+    // limit search results to 5
+    searchResults = searchResults.slice(0, 9999);
+    const idStrings = searchResults.map((result) => result._id.toString());
+
+    console.log("word ids:", idStrings);
+
+    res.render(`admin/admin-edit-word`, {
+      searchResults,
+      searchString,
+      pageTitle: `${searchString}`,
+      contentTitle: "Word Search",
+      isAuthenticated: req.isLoggedIn,
+    });
+    console.log("Search Results:", searchResults);
+  } catch (err) {
+    (err) => {
+      res.status(400).json({ message: err.message });
+      //400 means user error
+      console.log(err);
+    };
+  }
 };
 
 exports.getDeleteWord = async (req, res, next) => {

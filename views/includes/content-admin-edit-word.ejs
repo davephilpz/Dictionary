@@ -1,15 +1,51 @@
-<section class="section-admin-edit-word">
+<section class="section-search">
   <form
     class="form-word-search"
-    action="/admin/edit-word/:search"
+    action="/admin/edit-word"
     method="POST"
+    role="search window"
+    aria-label="word search window"
+    id="edit-form"
   >
     <div class="form__search">
-      <label for="wordToSearch"></label>
-      <input class="form__search-input" type="text" name="wordToSearch"
-      id="wordToSearch" placeholder="Search word" alt="Search word in kanji,
+      <picture class="tooltip__icon">
+        <source srcset="../img/icons/tooltip.webp" type="image/webp" />
+        <source srcset="../img/icons/tooltip.png" type="image/png" />
+        <img
+          src="../img/icons/tooltip.png"
+          alt="Tooltip icon for more information on search criteria."
+        />
+      </picture>
+      <label for="edit-box"></label>
+      <input
+        class="form__search-input"
+        type="text"
+        name="searchString"
+        id="edit-box"
+        required
+        placeholder="Search word"
+        alt="Search word in kanji,
       hiragana, katakana, romaji or English."
+        onkeyup="sendData()"
+      />
+      <button class="search__btn" type="submit" onClick="addParams()">
+        Search
+      </button>
     </div>
-    <button class="search__btn" type="submit">Search</button>
   </form>
+  <div class="tooltip-wrapper" id="tooltip" role="tooltip" aria-hidden="true">
+    <div class="tooltip">
+      <p class="tooltip__text">
+        Search may be performed in English or any Japanese alphabet. You may
+        include a (*＊) in front or behind letters to perform a wildcard search.
+      </p>
+      <button class="tooltip__close-button">X</button>
+    </div>
+  </div>
+  <div
+    class="search__predictions"
+    id="search-predictions"
+    role="search predictions"
+    aria-label="list of words in database matching input that user may be searching for"
+  ></div>
 </section>

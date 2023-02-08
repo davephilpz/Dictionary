@@ -6,16 +6,17 @@ const router = express.Router();
 
 router.route("/").get(adminController.getAdminControls);
 
+//create routes
 router
   .route("/add-word")
   .get(adminController.getCreateWord)
   .post(adminController.postCreateWord);
 
-router
-  .route("/edit-word")
-  .get(adminController.getUpdateWord)
-  .patch(adminController.postUpdateWord);
+//update routes
+router.route("/edit-word").get(adminController.getUpdateWord);
+router.route("/edit-word").post(adminController.postUpdateWord);
 
+//delete routes
 router
   .route("/delete-word")
   .get(adminController.getDeleteWord)

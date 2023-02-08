@@ -4,9 +4,10 @@ const wordController = require("../controllers/word.controller");
 
 const router = express.Router();
 
+//homepage route
 router.route("/").get(wordController.getSearchPage);
 
+//read route
 router.route("/search/:word").post(wordController.postSearchWord);
-//   .get(wordController.getSearchWord);
 
 module.exports = router;
