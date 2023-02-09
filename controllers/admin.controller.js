@@ -3,12 +3,19 @@ const wanakana = require("wanakana");
 const Word = require("../models/word.model");
 
 exports.getAdminControls = async (req, res, next) => {
-  res.render("admin/admin", {
-    pageTitle: "Admin Controls",
-    contentTitle: "Admin Controls",
-    path: "/admin",
-    isAuthenticated: req.isLoggedIn,
-  });
+  let searchString;
+  let searchResults;
+  if (req.query.word) {
+  } else {
+    res.render("admin/admin", {
+      pageTitle: "Admin Controls",
+      contentTitle: "Admin Controls",
+      path: "/admin",
+      isAuthenticated: req.isLoggedIn,
+      searchString,
+      searchResults,
+    });
+  }
 };
 
 exports.getCreateWord = async (req, res, next) => {
@@ -215,30 +222,28 @@ exports.getDeleteWord = async (req, res, next) => {
 };
 
 exports.postDeleteWord = async (req, res) => {
-  try {
-    let searchString = req.body.searchString.trim();
-    console.log(searchString);
-
-    let searchResults = await Word.find({
-      "日本語.日本語単語": { searchString },
-    });
-    //limit search results to 5
-    searchResults = searchResults.slice(0, 5);
-
-    res.render("/admin/admin-delete-word", {
-      searchResults,
-      searchString,
-      pageTitle: `search: ${searchString}`,
-      contentTitle: "Word Search",
-      path: `/admin/admin-delete-word/:id`,
-      isAuthenticated: req.isLoggedIn,
-    });
-    console.log(searchResults);
-  } catch (err) {
-    (err) => {
-      res.status(400).json({ message: err.message });
-      //400 means user error
-      console.log(err);
-    };
-  }
+  // try {
+  //   let searchString = req.body.searchString.trim();
+  //   console.log(searchString);
+  //   let searchResults = await Word.find({
+  //     "日本語.日本語単語": { searchString },
+  //   });
+  //   //limit search results to 5
+  //   searchResults = searchResults.slice(0, 5);
+  //   res.render("/admin/admin-delete-word", {
+  //     searchResults,
+  //     searchString,
+  //     pageTitle: `search: ${searchString}`,
+  //     contentTitle: "Word Search",
+  //     path: `/admin/admin-delete-word/:id`,
+  //     isAuthenticated: req.isLoggedIn,
+  //   });
+  //   console.log(searchResults);
+  // } catch (err) {
+  //   (err) => {
+  //     res.status(400).json({ message: err.message });
+  //     //400 means user error
+  //     console.log(err);
+  //   };
+  // }
 };

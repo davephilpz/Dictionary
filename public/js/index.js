@@ -1,5 +1,6 @@
 //DOM elements
 const searchForm = document.querySelector("#search-form");
+const adminSearch = document.querySelector("#admin-search");
 const editForm = document.querySelector("#edit-form");
 const updateWord = document.querySelector("#update-word");
 const deleteWord = document.querySelector("#delete-word");
@@ -25,6 +26,21 @@ if (searchForm) {
   });
 }
 
+if (adminSearch) {
+  adminSearch.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const searchInput = document.querySelector("#admin-search-input").value;
+
+    if (searchInput === "") {
+      return;
+    } else {
+      adminSearch.action = `/admin/edit-word?word=${searchInput}`;
+      adminSearch.submit();
+    }
+  });
+}
+
 if (editForm) {
   editForm.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -39,10 +55,11 @@ if (editForm) {
     }
   });
 }
-
+console.log("indexjs loaded");
 if (deleteWord) {
-  editForm.addEventListener("submit", function (event) {
+  deleteWord.addEventListener("submit", function (event) {
     event.preventDefault();
+    console.log("submit button used");
     const wordToDelete = this.getAttribute("data-value");
     console.log(wordToDelete);
 
@@ -51,7 +68,7 @@ if (deleteWord) {
     if (wordToDelete === "") {
       return;
     } else {
-      editForm.action = `/admin/edit-word/?word=${wordToDelete}`;
+      editForm.action = `/admin/edit-word/delete/?word=${wordToDelete}`;
       editForm.submit();
     }
   });

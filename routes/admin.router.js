@@ -16,8 +16,9 @@ router
 router
   .route("/edit-word")
   .get(adminController.getEditWord)
-  .post(adminController.postEditWord)
-  .delete(adminController.postDeleteWord);
+  .post(adminController.postEditWord);
+
+router.route("/edit-word/delete").delete(adminController.postDeleteWord);
 
 //delete routes
 router
