@@ -17,6 +17,37 @@ exports.getAdminControls = async (req, res, next) => {
   });
 };
 
+//Called by getAdminControls by taking in query from URL. Returns query string in GET request and word. User can then click update/delete to perform CRUD or add to add new word.
+exports.getEditWord = async (req, res) => {
+  //get query from url
+  const searchString = req.query.word.toString();
+
+  console.log("query:", searchString);
+
+  try {
+    // Find words matching query exactly. Admin can find word in normal search with wildcards if they need to. This is to simplify CRUD operations.
+    let searchResults = await Word.find({
+      "日本語.日本語単語": searchString,
+    });
+
+    console.log("Search Results:", searchResults);
+
+    res.render(`admin/admin-search-results`, {
+      searchResults,
+      searchString,
+      pageTitle: `${searchString}`,
+      contentTitle: "Add New Word or Search to Update or Delete",
+      isAuthenticated: req.isLoggedIn,
+    });
+  } catch (err) {
+    (err) => {
+      res.status(400).json({ message: err.message });
+      //400 means user error
+      console.log(err);
+    };
+  }
+};
+
 exports.getCreateWord = async (req, res, next) => {
   //flash message for success or fail
   const flashMessage = req.flash("message");
@@ -24,7 +55,6 @@ exports.getCreateWord = async (req, res, next) => {
   res.render("admin/admin-add-word", {
     pageTitle: "Add Word",
     contentTitle: "",
-    path: "/admin/add-word",
     isAuthenticated: req.isLoggedIn,
     message: flashMessage,
   });
@@ -105,18 +135,11 @@ exports.postCreateWord = async (req, res) => {
   }
 };
 
-// exports.getEditWord = async (req, res, next) => {
-//   res.render("admin/admin-edit-word", {
-//     pageTitle: "Edit Word",
-//     contentTitle: "Admin Controls: Edit Word",
-//     path: "/admin/edit-word",
-//     isAuthenticated: req.isLoggedIn,
-//   });
-// };
+exports.getUpdateWord = async (req, res) => {
+  //flash message for success or fail
+  const flashMessage = req.flash("message");
 
-exports.getEditWord = async (req, res) => {
-  //get query from url
-  const searchString = req.query.word.toString();
+  const searchString = req.query.word;
 
   console.log("query:", searchString);
 
@@ -128,12 +151,13 @@ exports.getEditWord = async (req, res) => {
 
     console.log("Search Results:", searchResults);
 
-    res.render(`admin/admin-search-results`, {
-      searchResults,
-      searchString,
-      pageTitle: `${searchString}`,
-      contentTitle: "Add New Word or Search to Update or Delete",
+    res.render("admin/admin-update-word", {
+      pageTitle: "Add Word",
+      contentTitle: "",
       isAuthenticated: req.isLoggedIn,
+      message: flashMessage,
+      searchString,
+      searchResults,
     });
   } catch (err) {
     (err) => {
@@ -153,34 +177,8 @@ exports.getDeleteWord = async (req, res, next) => {
   res.render("admin/admin-delete-word", {
     pageTitle: "Delete Word",
     contentTitle: "Admin Controls: Delete Word",
-    path: `/admin/delete-word/${req.params.id}`,
     isAuthenticated: req.isLoggedIn,
   });
 };
 
-exports.postDeleteWord = async (req, res) => {
-  // try {
-  //   let searchString = req.body.searchString.trim();
-  //   console.log(searchString);
-  //   let searchResults = await Word.find({
-  //     "日本語.日本語単語": { searchString },
-  //   });
-  //   //limit search results to 5
-  //   searchResults = searchResults.slice(0, 5);
-  //   res.render("/admin/admin-delete-word", {
-  //     searchResults,
-  //     searchString,
-  //     pageTitle: `search: ${searchString}`,
-  //     contentTitle: "Word Search",
-  //     path: `/admin/admin-delete-word/:id`,
-  //     isAuthenticated: req.isLoggedIn,
-  //   });
-  //   console.log(searchResults);
-  // } catch (err) {
-  //   (err) => {
-  //     res.status(400).json({ message: err.message });
-  //     //400 means user error
-  //     console.log(err);
-  //   };
-  // }
-};
+exports.postDeleteWord = async (req, res) => {};

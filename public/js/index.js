@@ -1,7 +1,6 @@
 //DOM elements
 const searchForm = document.querySelector("#search-form");
 const adminSearch = document.querySelector("#admin-search");
-const editForm = document.querySelector("#edit-form");
 const updateWord = document.querySelector("#update-word");
 const deleteWord = document.querySelector("#delete-word");
 
@@ -42,21 +41,6 @@ if (adminSearch) {
   });
 }
 
-if (editForm) {
-  editForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    const editInput = document.querySelector("#edit-box").value;
-
-    if (editInput === "") {
-      return;
-    } else {
-      editForm.action = `/admin/edit-word/?word=${editInput}`;
-      editForm.submit();
-    }
-  });
-}
-console.log("indexjs loaded");
 if (deleteWord) {
   deleteWord.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -85,11 +69,11 @@ if (accordianToggle) {
 
 //desktop search tooltip handling
 if (tooltipIcon) {
-  //open
+  //open on non-touch
   tooltipIcon.addEventListener("mouseover", function () {
     tooltip.style.visibility = "visible";
   });
-  //close
+  //close on non-touch
   tooltipIcon.addEventListener("mouseout", function () {
     tooltip.style.visibility = "hidden";
   });
@@ -106,3 +90,5 @@ if (closeButton) {
     tooltip.style.visibility = "hidden";
   });
 }
+
+console.log("indexjs loaded");

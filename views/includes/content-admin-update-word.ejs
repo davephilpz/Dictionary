@@ -1,0 +1,172 @@
+<section class="section-admin-add-word">
+  <% for (let searchResult of searchResults) { %>
+  <form
+    action="/admin/add-word"
+    method="POST"
+    class="input-form"
+    role="form"
+    aria-label="admin add word form"
+  >
+    <label for="日本語単語"></label>
+    <input
+      type="text"
+      name="日本語単語"
+      id="日本語単語"
+      placeholder="日本語単語"
+      required
+      value="<%= searchResult.日本語.日本語単語 %>"
+    />
+
+    <label for="英単語"></label>
+    <input
+      type="text"
+      name="英単語"
+      id="英単語"
+      placeholder="英単語"
+      required
+      value="<%= searchResult.英語.英単語 %>"
+    />
+
+    <div class="form__row">
+      <div class="form__row--item">
+        <label for="二次的定義"></label>
+        <input
+          type="text"
+          name="二次的定義"
+          id="二次的定義"
+          placeholder="英語二次的定義"
+          value="<%= searchResult.英語.二次的定義 %>"
+        />
+      </div>
+
+      <div class="form__row--item">
+        <label for="複数定義"></label>
+        <input
+          type="text"
+          name="複数定義"
+          id="複数定義"
+          placeholder="英語複数定義"
+          value="<%= searchResult.英語.複数定義 %>"
+        />
+      </div>
+    </div>
+
+    <div class="form__row">
+      <div class="form__row--item">
+        <label for="語類">語類</label>
+        <select
+          type="text"
+          name="語類"
+          id="語類"
+          required
+          value="<%= searchResult.日本語.語類 %>"
+        >
+          <option value="未定">未定</option>
+          <option value="文語">文語</option>
+          <option value="口語">口語</option>
+          <option value="両方">両方</option>
+        </select>
+      </div>
+
+      <div class="form__row--item">
+        <label for="日本語品詞">日本語品詞</label>
+        <select
+          type="text"
+          name="日本語品詞"
+          id="日本語品詞"
+          required
+          value="<%= searchResult.日本語.日本語品詞 %>"
+        >
+          <option value="名詞">名詞</option>
+          <option value="動詞">動詞</option>
+          <option value="形容詞">形容詞</option>
+          <option value="副詞">副詞</option>
+          <option value="両方">其の他</option>
+        </select>
+      </div>
+
+      <div class="form__row--item">
+        <label for="英語品詞">英語品詞</label>
+        <select
+          type="text"
+          name="英語品詞"
+          id="英語品詞"
+          required
+          value="<%= searchResult.英語.英語品詞 %>"
+        >
+          <option value="名詞">名詞</option>
+          <option value="動詞">動詞</option>
+          <option value="形容詞">形容詞</option>
+          <option value="副詞">副詞</option>
+          <option value="両方">其の他</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form__row">
+      <div class="form__row--item">
+        <label for="平仮名"></label>
+        <input
+          type="text"
+          name="平仮名"
+          id="平仮名"
+          placeholder="平仮名"
+          required
+          value="<%= searchResult.日本語.平仮名 %>"
+        />
+      </div>
+
+      <div class="form__row--item">
+        <label for="略語"></label>
+        <input
+          type="text"
+          name="略語"
+          id="略語"
+          placeholder="略語"
+          value="<%= searchResult.日本語.略語 %>"
+        />
+      </div>
+
+      <div class="form__row--item">
+        <label for="助詞"></label>
+        <input
+          type="text"
+          name="助詞"
+          id="助詞"
+          placeholder="助詞"
+          value="<%= searchResult.日本語.助詞 %>"
+        />
+      </div>
+    </div>
+
+    <label for="日本語例文"></label>
+    <input
+      type="text"
+      name="日本語例文"
+      id="日本語例文"
+      placeholder="日本語例文"
+      value="<%= searchResult.日本語.日本語例文 %>"
+    />
+
+    <label for="英語例文"></label>
+    <input
+      type="text"
+      name="英語例文"
+      id="英語例文"
+      placeholder="英語例文"
+      value="<%= searchResult.英語.英語例文 %>"
+    />
+
+    <label for="備考欄"></label>
+    <input
+      type="text"
+      name="備考欄"
+      id="備考欄"
+      placeholder="備考欄"
+      value="<%= searchResult.日本語.備考欄 %>"
+    />
+
+    <input class="form__btn" type="submit" value="Update Word" />
+  </form>
+  <% } %>
+</section>
