@@ -41,6 +41,22 @@ if (adminSearch) {
   });
 }
 
+if (updateWord) {
+  updateWord.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const searchInput = document.querySelector("#admin-update-input").value;
+
+    if (searchInput === "") {
+      return;
+    } else {
+      updateWord.action = `/admin/edit-word?word=${searchInput}`;
+      updateWord.submit();
+      console.log(searchInput);
+    }
+  });
+}
+
 if (deleteWord) {
   deleteWord.addEventListener("submit", function (event) {
     event.preventDefault();

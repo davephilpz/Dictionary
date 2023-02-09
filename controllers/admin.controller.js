@@ -169,8 +169,65 @@ exports.getUpdateWord = async (req, res) => {
 };
 
 exports.postUpdateWord = async (req, res) => {
-  const searchString = req.query.word.toString();
-  console.log("query:", searchString);
+  const searchString = req.query.word;
+  const {
+    語類,
+    平仮名,
+    日本語品詞,
+    助詞,
+    略語,
+    備考欄,
+    日本語例文,
+    英単語,
+    二次的定義,
+    複数定義,
+    英語品詞,
+    英語例文,
+  } = req.body;
+
+  try {
+    const katakana = wanakana.toKatakana(平仮名);
+    const romaji = wanakana.toRomaji(平仮名);
+    const nihongoReibun = 日本語例文.split(";").join(",");
+    const nijitekiTeigi = 二次的定義.split(";").join(",");
+    const fukusuuTeigi = 複数定義.split(";").join(",");
+    const eigoReibun = 英語例文.split(";").join(",");
+
+    const enteredWord = await Word.findOneAndUpdate(
+      { 日本語単語: searchString },
+      {
+        $set: {
+          日本語: {
+            語類: 語類,
+            平仮名: 平仮名,
+            片仮名: katakana,
+            ローマ字: romaji,
+            日本語品詞: 日本語品詞,
+            助詞: 助詞,
+            略語: 略語,
+            備考欄: 備考欄,
+            日本語例文: nihongoReibun,
+          },
+          英語: {
+            英単語: 英単語,
+            二次的定義: nijitekiTeigi,
+            複数定義: fukusuuTeigi,
+            英語品詞: 英語品詞,
+            英語例文: eigoReibun,
+          },
+        },
+      },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+  } catch (err) {
+    (err) => {
+      res.status(400).json({ message: err.message });
+      console.log(err);
+    };
+  }
 };
 
 exports.getDeleteWord = async (req, res, next) => {

@@ -49,12 +49,18 @@
     <li class="search__result">
       <div class="search__result--edit-row">
         <form
-          action="/admin/edit-word"
-          method="POST"
+          action="/admin/update-word"
+          method="GET"
           role="search window"
           aria-label="word search window"
           id="update-form"
         >
+          <input
+            type="hidden"
+            name="word"
+            id="admin-update-input"
+            value="<%= searchResult.日本語.日本語単語 %>"
+          />
           <button class="edit__btn" type="submit" id="update-word">
             Update
           </button>
