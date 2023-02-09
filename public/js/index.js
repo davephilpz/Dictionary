@@ -37,6 +37,7 @@ if (adminSearch) {
     } else {
       adminSearch.action = `/admin/edit-word?word=${searchInput}`;
       adminSearch.submit();
+      console.log(searchInput);
     }
   });
 }

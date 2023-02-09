@@ -4,8 +4,7 @@
     <%- include('../includes/head.ejs') %>
   </head>
   <body>
-    <%- include('../includes/header.ejs') %> <%-
-    include('../includes/admin-nav.ejs') %> <% if (searchString){ %>
+    <%- include('../includes/header.ejs') %> <% if (searchString){ %>
     <main><%- include('../includes/content-admin-search.ejs') %></main>
     <% } else { %>
     <main><%- include('../includes/content-admin.ejs') %></main>

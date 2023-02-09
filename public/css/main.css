@@ -450,6 +450,10 @@ button {
   background-color: #eb4d4b;
 }
 
+.margin-bottom {
+  margin-bottom: 5rem;
+}
+
 /********************/
 /* Header */
 /********************/
@@ -799,6 +803,8 @@ button {
 }
 
 .search__btn {
+  text-decoration: none;
+  line-height: 2;
   cursor: pointer;
   color: var(--color-dark);
   background-color: var(--color-accent-primary);
