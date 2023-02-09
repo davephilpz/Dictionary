@@ -170,6 +170,9 @@ exports.getUpdateWord = async (req, res) => {
 
 exports.postUpdateWord = async (req, res) => {
   const searchString = req.query.word;
+
+  console.log("searchString:", searchString);
+
   const {
     語類,
     平仮名,
@@ -222,6 +225,19 @@ exports.postUpdateWord = async (req, res) => {
         runValidators: true,
       }
     );
+
+    console.log("enteredWord:", enteredWord);
+
+    res
+      .status(200)
+      .json({
+        status: "success",
+        message: "Product updated successfully",
+        enteredWord,
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   } catch (err) {
     (err) => {
       res.status(400).json({ message: err.message });

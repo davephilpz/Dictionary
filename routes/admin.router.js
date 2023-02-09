@@ -10,7 +10,10 @@ router.route("/").get(adminController.getAdminControls);
 router.route("/edit-word").get(adminController.getEditWord);
 
 //create route
-router.route("/add-word").get(adminController.getCreateWord);
+router
+  .route("/add-word")
+  .get(adminController.getCreateWord)
+  .post(adminController.postCreateWord);
 
 //update route
 router
