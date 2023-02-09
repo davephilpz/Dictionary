@@ -128,7 +128,7 @@ exports.getEditWord = async (req, res) => {
 
     console.log("Search Results:", searchResults);
 
-    res.render(`admin/admin-edit-word-search`, {
+    res.render(`admin/admin-search-results`, {
       searchResults,
       searchString,
       pageTitle: `${searchString}`,
