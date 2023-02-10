@@ -3,7 +3,12 @@ const searchForm = document.querySelector("#search-form");
 const adminSearch = document.querySelector("#admin-search");
 const getUpdateForm = document.querySelector("#get-update-form");
 const submitUpdateForm = document.querySelector("#submit-update-form");
-// const deleteWord = document.querySelector("#delete-word");
+const getDeleteConfirmation = document.querySelector(
+  "#get-delete-confirmation"
+);
+const submitDeleteConfirmation = document.querySelector(
+  "#submit-delete-confirmation"
+);
 
 let accordianToggle = document.getElementsByClassName("search__result");
 const tooltipIcon = document.querySelector(".tooltip__icon");
@@ -59,6 +64,7 @@ if (getUpdateForm) {
     }
   });
 }
+
 if (submitUpdateForm) {
   submitUpdateForm.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -77,24 +83,43 @@ if (submitUpdateForm) {
   });
 }
 
-// if (deleteWord) {
-//   deleteWord.addEventListener("submit", function (event) {
-//     event.preventDefault();
-//     console.log("submit button used");
-//     const wordToDelete = this.getAttribute("data-value");
-//     console.log(wordToDelete);
+if (getDeleteConfirmation) {
+  getDeleteConfirmation.addEventListener("submit", function (event) {
+    event.preventDefault();
+    console.log("submit update form ran");
 
-//     // const editInput = document.querySelector("#edit-box").value;
+    const input = document.querySelector("#get-delete-input").value;
+    console.log("submit update input value:", input);
 
-//     if (wordToDelete === "") {
-//       return;
-//     } else {
-//       editForm.action = `/admin/edit-word/delete/?word=${wordToDelete}`;
-//       editForm.submit();
-//     }
-//   });
-// }
+    if (input === "") {
+      return;
+    } else {
+      getDeleteConfirmation.action = `/admin/delete-word?word=${input}`;
+      getDeleteConfirmation.submit();
+      console.log(getDeleteConfirmation.action);
+    }
+  });
+}
 
+if (submitDeleteConfirmation) {
+  submitDeleteConfirmation.addEventListener("submit", function (event) {
+    event.preventDefault();
+    console.log("submit update form ran");
+
+    const input = submitDeleteWord;
+    console.log("submit update input value:", input);
+
+    if (input === "") {
+      return;
+    } else {
+      submitDeleteConfirmation.action = `/admin/delete-word?word=${input}`;
+      submitDeleteConfirmation.submit();
+      console.log(submitDeleteConfirmation.action);
+    }
+  });
+}
+
+//open and close accordians above variable gets all elements by class name and this loops through to make all selectable. Not set to be mutually exclusive.
 if (accordianToggle) {
   for (let i = 0; i < accordianToggle.length; i++) {
     accordianToggle[i].addEventListener("click", function () {
@@ -103,7 +128,7 @@ if (accordianToggle) {
   }
 }
 
-//desktop search tooltip handling
+//Desktop search tooltip handling. Only available on main search since admin does not need.
 if (tooltipIcon) {
   //open on non-touch
   tooltipIcon.addEventListener("mouseover", function () {

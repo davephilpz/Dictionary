@@ -27,6 +27,6 @@ router
 router
   .route("/delete-word")
   .get(adminController.getDeleteWord)
-  .delete(adminController.postDeleteWord);
+  .post(adminController.postDeleteWord);
 
 module.exports = router;

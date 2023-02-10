@@ -3,17 +3,19 @@ const wanakana = require("wanakana");
 const Word = require("../models/word.model");
 
 exports.getAdminControls = async (req, res, next) => {
-  //declare and pass in variables
+  //declare and pass in variables for EJS template to work
   let searchString;
   let searchResults;
+
+  const flashMessage = req.flash("message");
 
   res.render("admin/admin", {
     pageTitle: "Admin Controls",
     contentTitle: "Add New Word or Search to Update or Delete",
-    path: "/admin",
     isAuthenticated: req.isLoggedIn,
     searchString,
     searchResults,
+    message: flashMessage,
   });
 };
 
@@ -239,17 +241,8 @@ exports.postUpdateWord = async (req, res) => {
   )
     .then((updatedWord) => {
       console.log("submit update word updated word:", updatedWord);
-      // res.status(200).json({
-      //   status: "success",
-      //   message: `${searchString} updated successfully to ${updatedWord.日本語.日本語単語}`,
-      //   updatedWord,
-      // });
 
-      req.flash(
-        "message",
-        `Successfully changed (${searchString}) to (${updatedWord})`
-      );
-      res.status(201).redirect("/admin");
+      res.status(200).redirect("/admin");
     })
     .catch((err) => {
       console.log(err);
@@ -258,11 +251,60 @@ exports.postUpdateWord = async (req, res) => {
 };
 
 exports.getDeleteWord = async (req, res, next) => {
-  res.render("admin/admin-delete-word", {
-    pageTitle: "Delete Word",
-    contentTitle: "Admin Controls: Delete Word",
-    isAuthenticated: req.isLoggedIn,
-  });
+  // res.render("admin/admin-delete-word", {
+  //   pageTitle: "Delete Word",
+  //   contentTitle: "Admin Controls: Delete Word",
+  //   isAuthenticated: req.isLoggedIn,
+  // });
+
+  //flash message for success or fail
+  const flashMessage = req.flash("message");
+
+  const searchString = req.query.word.toString();
+
+  console.log("get delete word query object:", req.url);
+  console.log("get delete word query:", searchString);
+
+  try {
+    // Find words matching query exactly. Admin can find word in normal search with wildcards if they need to. This is to simplify CRUD operations.
+    let searchResults = await Word.find({
+      "日本語.日本語単語": searchString,
+    });
+
+    console.log("get delete word Search Results:", searchResults);
+
+    res.render("admin/admin-delete-word", {
+      pageTitle: "Update Word",
+      contentTitle: "Confirm Word Deletion",
+      isAuthenticated: req.isLoggedIn,
+      message: flashMessage,
+      searchString,
+      searchResults,
+    });
+  } catch (err) {
+    (err) => {
+      res.status(400).json({ message: err.message });
+      //400 means user error
+      console.log(err);
+    };
+  }
 };
 
-exports.postDeleteWord = async (req, res) => {};
+exports.postDeleteWord = async (req, res) => {
+  const searchString = req.query.word;
+
+  console.log("submit delete word searchString:", searchString);
+
+  const word = await Word.findOneAndDelete({
+    "日本語.日本語単語": searchString,
+  })
+    .then((deletedWord) => {
+      console.log("deleted word:", deletedWord);
+      req.flash("message", `Successfully added: (${searchString})`);
+      res.status(200).redirect("/admin");
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json({ message: err.message });
+    });
+};

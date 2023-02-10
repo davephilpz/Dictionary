@@ -60,23 +60,22 @@
             id="get-update-input"
             value="<%= searchResult.日本語.日本語単語 %>"
           />
-          <button class="edit__btn" type="submit" id="">Update</button>
+          <button class="edit__btn" type="submit">Update</button>
         </form>
         <form
           action="/admin/delete-word"
           method="GET"
           role="search window"
           aria-label="word search window"
-          id="delete-form"
+          id="get-delete-confirmation"
         >
-          <button
-            class="edit__btn"
-            type="submit"
-            id="delete-word"
-            data-value="<% searchResult._id %>"
-          >
-            Delete
-          </button>
+          <input
+            type="hidden"
+            name="word"
+            id="get-delete-input"
+            value="<%= searchResult.日本語.日本語単語 %>"
+          />
+          <button class="edit__btn" type="submit">Delete</button>
         </form>
       </div>
       <div class="search__result--id-row">Word id: <%= searchResult._id %></div>
