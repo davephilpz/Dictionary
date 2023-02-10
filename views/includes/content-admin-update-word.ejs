@@ -1,3 +1,7 @@
+<script>
+  let submitUpdateWord = `<%= searchString %>`;
+  console.log("submitUpdateWord:", submitUpdateWord);
+</script>
 <section class="section-admin-add-word">
   <% for (let searchResult of searchResults) { %>
   <form
@@ -6,7 +10,7 @@
     class="input-form"
     name="word"
     role="form"
-    id="update-word-form"
+    id="submit-update-form"
     aria-label="admin add word form"
   >
     <label for="日本語単語"></label>
@@ -16,8 +20,7 @@
       id="日本語単語"
       placeholder="日本語単語"
       required
-      id="updated-word"
-      value=""
+      value="<%= searchResult.日本語.日本語単語 %>"
     />
 
     <label for="英単語"></label>

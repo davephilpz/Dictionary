@@ -1,7 +1,6 @@
 <script>
   let wordId = `<%= searchString._id %>`;
 </script>
-
 <section class="section-search margin-bottom">
   <form
     class="form-word-search"
@@ -53,21 +52,19 @@
           method="GET"
           role="search window"
           aria-label="word search window"
-          id="update-form"
+          id="get-update-form"
         >
           <input
             type="hidden"
             name="word"
-            id="admin-update-input"
+            id="get-update-input"
             value="<%= searchResult.日本語.日本語単語 %>"
           />
-          <button class="edit__btn" type="submit" id="update-word">
-            Update
-          </button>
+          <button class="edit__btn" type="submit" id="">Update</button>
         </form>
         <form
-          action="/admin/edit-word"
-          method="POST"
+          action="/admin/delete-word"
+          method="GET"
           role="search window"
           aria-label="word search window"
           id="delete-form"

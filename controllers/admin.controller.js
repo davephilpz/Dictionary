@@ -137,11 +137,12 @@ exports.postCreateWord = async (req, res) => {
 
 exports.getUpdateWord = async (req, res) => {
   //flash message for success or fail
-  const flashMessage = req.flash("message");
+  // const flashMessage = req.flash("message");
 
-  const searchString = req.query.word;
+  const searchString = req.query.word.toString();
 
-  console.log("query:", searchString);
+  console.log("getUpdateWord query object:", req.url);
+  console.log("getUpdateWord query:", searchString);
 
   try {
     // Find words matching query exactly. Admin can find word in normal search with wildcards if they need to. This is to simplify CRUD operations.
@@ -149,16 +150,20 @@ exports.getUpdateWord = async (req, res) => {
       "日本語.日本語単語": searchString,
     });
 
-    console.log("Search Results:", searchResults);
+    console.log("getUpdateWord Search Results:", searchResults);
 
     res.render("admin/admin-update-word", {
-      pageTitle: "Add Word",
+      pageTitle: "Update Word",
       contentTitle: "",
       isAuthenticated: req.isLoggedIn,
-      message: flashMessage,
+      message: "",
       searchString,
       searchResults,
     });
+    console.log(
+      "final search string ***************************",
+      searchString
+    );
   } catch (err) {
     (err) => {
       res.status(400).json({ message: err.message });
@@ -171,8 +176,8 @@ exports.getUpdateWord = async (req, res) => {
 exports.postUpdateWord = async (req, res) => {
   const searchString = req.query.word;
 
-  console.log("searchString:", searchString);
-  console.log("body:", req.body);
+  console.log("submit update word searchString:", searchString);
+  console.log("submit update word body:", req.body);
 
   const {
     日本語単語,
@@ -190,7 +195,7 @@ exports.postUpdateWord = async (req, res) => {
     英語例文,
   } = req.body;
 
-  console.log("nihongo:", 日本語単語);
+  console.log("submit update word nihongo:", 日本語単語);
 
   const katakana = wanakana.toKatakana(平仮名);
   const romaji = wanakana.toRomaji(平仮名);
@@ -200,7 +205,7 @@ exports.postUpdateWord = async (req, res) => {
   const eigoReibun = 英語例文.split(";").join(",");
 
   const word = await Word.find({ "日本語.日本語単語": searchString });
-  console.log("word find:", word);
+  console.log("submit update word word find:", word);
 
   const updatedWord = await Word.findOneAndUpdate(
     { "日本語.日本語単語": searchString },
@@ -233,7 +238,7 @@ exports.postUpdateWord = async (req, res) => {
     }
   )
     .then((updatedWord) => {
-      console.log("updated word:", updatedWord);
+      console.log("submit update word updated word:", updatedWord);
       // res.status(200).json({
       //   status: "success",
       //   message: `${searchString} updated successfully to ${updatedWord.日本語.日本語単語}`,
