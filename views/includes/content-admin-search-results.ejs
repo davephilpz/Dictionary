@@ -79,7 +79,7 @@
           </button>
         </form>
       </div>
-      <div class="search__result--id-row"><%= searchResult._id %></div>
+      <div class="search__result--id-row">Word id: <%= searchResult._id %></div>
       <div class="search__result--top-row">
         <h2><%= searchResult.日本語.日本語単語 %></h2>
         <span class="search__result--part-of-speech"
@@ -101,6 +101,13 @@
         <span class="search__result--word-type"></span>
         <% break; default: break; } %>
       </div>
+      <% if (searchResult.日本語.略語 == '') { %>
+      <span class="search__result--part-of-speech"></span>
+      <% } else { %>
+      <span class="search__result--part-of-speech"
+        >略: (<%= searchResult.日本語.略語 %>)</span
+      >
+      <% } %>
       <div class="search__result--second-row">
         <span class="search__result--hiragana"
           ><%= searchResult.日本語.平仮名 %></span

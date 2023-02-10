@@ -137,7 +137,7 @@ exports.postCreateWord = async (req, res) => {
 
 exports.getUpdateWord = async (req, res) => {
   //flash message for success or fail
-  // const flashMessage = req.flash("message");
+  const flashMessage = req.flash("message");
 
   const searchString = req.query.word.toString();
 
@@ -156,7 +156,7 @@ exports.getUpdateWord = async (req, res) => {
       pageTitle: "Update Word",
       contentTitle: "",
       isAuthenticated: req.isLoggedIn,
-      message: "",
+      message: flashMessage,
       searchString,
       searchResults,
     });
@@ -244,10 +244,11 @@ exports.postUpdateWord = async (req, res) => {
       //   message: `${searchString} updated successfully to ${updatedWord.日本語.日本語単語}`,
       //   updatedWord,
       // });
-      // req.flash(
-      //   "message",
-      //   `Successfully changed (${searchString}) to (${updatedWord})`
-      // );
+
+      req.flash(
+        "message",
+        `Successfully changed (${searchString}) to (${updatedWord})`
+      );
       res.status(201).redirect("/admin");
     })
     .catch((err) => {
