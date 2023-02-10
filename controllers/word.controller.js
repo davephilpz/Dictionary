@@ -16,6 +16,7 @@ exports.getSearchPage = async (req, res, next) => {
   }
 };
 
+// TODO move search other dictionaries to ejs block even if word not found in this dictionary. Also, add tatoeba link to other dictionaries.
 exports.postSearchWord = async (req, res, next) => {
   //get query from params
   const searchString = req.params.word;

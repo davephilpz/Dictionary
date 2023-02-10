@@ -4,7 +4,9 @@
     action="/admin/update-word"
     method="POST"
     class="input-form"
+    name="word"
     role="form"
+    id="update-word-form"
     aria-label="admin add word form"
   >
     <label for="日本語単語"></label>
@@ -14,7 +16,8 @@
       id="日本語単語"
       placeholder="日本語単語"
       required
-      value="<%= searchResult.日本語.日本語単語 %>"
+      id="updated-word"
+      value=""
     />
 
     <label for="英単語"></label>

@@ -4,8 +4,10 @@ const adminController = require("../controllers/admin.controller");
 
 const router = express.Router();
 
+//admin controls
 router.route("/").get(adminController.getAdminControls);
 
+// TODO consolidate this into admin home route
 //get word for CRUD
 router.route("/edit-word").get(adminController.getEditWord);
 
@@ -19,7 +21,7 @@ router
 router
   .route("/update-word")
   .get(adminController.getUpdateWord)
-  .patch(adminController.postUpdateWord);
+  .post(adminController.postUpdateWord);
 
 //delete route
 router
