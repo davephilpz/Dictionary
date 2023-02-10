@@ -1,7 +1,3 @@
-<% if (searchResults.length === 0) { %>
-<section class="section-search-other-dictionaries"></section>
-<% } else { %>
-
 <section class="section-search-other-dictionaries">
   <h3 class="other-dictionaries__title">
     Search other online dictionaries for (<%= searchString %>)
@@ -103,6 +99,28 @@
         </picture>
       </a>
     </li>
+    <li class="other-dictionary__link">
+      <a
+        href="https://tatoeba.org/en/sentences/search?query==<%= searchString %>"
+        target="_blank"
+      >
+        <picture>
+          <source
+            srcset="../img/other-dictionary-icons/tatoeba.webp"
+            type="image/webp"
+          />
+          <source
+            srcset="../img/other-dictionary-icons/tatoeba.png"
+            type="image/png"
+          />
+          <img
+            class="other-dictionary__icon"
+            src="../img/other-dictionary-icons/tatoeba.png"
+            alt="Tatoeba dictionary icon"
+            aria-label="Search <%= searchString %> on Tatoeba online dictionary"
+          />
+        </picture>
+      </a>
+    </li>
   </ul>
 </section>
-<% } %>
