@@ -45,7 +45,9 @@
 
 function sendData(e) {
   const predictionResults = document.getElementById("live-search");
-  let match = e.value.match(/^[a-zA-Z ]*/);
+  let match = e.value.match(
+    /^[a-zA-Z\u3040-\u30ff\u3400-\u4DBF\u4E00-\u9FFF\u20000-\u2A6DF\u2A700-\u2B73F\u2B740-\u2B81F\u2B820-\u2CEAF\uF900-\uFAFF ]*/
+  );
   let match2 = e.value.match(/\s*/);
   if (match2[0] === e.value) {
     predictionResults.innerHTML = "";
