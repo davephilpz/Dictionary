@@ -18,12 +18,57 @@ exports.getSearchPage = async (req, res, next) => {
 
 exports.postLiveSearch = async (req, res) => {
   let liveSearchQuery = req.body.liveSearchQuery;
+  const fields = [
+    "日本語.日本語単語",
+    "日本語.平仮名",
+    "日本語.片仮名",
+    "日本語.ローマ字",
+    "英語.英単語",
+  ];
+  const query = {
+    $or: fields.map((field) => ({
+      [field]: { $regex: new RegExp("^" + liveSearchQuery + ".*", "i") },
+    })),
+  };
 
-  let matchFound = await Word.find({
-    "日本語.日本語単語": {
-      $regex: new RegExp("^" + liveSearchQuery + ".*", "i"),
-    },
-  }).exec();
+  let matchFound = await Word.find(query).exec();
+
+  // let matchFound = await Word.find({
+  //   $or: [
+  //     {
+  //       "日本語.日本語単語": {
+  //         $regex: new RegExp("^" + liveSearchQuery + ".*", "i"),
+  //       },
+  //     },
+  //     {
+  //       "日本語.平仮名": {
+  //         $regex: new RegExp("^" + liveSearchQuery + ".*", "i"),
+  //       },
+  //     },
+  //     {
+  //       "日本語.片仮名": {
+  //         $regex: new RegExp("^" + liveSearchQuery + ".*", "i"),
+  //       },
+  //     },
+  //     {
+  //       "日本語.ローマ字": {
+  //         $regex: new RegExp("^" + liveSearchQuery + ".*", "i"),
+  //       },
+  //     },
+  //     {
+  //       "英語.英単語": {
+  //         $regex: new RegExp("^" + liveSearchQuery + ".*", "i"),
+  //       },
+  //     },
+  //   ],
+  // }).exec();
+
+  // let matchFound = await Word.find({
+  //   "日本語.日本語単語": {
+  //     $regex: new RegExp("^" + liveSearchQuery + ".*", "i"),
+  //   },
+  // }).exec();
+
   console.log("matchFound:", matchFound);
 
   //limit to 5 results
