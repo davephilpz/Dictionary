@@ -16,6 +16,27 @@ exports.getSearchPage = async (req, res, next) => {
   }
 };
 
+exports.postLiveSearch = async (req, res) => {
+  let liveSearchQuery = req.body.liveSearchQuery;
+
+  let matchFound = await Word.find({
+    "日本語.日本語単語": {
+      $regex: new RegExp("^" + liveSearchQuery + ".*", "i"),
+    },
+  }).exec();
+  console.log("matchFound:", matchFound);
+
+  //limit to 5 results
+  matchFound = matchFound.slice(0, 5);
+
+  let searchPredictions = [];
+  matchFound.forEach((word) => {
+    searchPredictions.push(word.日本語.日本語単語);
+  });
+
+  res.send({ searchPredictions });
+};
+
 exports.postSearchWord = async (req, res, next) => {
   //get query from params
   const searchString = req.params.word;
