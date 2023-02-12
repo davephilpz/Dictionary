@@ -1,5 +1,6 @@
 const User = require("../models/user.model");
 const bcrypt = require("bcryptjs");
+const { generateToken } = require("../util/generateToken");
 
 exports.getRegisterUser = async (req, res) => {
   res.render("signup", {
@@ -55,6 +56,8 @@ exports.postLogin = async (req, res, next) => {
   if (userFound && (await bcrypt.compare(password, userFound?.password))) {
     res.json({
       message: "Success",
+      userFound,
+      jwt: generateToken(userFound?._id),
     });
   } else {
     res.json({
@@ -62,7 +65,7 @@ exports.postLogin = async (req, res, next) => {
     });
   }
 
-  req.isLoggedIn = true;
+  // req.isLoggedIn = true;
   console.log(req.isLoggedIn);
   console.log(req.isAuthenticated);
   // res.redirect("/");

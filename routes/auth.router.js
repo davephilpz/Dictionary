@@ -4,6 +4,7 @@ const authController = require("../controllers/auth.controller");
 
 const router = express();
 
+////////public access////////
 router
   .route("/signup")
   .get(authController.getRegisterUser)

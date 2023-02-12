@@ -22,7 +22,7 @@ const usersSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, "Please provide a valid password."],
-      // select: false,
+      // select: false, //bcrypt cannot compare passwords on login if this is false. wordaround possible??
       minLength: [10, "Password must be at least 10 characters long."],
     },
     passwordConfirm: {

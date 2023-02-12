@@ -4,6 +4,7 @@ const adminController = require("../controllers/admin.controller");
 
 const router = express.Router();
 
+////////admin restricted////////
 //admin controls
 router.route("/").get(adminController.getAdminControls);
 

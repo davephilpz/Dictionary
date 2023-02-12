@@ -3,6 +3,7 @@ const reviewController = require("../controllers/review.controller");
 
 const router = express.Router();
 
+////////user/admin restricted////////
 router
   .route("/review")
   .get(reviewController.getReviewWords)
