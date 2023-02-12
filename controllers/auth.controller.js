@@ -1,9 +1,10 @@
 const User = require("../models/user.model");
+const bcrypt = require("bcryptjs");
 
 exports.getRegisterUser = async (req, res) => {
-  res.render("login", {
-    pageTitle: "User Signin",
-    contentTitle: "User Signin",
+  res.render("signup", {
+    pageTitle: "User Sign Up",
+    contentTitle: "User Sign Up",
     isAuthenticated: req.isLoggedIn,
   });
 };
@@ -20,14 +21,17 @@ exports.postRegisterUser = async (req, res) => {
     });
   }
   //hash password
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
+  const hashedPasswordConfirm = await bcrypt.hash(passwordConfirm, salt);
 
   //create user
   const user = await User.create({
     name,
     email,
     role,
-    password,
-    passwordConfirm,
+    password: hashedPassword,
+    passwordConfirm: hashedPasswordConfirm,
   }).then(
     res.status(201).json({
       message: "User successfully created",
@@ -46,14 +50,22 @@ exports.getLogin = async (req, res, next) => {
 exports.postLogin = async (req, res, next) => {
   const { email, password } = req.body;
 
-  const userFound = await User.find({ email: email });
-  // console.log(
-  //   `username ${req.body.username} password ${req.body.password} email ${req.body.email} reference ${req.body.reference}`
-  // );
+  const userFound = await User.findOne({ email: email }).exec();
+  console.log(userFound);
+  if (userFound && (await bcrypt.compare(password, userFound?.password))) {
+    res.json({
+      message: "Success",
+    });
+  } else {
+    res.json({
+      message: "Invalid login credentials",
+    });
+  }
+
   req.isLoggedIn = true;
   console.log(req.isLoggedIn);
   console.log(req.isAuthenticated);
-  res.redirect("/");
+  // res.redirect("/");
   console.log(req.isLoggedIn);
   console.log(req.isAuthenticated);
 };
