@@ -8,7 +8,6 @@ exports.getRegisterUser = async (req, res) => {
   res.render("signup", {
     pageTitle: "User Sign Up",
     contentTitle: "User Sign Up",
-    isAuthenticated: req.isLoggedIn,
   });
 };
 
@@ -46,7 +45,6 @@ exports.getLogin = async (req, res, next) => {
   res.render("signin", {
     pageTitle: "User Sign In",
     contentTitle: "User Sign In",
-    isAuthenticated: req.isLoggedIn,
   });
 };
 
@@ -76,8 +74,12 @@ exports.getUserProfile = async (req, res) => {
   //verify token
   const verifiedToken = verifyToken(token);
   console.log("verified token:", verifiedToken);
-  console.log(req);
+  console.log("req userAuthId:", req.userAuthId);
 
+  // res.render("user-profile", {
+  //   pageTitle: "User Profile",
+  //   contentTitle: "User Profile",
+  // });
   res.json({
     message: "Welcome user",
   });

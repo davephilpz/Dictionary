@@ -2,11 +2,14 @@ const express = require("express");
 
 const adminController = require("../controllers/admin.controller");
 
+const { isLoggedIn } = require("../middleware/isLoggedIn");
+const { isAdmin } = require("../middleware/isAdmin");
+
 const router = express.Router();
 
 ////////admin restricted////////
 //admin controls
-router.route("/").get(adminController.getAdminControls);
+router.route("/").get(isLoggedIn, isAdmin, adminController.getAdminControls);
 
 // TODO consolidate this into admin home route
 //get word for CRUD
