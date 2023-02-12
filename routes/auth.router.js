@@ -15,4 +15,6 @@ router
   .get(authController.getLogin)
   .post(authController.postLogin);
 
+router.route("/profile").get(authController.getUserProfile);
+
 module.exports = router;

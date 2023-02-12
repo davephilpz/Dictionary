@@ -1,6 +1,7 @@
 const User = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 const { generateToken } = require("../util/generateToken");
+const { getTokenFromHeader } = require("../util/getTokenFromHeader");
 
 exports.getRegisterUser = async (req, res) => {
   res.render("signup", {
@@ -64,11 +65,13 @@ exports.postLogin = async (req, res, next) => {
       message: "Invalid login credentials",
     });
   }
+};
 
-  // req.isLoggedIn = true;
-  console.log(req.isLoggedIn);
-  console.log(req.isAuthenticated);
-  // res.redirect("/");
-  console.log(req.isLoggedIn);
-  console.log(req.isAuthenticated);
+exports.getUserProfile = async (req, res) => {
+  const token = getTokenFromHeader(req);
+  console.log("token in get profile:", token);
+
+  res.json({
+    message: "Welcome user",
+  });
 };
