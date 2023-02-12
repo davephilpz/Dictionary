@@ -5,7 +5,12 @@ const authController = require("../controllers/auth.controller");
 const router = express();
 
 router
-  .route("/login")
+  .route("/signup")
+  .get(authController.getRegisterUser)
+  .post(authController.postRegisterUser);
+
+router
+  .route("/signin")
   .get(authController.getLogin)
   .post(authController.postLogin);
 
