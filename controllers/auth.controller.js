@@ -54,11 +54,17 @@ exports.postLogin = async (req, res, next) => {
   const userFound = await User.findOne({ email: email }).exec();
   console.log(userFound);
   if (userFound && (await bcrypt.compare(password, userFound?.password))) {
-    res.json({
-      message: "Success",
+    res.cookie("jwt", generateToken(userFound?._id));
+    res.render("index", {
+      pageTitle: "Dictionary",
+      contentTitle: "Word Search",
       userFound,
-      jwt: generateToken(userFound?._id),
     });
+    // res.json({
+    //   message: "Success",
+    //   userFound,
+    //   jwt: generateToken(userFound?._id),
+    // });
   } else {
     res.json({
       message: "Invalid login credentials",
@@ -68,19 +74,19 @@ exports.postLogin = async (req, res, next) => {
 
 exports.getUserProfile = async (req, res) => {
   //retrieve token
-  const token = getTokenFromHeader(req);
-  console.log("token in get profile:", token);
+  // const token = getTokenFromHeader(req);
+  // console.log("token in get profile:", token);
 
-  //verify token
-  const verifiedToken = verifyToken(token);
-  console.log("verified token:", verifiedToken);
-  console.log("req userAuthId:", req.userAuthId);
+  // //verify token
+  // const verifiedToken = verifyToken(token);
+  // console.log("verified token:", verifiedToken);
+  // console.log("req userAuthId:", req.userAuthId);
 
-  // res.render("user-profile", {
-  //   pageTitle: "User Profile",
-  //   contentTitle: "User Profile",
-  // });
-  res.json({
-    message: "Welcome user",
+  res.render("user-profile", {
+    pageTitle: "User Profile",
+    contentTitle: "User Profile",
   });
+  // res.json({
+  //   message: "Welcome user",
+  // });
 };

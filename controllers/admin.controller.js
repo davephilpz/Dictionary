@@ -7,12 +7,15 @@ exports.getAdminControls = async (req, res, next) => {
   let searchString;
   let searchResults;
 
+  console.log("get admin req headers:", req.headers);
+
   const flashMessage = req.flash("message");
 
   res.render("admin/admin", {
     pageTitle: "Admin Controls",
     contentTitle: "Add New Word or Search to Update or Delete",
-    isAuthenticated: req.isLoggedIn,
+    userFound,
+    userAuthId,
     searchString,
     searchResults,
     message: flashMessage,
@@ -57,7 +60,6 @@ exports.getCreateWord = async (req, res, next) => {
   res.render("admin/admin-add-word", {
     pageTitle: "Add Word",
     contentTitle: "",
-    isAuthenticated: req.isLoggedIn,
     message: flashMessage,
   });
 };
@@ -157,7 +159,6 @@ exports.getUpdateWord = async (req, res) => {
     res.render("admin/admin-update-word", {
       pageTitle: "Update Word",
       contentTitle: "",
-      isAuthenticated: req.isLoggedIn,
       message: flashMessage,
       searchString,
       searchResults,
@@ -276,7 +277,6 @@ exports.getDeleteWord = async (req, res, next) => {
     res.render("admin/admin-delete-word", {
       pageTitle: "Update Word",
       contentTitle: "Confirm Word Deletion",
-      isAuthenticated: req.isLoggedIn,
       message: flashMessage,
       searchString,
       searchResults,

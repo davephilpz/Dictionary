@@ -13,7 +13,9 @@ exports.isLoggedIn = (req, res, next) => {
 
   //check to see if token was returned from verification
   if (!verifiedUserToken) {
-    return "Token is invalid or has expired. Please login again.";
+    return res
+      .status(401)
+      .send("Token is invalid or has expired. Please login again.");
   } else {
     //save user into req object
     req.userAuthId = verifiedUserToken?.id;

@@ -9,7 +9,7 @@ const router = express.Router();
 
 ////////admin restricted////////
 //admin controls
-router.route("/").get(isLoggedIn, isAdmin, adminController.getAdminControls);
+router.route("/").get(isLoggedIn, adminController.getAdminControls);
 
 // TODO consolidate this into admin home route
 //get word for CRUD

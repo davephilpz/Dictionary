@@ -1,6 +1,8 @@
 const express = require("express");
 const path = require("path");
 const get404 = require("./controllers/get404.controller");
+
+//cookie handling and jwt dependency
 const cookieParser = require("cookie-parser");
 //flash message dependencies:
 const session = require("express-session");
@@ -19,6 +21,7 @@ app.use(express.json()); //built in middleware that parses post requests with js
 app.use(express.urlencoded({ extended: true })); //parses post requests with urlencoded payloads. express expects key/value pairs: username=Test&password=MyPasSword!
 //mime type = application/x-www-form-urlencoded
 //extended true allows objects and arrays to be formatted too. allows this data to be accessed similarly to json data.
+app.use(cookieParser());
 
 //ejs templating engine
 app.set("view engine", "ejs");
