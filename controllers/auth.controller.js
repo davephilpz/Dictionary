@@ -2,6 +2,7 @@ const User = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 const { generateToken } = require("../util/generateToken");
 const { getTokenFromHeader } = require("../util/getTokenFromHeader");
+const { verifyToken } = require("../util/verifyToken");
 
 exports.getRegisterUser = async (req, res) => {
   res.render("signup", {
@@ -68,8 +69,14 @@ exports.postLogin = async (req, res, next) => {
 };
 
 exports.getUserProfile = async (req, res) => {
+  //retrieve token
   const token = getTokenFromHeader(req);
   console.log("token in get profile:", token);
+
+  //verify token
+  const verifiedToken = verifyToken(token);
+  console.log("verified token:", verifiedToken);
+  console.log(req);
 
   res.json({
     message: "Welcome user",

@@ -2,6 +2,8 @@ const express = require("express");
 
 const authController = require("../controllers/auth.controller");
 
+const { isLoggedIn } = require("../middleware/isLoggedIn");
+
 const router = express();
 
 ////////public access////////
@@ -15,6 +17,6 @@ router
   .get(authController.getLogin)
   .post(authController.postLogin);
 
-router.route("/profile").get(authController.getUserProfile);
+router.route("/profile").get(isLoggedIn, authController.getUserProfile);
 
 module.exports = router;

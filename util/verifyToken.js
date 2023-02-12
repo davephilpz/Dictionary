@@ -6,7 +6,7 @@ exports.verifyToken = (token) => {
     process.env.JWT_SECRET_KEY,
     (err, decodedUserToken) => {
       if (err) {
-        return "Token has expired or is invalid.";
+        return false;
       } else {
         return decodedUserToken;
       }
