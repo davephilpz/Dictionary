@@ -18,18 +18,10 @@
         />
       </picture>
       <label for="search-box"></label>
-      <input
-        class="form__search-input"
-        type="text"
-        name="searchString"
-        id="search-box"
-        required
-        placeholder="Search word"
-        alt="Search word in kanji,
-      hiragana, katakana, romaji or English."
-        onkeyup="sendData(this)"
-        autocomplete="off"
-      />
+      <div class="search-container">
+        <input type="text" id="search-input" />
+        <ul id="live-search" class="search-predictions"></ul>
+      </div>
       <button class="search__btn" type="submit" onClick="addParams()">
         Search
       </button>

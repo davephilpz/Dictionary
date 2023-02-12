@@ -20,7 +20,7 @@ if (searchForm) {
   searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const searchInput = document.querySelector("#search-box").value;
+    const searchInput = document.querySelector("#search-input").value;
 
     if (searchInput === "") {
       return;
