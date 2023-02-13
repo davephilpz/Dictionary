@@ -39,12 +39,11 @@ app.use(xssDef());
 app.use(
   httpParamPollDef({
     whitelist: [
-      "duration",
-      "ratingsQuantity",
-      "ratingsAverage",
-      "maxGroupSize",
-      "dfficulty",
-      "price",
+      "日本語.日本語単語",
+      "日本語.平仮名",
+      "日本語.片仮名",
+      "日本語.ローマ字",
+      "英語.英単語",
     ],
   })
 );
