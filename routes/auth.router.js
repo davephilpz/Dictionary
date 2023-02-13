@@ -20,6 +20,7 @@ router
 router.route("/signout").get(authController.getUserSignout);
 
 ////////user/admin restricted////////
+// TODO if admin will have a special profile, need to import and add isAdmin middleware to this route.
 router.route("/profile").get(isLoggedIn, authController.getUserProfile);
 
 module.exports = router;

@@ -9,6 +9,11 @@ const xssDef = require("xss-clean"); //xss attack defense
 const httpParamPollDef = require("hpp"); //http parameter pollution prevention
 const mongoSanitize = require("express-mongo-sanitize"); //mongo query injection defense
 const helmet = require("helmet"); //better html headers
+// TODO add CSRF handling
+// TODO enable https
+// TODO enable SSL/TSL encryption
+// TODO enable server side logging/monitoring
+// TODO finish user reg and add client side validation and prevent role selection
 
 //compression middleware declarations
 const compression = require("compression"); //compressor of text to lower i/o file size.
