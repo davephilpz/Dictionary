@@ -2,6 +2,13 @@ const express = require("express");
 const path = require("path");
 const get404 = require("./controllers/get404.controller");
 
+//security middleware declarations
+const rateLimit = require("express-rate-limit");
+const xssDef = require("xss-clean"); //xss attack defense
+const httpParamPollDef = require("hpp"); //http parameter pollution prevention
+const mongoSanitize = require("express-mongo-sanitize"); //mongo query injection defense
+const helmet = require("helmet"); //better html headers
+
 //cookie handling and jwt dependency
 const cookieParser = require("cookie-parser");
 //flash message dependencies (session also needed for user session)
@@ -16,6 +23,42 @@ const authRouter = require("./routes/auth.router");
 
 //use express
 const app = express();
+
+//security middleware
+//API request limiter
+const limiter = rateLimit({
+  max: 100, //#of requests. this is for entire api usage.
+  windowMs: 60 * 60 * 1000, //per 60mins
+  message:
+    "Too many API requests from this IP address. Hourly limit is currently 100 requests.",
+});
+app.use("/api", limiter);
+//converts all html symbols. mongo validation alone protects server against most xss.
+app.use(xssDef());
+//prevent attacks when duplicate queries etc are sent and change data type etc.
+app.use(
+  httpParamPollDef({
+    whitelist: [
+      "duration",
+      "ratingsQuantity",
+      "ratingsAverage",
+      "maxGroupSize",
+      "dfficulty",
+      "price",
+    ],
+  })
+);
+//removes all $ and :. to prevent injections.
+app.use(mongoSanitize());
+//adds sercurity for headers. Add additional scripts/sources as app grows or needs other CDN, hooks, APIs etc.
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'"],
+    },
+  })
+);
 
 //data parsing middleware
 app.use(express.json()); //built in middleware that parses post requests with json in body
