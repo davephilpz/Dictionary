@@ -8,7 +8,6 @@ exports.getRegisterUser = async (req, res) => {
   res.render("signup", {
     pageTitle: "User Sign Up",
     contentTitle: "User Sign Up",
-    userAuthId: req.userAuthId,
     session: req.session,
   });
 };
@@ -47,7 +46,6 @@ exports.getLogin = async (req, res, next) => {
   res.render("signin", {
     pageTitle: "User Sign In",
     contentTitle: "User Sign In",
-    userAuthId: req.userAuthId,
     session: req.session,
   });
 };
@@ -60,10 +58,7 @@ exports.postLogin = async (req, res, next) => {
   if (userFound && (await bcrypt.compare(password, userFound?.password))) {
     res.cookie("jwt", generateToken(userFound?._id));
 
-    //access user ID on protected routes
-    req.userAuthId = userFound._id;
-
-    //save user ID to session
+    //save user ID to session to persist through EJS template reloads. Removing this will remove the protected nav when going to unprotected route.
     const userAuthId = userFound._id;
     req.session.userAuthId = userAuthId;
 
@@ -71,14 +66,8 @@ exports.postLogin = async (req, res, next) => {
       pageTitle: "Dictionary",
       contentTitle: "Word Search",
       userFound,
-      userAuthId: req.userAuthId,
       session: req.session,
     });
-    // res.json({
-    //   message: "Success",
-    //   userFound,
-    //   jwt: generateToken(userFound?._id),
-    // });
   } else {
     res.json({
       message: "Invalid login credentials",
@@ -87,24 +76,11 @@ exports.postLogin = async (req, res, next) => {
 };
 
 exports.getUserProfile = async (req, res) => {
-  //retrieve token
-  // const token = getTokenFromHeader(req);
-  // console.log("token in get profile:", token);
-
-  // //verify token
-  // const verifiedToken = verifyToken(token);
-  // console.log("verified token:", verifiedToken);
-  // console.log("req userAuthId:", req.userAuthId);
-
   res.render("user-profile", {
     pageTitle: "User Profile",
     contentTitle: "User Profile",
-    userAuthId: req.userAuthId,
     session: req.session,
   });
-  // res.json({
-  //   message: "Welcome user",
-  // });
 };
 
 exports.getUserSignout = (req, res) => {

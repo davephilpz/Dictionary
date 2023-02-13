@@ -35,7 +35,6 @@ exports.getReviewWords = async (req, res) => {
     contentTitle: "Word Review",
     path: "/",
     // searchResults,
-    userAuthId: req.userAuthId,
     session: req.session,
   });
   // })
@@ -68,7 +67,7 @@ exports.postReviewWords = async (req, res) => {
           contentTitle: "Word Review",
           searchResults,
           pages,
-          userAuthId: req.userAuthId,
+          session: req.session,
         });
       })
       .catch((err) => {

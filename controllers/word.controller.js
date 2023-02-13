@@ -5,7 +5,6 @@ exports.getSearchPage = async (req, res, next) => {
     res.render("index", {
       pageTitle: "Dictionary",
       contentTitle: "Word Search",
-      userAuthId: req.userAuthId,
       session: req.session,
     });
   } catch (err) {
@@ -160,7 +159,6 @@ exports.postSearchWord = async (req, res, next) => {
       searchString,
       pageTitle: `${searchString}`,
       contentTitle: "Word Search",
-      userAuthId: req.userAuthId,
       session: req.session,
     });
     console.log("Search Results:", searchResults);

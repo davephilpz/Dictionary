@@ -17,7 +17,6 @@ exports.getAdminControls = async (req, res, next) => {
     searchString,
     searchResults,
     message: flashMessage,
-    userAuthId: req.userAuthId,
     session: req.session,
   });
 };
@@ -42,7 +41,6 @@ exports.getEditWord = async (req, res) => {
       searchString,
       pageTitle: `${searchString}`,
       contentTitle: "Add New Word or Search to Update or Delete",
-      userAuthId: req.userAuthId,
       session: req.session,
     });
   } catch (err) {
@@ -62,7 +60,6 @@ exports.getCreateWord = async (req, res, next) => {
     pageTitle: "Add Word",
     contentTitle: "",
     message: flashMessage,
-    userAuthId: req.userAuthId,
     session: req.session,
   });
 };
@@ -165,7 +162,6 @@ exports.getUpdateWord = async (req, res) => {
       message: flashMessage,
       searchString,
       searchResults,
-      userAuthId: req.userAuthId,
       session: req.session,
     });
     console.log(
@@ -285,7 +281,6 @@ exports.getDeleteWord = async (req, res, next) => {
       message: flashMessage,
       searchString,
       searchResults,
-      userAuthId: req.userAuthId,
       session: req.session,
     });
   } catch (err) {
