@@ -4,6 +4,7 @@ exports.get404 = (req, res, next) => {
     contentTitle: "",
     path: "/404",
     userAuthId: req.userAuthId,
+    session: req.session,
   });
 };
 

@@ -39,7 +39,7 @@ app.use(
     secret: "secretSessionString",
     cookie: { maxAge: 60000 },
     resave: true, //true forces sessions to be saved back to session store, even if the session was never modified during the request
-    saveUninitialized: true, //true forces sessions that is initialized to be saved to the store
+    saveUninitialized: true, //true forces sessions that are initialized to be saved to the store
   })
 );
 app.use(connectFlash());

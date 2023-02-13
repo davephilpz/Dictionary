@@ -6,7 +6,10 @@ exports.getSearchPage = async (req, res, next) => {
       pageTitle: "Dictionary",
       contentTitle: "Word Search",
       userAuthId: req.userAuthId,
+      session: req.session,
     });
+
+    console.log("home user auth id:", req.userAuthId);
   } catch (err) {
     (err) => {
       res.status(500).json({ message: err.message });
@@ -160,6 +163,7 @@ exports.postSearchWord = async (req, res, next) => {
       pageTitle: `${searchString}`,
       contentTitle: "Word Search",
       userAuthId: req.userAuthId,
+      session: req.session,
     });
     console.log("Search Results:", searchResults);
   } catch (err) {

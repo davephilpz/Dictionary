@@ -36,6 +36,7 @@ exports.getReviewWords = async (req, res) => {
     path: "/",
     // searchResults,
     userAuthId: req.userAuthId,
+    session: req.session,
   });
   // })
   // .catch((err) => {
