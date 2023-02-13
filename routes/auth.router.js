@@ -17,6 +17,8 @@ router
   .get(authController.getLogin)
   .post(authController.postLogin);
 
+router.route("/signout").get(authController.getUserSignout);
+
 ////////user/admin restricted////////
 router.route("/profile").get(isLoggedIn, authController.getUserProfile);
 

@@ -8,8 +8,6 @@ exports.getSearchPage = async (req, res, next) => {
       userAuthId: req.userAuthId,
       session: req.session,
     });
-
-    console.log("home user auth id:", req.userAuthId);
   } catch (err) {
     (err) => {
       res.status(500).json({ message: err.message });

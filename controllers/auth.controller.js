@@ -106,3 +106,14 @@ exports.getUserProfile = async (req, res) => {
   //   message: "Welcome user",
   // });
 };
+
+exports.getUserSignout = (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error(err);
+    } else {
+      res.clearCookie("jwt");
+      res.redirect("/");
+    }
+  });
+};
