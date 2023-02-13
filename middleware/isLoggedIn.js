@@ -19,6 +19,7 @@ exports.isLoggedIn = (req, res, next) => {
   } else {
     //save user into req object
     req.userAuthId = verifiedUserToken?.id;
+    console.log("req user auth id set::::::::", req.userAuthId);
     next();
   }
 };

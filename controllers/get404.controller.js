@@ -3,7 +3,7 @@ exports.get404 = (req, res, next) => {
     pageTitle: "Page Not Found",
     contentTitle: "",
     path: "/404",
-    isAuthenticated: req.isLoggedIn,
+    userAuthId: req.userAuthId,
   });
 };
 

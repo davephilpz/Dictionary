@@ -8,6 +8,7 @@ exports.getRegisterUser = async (req, res) => {
   res.render("signup", {
     pageTitle: "User Sign Up",
     contentTitle: "User Sign Up",
+    userAuthId: req.userAuthId,
   });
 };
 
@@ -45,6 +46,7 @@ exports.getLogin = async (req, res, next) => {
   res.render("signin", {
     pageTitle: "User Sign In",
     contentTitle: "User Sign In",
+    userAuthId: req.userAuthId,
   });
 };
 
@@ -55,10 +57,12 @@ exports.postLogin = async (req, res, next) => {
   console.log(userFound);
   if (userFound && (await bcrypt.compare(password, userFound?.password))) {
     res.cookie("jwt", generateToken(userFound?._id));
+    req.userAuthId = userFound._id;
     res.render("index", {
       pageTitle: "Dictionary",
       contentTitle: "Word Search",
       userFound,
+      userAuthId: req.userAuthId,
     });
     // res.json({
     //   message: "Success",
@@ -85,6 +89,7 @@ exports.getUserProfile = async (req, res) => {
   res.render("user-profile", {
     pageTitle: "User Profile",
     contentTitle: "User Profile",
+    userAuthId: req.userAuthId,
   });
   // res.json({
   //   message: "Welcome user",

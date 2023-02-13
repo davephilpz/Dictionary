@@ -10,6 +10,8 @@
       <li class="nav__item">
         <a class="nav__link" href="/">Search</a>
       </li>
+
+      <% if (userAuthId) { %>
       <li class="nav__item">
         <a class="nav__link" href="/review">Review</a>
       </li>
@@ -21,6 +23,7 @@
       <li class="nav__item">
         <a class="nav__link" href="/profile">My Account</a>
       </li>
+      <% } else { %> <% } %>
 
       <li class="nav__item">
         <a class="nav__link" href="/signin">Sign In</a>

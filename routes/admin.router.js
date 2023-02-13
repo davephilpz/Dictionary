@@ -13,24 +13,24 @@ router.route("/").get(isLoggedIn, adminController.getAdminControls);
 
 // TODO consolidate this into admin home route
 //get word for CRUD
-router.route("/edit-word").get(adminController.getEditWord);
+router.route("/edit-word").get(isLoggedIn, adminController.getEditWord);
 
 //create route
 router
   .route("/add-word")
-  .get(adminController.getCreateWord)
-  .post(adminController.postCreateWord);
+  .get(isLoggedIn, adminController.getCreateWord)
+  .post(isLoggedIn, adminController.postCreateWord);
 
 //update route
 router
   .route("/update-word")
-  .get(adminController.getUpdateWord)
-  .post(adminController.postUpdateWord);
+  .get(isLoggedIn, adminController.getUpdateWord)
+  .post(isLoggedIn, adminController.postUpdateWord);
 
 //delete route
 router
   .route("/delete-word")
-  .get(adminController.getDeleteWord)
-  .post(adminController.postDeleteWord);
+  .get(isLoggedIn, adminController.getDeleteWord)
+  .post(isLoggedIn, adminController.postDeleteWord);
 
 module.exports = router;

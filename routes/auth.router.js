@@ -17,6 +17,7 @@ router
   .get(authController.getLogin)
   .post(authController.postLogin);
 
+////////user/admin restricted////////
 router.route("/profile").get(isLoggedIn, authController.getUserProfile);
 
 module.exports = router;
