@@ -61,11 +61,11 @@ app.use(
 );
 
 //data parsing middleware
-app.use(express.json()); //built in middleware that parses post requests with json in body
+app.use(express.json({ limit: "10kb" })); //built in middleware that parses post requests with json in body
 //looks for header: Content-Type: application/json
 //content-type is the mime type of the data being sent; text/html image/png etc.
 //if no body to parse, or does not type or an error code, the req body will be an empty object
-app.use(express.urlencoded({ extended: true })); //parses post requests with urlencoded payloads. express expects key/value pairs: username=Test&password=MyPasSword!
+app.use(express.urlencoded({ extended: true, limit: "10kb" })); //parses post requests with urlencoded payloads. express expects key/value pairs: username=Test&password=MyPasSword!
 //mime type = application/x-www-form-urlencoded
 //extended true allows objects and arrays to be formatted too. allows this data to be accessed similarly to json data.
 //need this for JWT and flash messages and any other cookies for future.
