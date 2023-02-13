@@ -1,3 +1,4 @@
+//base router functionality declaractions
 const express = require("express");
 const path = require("path");
 const get404 = require("./controllers/get404.controller");
@@ -9,7 +10,10 @@ const httpParamPollDef = require("hpp"); //http parameter pollution prevention
 const mongoSanitize = require("express-mongo-sanitize"); //mongo query injection defense
 const helmet = require("helmet"); //better html headers
 
-//cookie handling and jwt dependency
+//compression middleware declarations
+const compression = require("compression"); //compressor of text to lower i/o file size.
+
+//cookie handling and jwt dependency declarations
 const cookieParser = require("cookie-parser");
 //flash message dependencies (session also needed for user session)
 const session = require("express-session");
@@ -23,6 +27,9 @@ const authRouter = require("./routes/auth.router");
 
 //use express
 const app = express();
+
+//compress i/o to lighten data usage
+app.use(compression());
 
 //security middleware
 //API request limiter
