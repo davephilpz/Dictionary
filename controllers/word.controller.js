@@ -1,5 +1,7 @@
 const Word = require("../models/word.model");
 
+// TODO query string persists when redirected to homepage from error or login etc. Does not cause any errors, but should be fixed. Also javascript errors occur on pages when user does not have access. Not sure if this is preventable or not.
+
 exports.getSearchPage = async (req, res, next) => {
   try {
     res.render("index", {
