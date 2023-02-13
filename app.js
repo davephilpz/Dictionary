@@ -4,16 +4,20 @@ const get404 = require("./controllers/get404.controller");
 
 //cookie handling and jwt dependency
 const cookieParser = require("cookie-parser");
-//flash message dependencies:
+//flash message dependencies (session also needed for user session)
 const session = require("express-session");
 const connectFlash = require("connect-flash");
 
+//route declarations
 const adminRouter = require("./routes/admin.router");
 const wordRouter = require("./routes/word.router");
 const reviewRouter = require("./routes/review.router");
 const authRouter = require("./routes/auth.router");
 
+//use express
 const app = express();
+
+//data parsing middleware
 app.use(express.json()); //built in middleware that parses post requests with json in body
 //looks for header: Content-Type: application/json
 //content-type is the mime type of the data being sent; text/html image/png etc.
@@ -21,7 +25,8 @@ app.use(express.json()); //built in middleware that parses post requests with js
 app.use(express.urlencoded({ extended: true })); //parses post requests with urlencoded payloads. express expects key/value pairs: username=Test&password=MyPasSword!
 //mime type = application/x-www-form-urlencoded
 //extended true allows objects and arrays to be formatted too. allows this data to be accessed similarly to json data.
-app.use(cookieParser());
+//need this for JWT and flash messages and any other cookies for future.
+app.use(cookieParser(process.env.COOKIE_KEY));
 
 //ejs templating engine
 app.set("view engine", "ejs");
@@ -30,10 +35,7 @@ app.set("views", "views");
 //public access middleware
 app.use(express.static(path.join(__dirname, "public")));
 
-//flash message middleware
-app.use(cookieParser("secretCookieString")); //need to enter some string
-
-//must initialize session to allow connect-flash to work
+//session middleware
 app.use(
   session({
     secret: "secretSessionString",
@@ -42,6 +44,8 @@ app.use(
     saveUninitialized: true, //true forces sessions that are initialized to be saved to the store
   })
 );
+
+//flash message middleware
 app.use(connectFlash());
 
 //test middleware
@@ -55,18 +59,6 @@ app.use((req, res, next) => {
   // console.log(req.cookies);
   next();
 });
-
-//find test user and save them into req object
-// app.use((req, res, next) => {
-//   User.findById("admin@example.com")
-//     .then((user) => {
-//       req.user = user;
-//       next();
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// });
 
 //admin routes
 app.use("/admin", adminRouter);
