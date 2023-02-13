@@ -1,2 +1,4 @@
-<% if (session.userAuthId) { %> <%- include('header-protected') %> <% } else {
-%> <%- include('header-public') %> <% } %>
+<% if (session.userAuthId && session.isAdmin === 'admin') { %> <%-
+include('header-admin') %> <% } else if (session.userAuthId) { %> <%-
+include('header-protected') %> <% } else { %> <%- include('header-public') %> <%
+} %>

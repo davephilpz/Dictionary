@@ -60,7 +60,11 @@ exports.postLogin = async (req, res, next) => {
 
     //save user ID to session to persist through EJS template reloads. Removing this will remove the protected nav when going to unprotected route.
     const userAuthId = userFound._id;
+    const userType = userFound.role;
     req.session.userAuthId = userAuthId;
+    req.session.isAdmin = userType;
+
+    console.log("login isadmin:", req.session.isAdmin);
 
     res.render("index", {
       pageTitle: "Dictionary",
@@ -68,6 +72,8 @@ exports.postLogin = async (req, res, next) => {
       userFound,
       session: req.session,
     });
+
+    console.log("login req.session:", req.session);
   } else {
     res.json({
       message: "Invalid login credentials",
