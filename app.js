@@ -4,6 +4,8 @@ const path = require("path");
 const get404 = require("./controllers/get404.controller");
 
 //security middleware declarations
+//protect secrets in provess.env variables
+require("dotenv").config({ path: "./config.env" });
 const rateLimit = require("express-rate-limit");
 const xssDef = require("xss-clean"); //xss attack defense
 const httpParamPollDef = require("hpp"); //http parameter pollution prevention
@@ -23,6 +25,9 @@ const cookieParser = require("cookie-parser");
 //flash message dependencies (session also needed for user session)
 const session = require("express-session");
 const connectFlash = require("connect-flash");
+
+//session backup declarations
+const MongoDBStore = require("connect-mongodb-session")(session);
 
 //route declarations
 const adminRouter = require("./routes/admin.router");
@@ -90,11 +95,18 @@ app.set("views", "views");
 app.use(express.static(path.join(__dirname, "public")));
 
 //session middleware
+//backup sessions to Mongo DB
+const store = new MongoDBStore({
+  uri: "mongodb://localhost:27017/myapp",
+  collection: "sessions",
+});
+//session middleware settings
 app.use(
   session({
-    secret: "secretSessionString",
+    secret: process.env.SESSION_KEY,
     cookie: { maxAge: 60000 },
-    resave: true, //true forces sessions to be saved back to session store, even if the session was never modified during the request
+    store: store,
+    resave: false, //true forces sessions to be saved back to session store, even if the session was never modified during the request. False means only if modified and can improve performance.
     saveUninitialized: true, //true forces sessions that are initialized to be saved to the store
   })
 );

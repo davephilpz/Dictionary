@@ -1,33 +1,32 @@
 <section class="section-review">
+  <form
+    class="form-word-search"
+    action="/review"
+    method="POST"
+    role="search window"
+    aria-label="word search window"
+  >
+    <button
+      id="new-words"
+      name="newWords"
+      type="submit"
+      value="newWords"
+      class="review__card--button-new"
+    >
+      New Words
+    </button>
+    <button
+      id="review-words"
+      name="reviewWords"
+      type="submit"
+      value="reviewWords"
+      class="review__card--button-review"
+    >
+      Review Words
+    </button>
+  </form>
   <div class="review__card">
-    <div class="review__card--review-type">
-      <form
-        class="form-word-search"
-        action="/review"
-        method="POST"
-        role="search window"
-        aria-label="word search window"
-      >
-        <button
-          id="new-words"
-          name="newWords"
-          type="submit"
-          value="newWords"
-          class="review__card--button-new"
-        >
-          New Words
-        </button>
-        <button
-          id="review-words"
-          name="reviewWords"
-          type="submit"
-          value="reviewWords"
-          class="review__card--button-review"
-        >
-          Review Words
-        </button>
-      </form>
-    </div>
+    <div class="review__card--review-type"></div>
 
     <% for (let i = 0; i < searchResults.length; i++) { %>
     <h2 class="review__card--word">
