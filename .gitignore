@@ -4,3 +4,4 @@ config.env
 error.log
 logs
 logs/404-errors.log
+logs/404-errors.log

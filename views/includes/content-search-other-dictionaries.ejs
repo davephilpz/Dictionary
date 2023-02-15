@@ -77,6 +77,26 @@
       </a>
     </li>
     <li class="other-dictionary__link">
+      <a href="https://jisho.org/search/<%= searchString %>" target="_blank">
+        <picture>
+          <source
+            srcset="../img/other-dictionary-icons/jisho.webp"
+            type="image/webp"
+          />
+          <source
+            srcset="../img/other-dictionary-icons/jisho.png"
+            type="image/jpg"
+          />
+          <img
+            class="other-dictionary__icon"
+            src="../img/other-dictionary-icons/jisho.jpg"
+            alt="Jisho dictionary icon"
+            aria-label="Search <%= searchString %> on Jisho online dictionary"
+          />
+        </picture>
+      </a>
+    </li>
+    <li class="other-dictionary__link">
       <a
         href="https://ejje.weblio.jp/content/<%= searchString %>"
         target="_blank"
