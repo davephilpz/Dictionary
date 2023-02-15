@@ -6,22 +6,13 @@
     role="form"
     aria-label="user sign in form"
   >
-    <label for="username"></label>
+    <label for="name"></label>
     <input
       type="text"
-      name="username"
-      id="username"
-      autocomplete="username"
-      placeholder="Username"
-      required
-    />
-    <label for="password"></label>
-    <input
-      type="password"
-      name="password"
-      id="password"
-      autocomplete="password"
-      placeholder="Password"
+      name="name"
+      id="name"
+      autocomplete="name"
+      placeholder="Name"
       required
     />
     <label for="email"></label>
@@ -33,11 +24,42 @@
       placeholder="name@example.com"
       required
     />
+    <label for="password"></label>
+    <input
+      type="password"
+      name="password"
+      id="password"
+      pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,}"
+      autocomplete="password"
+      placeholder="Password"
+      required
+    />
+    <label for="confirm-password"></label>
+    <input
+      type="password"
+      name="confirmPassword"
+      id="confirm-password"
+      autocomplete="password"
+      placeholder="Confirm Password"
+      required
+    />
     <p>Where did you hear about us?</p>
     <div class="form__input">
-      <input type="radio" name="reference" id="theInternet" />
-      <label for="theInternet">The Internet</label>
-      <input type="radio" name="reference" id="other" />
+      <input
+        type="radio"
+        name="hearFromWhere"
+        id="theInternet"
+        value="internet"
+      />
+      <label for="the internet">The Internet</label>
+      <input type="radio" name="hearFromWhere" id="other" value="other" />
+      <label for="other">Other</label>
+    </div>
+    <p>Where are you from?</p>
+    <div class="form__input">
+      <input type="radio" name="liveWhere" id="theUniverse" value="universe" />
+      <label for="the universe">The Universe</label>
+      <input type="radio" name="liveWhere" id="other" value="other" />
       <label for="other">Other</label>
     </div>
 

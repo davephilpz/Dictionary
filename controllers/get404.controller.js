@@ -20,11 +20,13 @@ exports.get404 = (req, res, next) => {
     message: `404 error: ${req.url}`,
   });
 
+  const originalURL = req.originalUrl.replace("/", "");
+
   res.status(404).render("404", {
     pageTitle: "Page Not Found",
     contentTitle: "",
-    path: "/404",
     session: req.session,
+    originalURL: originalURL,
   });
 };
 

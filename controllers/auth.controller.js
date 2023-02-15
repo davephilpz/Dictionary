@@ -13,7 +13,9 @@ exports.getRegisterUser = async (req, res) => {
 };
 
 exports.postRegisterUser = async (req, res) => {
-  const { name, email, role, password, passwordConfirm } = req.body;
+  const { name, email, role, password, confirmPassword } = req.body;
+
+  console.log("user reg req.body:", req.body);
 
   const userExists = await User.findOne({ email });
 
@@ -26,15 +28,15 @@ exports.postRegisterUser = async (req, res) => {
   //hash password
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
-  const hashedPasswordConfirm = await bcrypt.hash(passwordConfirm, salt);
+  const hashedconfirmPassword = await bcrypt.hash(confirmPassword, salt);
 
   //create user
   const user = await User.create({
     name,
     email,
-    role,
+    role: "user", //role statically set as user to prevent injections.
     password: hashedPassword,
-    passwordConfirm: hashedPasswordConfirm,
+    passwordConfirm: hashedconfirmPassword,
   }).then(
     res.status(201).json({
       message: "User successfully created",
