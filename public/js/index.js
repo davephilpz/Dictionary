@@ -16,7 +16,8 @@ const tooltipIcon = document.querySelector(".tooltip__icon");
 const tooltip = document.querySelector(".tooltip");
 const closeButton = document.querySelector(".tooltip__close-button");
 
-// //delegation
+//delegation
+//404 rerouting to previous page
 document.addEventListener("DOMContentLoaded", function () {
   const Error404Btn = document.querySelector("#redirect-404");
   if (Error404Btn) {
@@ -27,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
 if (searchForm) {
   searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
