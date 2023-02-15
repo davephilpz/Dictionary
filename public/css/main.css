@@ -257,8 +257,8 @@
   --color-accent-opacity-light: rgba(82, 82, 82, 0.2);
   --color-accent-opacity-dark: rgba(82, 82, 82, 0.99);
   --box-shadow: 5rem, 5rem 5rem rgba(0, 0, 0, 0.8);
-  --flash-success: rgba(170, 222, 135, 0.5);
-  --flash-error: rgba(204, 92, 92, 0.5);
+  --flash-success: rgba(114, 223, 41, 0.764);
+  --flash-error: rgba(235, 38, 38, 0.806);
   --form-success: rgba(112, 251, 19, 0.6);
   --form-error: rgba(251, 38, 19, 0.8);
 }
@@ -1483,4 +1483,21 @@ form p {
 .pag-link.pag-link--current {
   color: var(--color-light);
   background-color: var(--color-dark);
+}
+
+.alert-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background-color: var(--flash-error);
+  color: var(--color-light);
+  font-size: 2rem;
+  text-align: center;
+  display: none;
+}
+
+.alert-banner.show {
+  display: block;
 }

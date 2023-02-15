@@ -10,3 +10,4 @@
 {"level":"info","message":"404 error: /signinfdsf","service":"my-app","timestamp":"2023-02-15T04:09:18.750Z"}
 {"level":"info","message":"404 error: /dsadasdasd","service":"my-app","timestamp":"2023-02-15T04:11:55.138Z"}
 {"level":"info","message":"404 error: /dsadasdasd","service":"my-app","timestamp":"2023-02-15T04:13:06.598Z"}
+{"level":"info","message":"404 error: /favicon.ico","service":"my-app","timestamp":"2023-02-15T17:53:50.358Z"}

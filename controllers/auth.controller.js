@@ -25,23 +25,44 @@ exports.postRegisterUser = async (req, res) => {
       message: "User already exists",
     });
   }
-  //hash password
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
-  const hashedconfirmPassword = await bcrypt.hash(confirmPassword, salt);
 
-  //create user
-  const user = await User.create({
-    name,
-    email,
-    role: "user", //role statically set as user to prevent injections.
-    password: hashedPassword,
-    passwordConfirm: hashedconfirmPassword,
-  }).then(
-    res.status(201).json({
-      message: "User successfully created",
-    })
-  );
+  //double check password for strength requirements
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$/;
+
+  if (
+    password.length < 10 ||
+    confirmPassword.length < 10 ||
+    password !== confirmPassword
+  ) {
+    res.status(400).json({
+      message: "Password does not meet minimum length requirements.",
+    });
+  } else if (!passwordRegex.test(password)) {
+    return res.status(400).json({ message: "Password is not strong enough." });
+  } else if (password !== confirmPassword) {
+    res.status(400).json({
+      message: "Passwords do not match.",
+    });
+  } else {
+    //hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    const hashedconfirmPassword = await bcrypt.hash(confirmPassword, salt);
+
+    //create user
+    const user = await User.create({
+      name,
+      email,
+      role: "user", //role statically set as user to prevent injections.
+      password: hashedPassword,
+      passwordConfirm: hashedconfirmPassword,
+    }).then(
+      res.status(201).json({
+        message: "User successfully created",
+      })
+    );
+  }
 };
 
 exports.getLogin = async (req, res, next) => {

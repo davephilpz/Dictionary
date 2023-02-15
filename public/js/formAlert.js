@@ -147,5 +147,17 @@ form.addEventListener("submit", (event) => {
     console.log(
       "Form validation failed. Please check your inputs and try again."
     );
+    showErrorBanner(
+      "Form validation failed. Please check your inputs and try again."
+    );
   }
 });
+
+function showErrorBanner(message) {
+  const banner = document.getElementById("alert-banner");
+  banner.textContent = message;
+  banner.classList.add("show");
+  setTimeout(() => {
+    banner.classList.remove("show");
+  }, 5000);
+}

@@ -5,6 +5,7 @@
     class="input-form"
     role="form"
     aria-label="user sign in form"
+    id="signup-form"
   >
     <div class="input-group">
       <label for="name"></label>
@@ -40,7 +41,7 @@
         type="password"
         name="password"
         id="password"
-        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,}"
+        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+]).{10,}"
         autocomplete="password"
         placeholder="Password"
         title="Password must be at least 10 digits and contain a capital and lowercase letter, a number and a symbol (!@#$%^&*()_+)"
@@ -83,6 +84,6 @@
       <label for="other">Other</label>
     </div> -->
 
-    <input class="form__btn" type="submit" value="Sign Up" id="signup-form" />
+    <input class="form__btn" type="submit" value="Sign Up" />
   </form>
 </section>
