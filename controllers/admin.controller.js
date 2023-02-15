@@ -2,6 +2,9 @@ const wanakana = require("wanakana");
 
 const Word = require("../models/word.model");
 
+// TODO fix admin handlers to work with security policy
+// TODO fix admin search to look like normal search
+
 exports.getAdminControls = async (req, res, next) => {
   //declare and pass in variables for EJS template to work
   let searchString;
