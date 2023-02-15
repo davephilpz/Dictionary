@@ -259,6 +259,8 @@
   --box-shadow: 5rem, 5rem 5rem rgba(0, 0, 0, 0.8);
   --flash-success: rgba(170, 222, 135, 0.5);
   --flash-error: rgba(204, 92, 92, 0.5);
+  --form-success: rgba(112, 251, 19, 0.6);
+  --form-error: rgba(251, 38, 19, 0.8);
 }
 
 *,
@@ -1122,7 +1124,7 @@ button {
   align-items: center;
   color: var(--color-light);
   background-color: var(--color-dark);
-  padding: 3rem;
+  padding: 3rem 6rem;
   width: 90%;
   font-size: 2rem;
   border-radius: 1rem;
@@ -1196,6 +1198,54 @@ form p {
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.input-group input {
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.form-alert {
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.input-group.success input {
+  box-shadow: 0 0 0 0.5rem var(--form-success);
+}
+
+.input-group.error input {
+  box-shadow: 0 0 0 0.5rem var(--form-error);
+}
+
+.input-group input:focus {
+  box-shadow: 0 0 0 0.5rem var(--color-grey-dark);
+}
+
+.input-group .form-alert {
+  display: none;
+  /* font-size: 0.75rem; */
+}
+
+.input-group.success .form-alert,
+.input-group.error .form-alert {
+  display: block;
+}
+
+.input-group.error .form-alert {
+  color: var(--form-error);
+}
+
+.input-group.success .form-alert {
+  color: var(--form-success);
 }
 
 /***** Tooltips *****/

@@ -6,44 +6,60 @@
     role="form"
     aria-label="user sign in form"
   >
-    <label for="name"></label>
-    <input
-      type="text"
-      name="name"
-      id="name"
-      autocomplete="name"
-      placeholder="Name"
-      required
-    />
-    <label for="email"></label>
-    <input
-      type="email"
-      name="email"
-      id="email"
-      autocomplete="email"
-      placeholder="name@example.com"
-      required
-    />
-    <label for="password"></label>
-    <input
-      type="password"
-      name="password"
-      id="password"
-      pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,}"
-      autocomplete="password"
-      placeholder="Password"
-      required
-    />
-    <label for="confirm-password"></label>
-    <input
-      type="password"
-      name="confirmPassword"
-      id="confirm-password"
-      autocomplete="password"
-      placeholder="Confirm Password"
-      required
-    />
-    <p>Where did you hear about us?</p>
+    <div class="input-group">
+      <label for="name"></label>
+      <input
+        type="text"
+        name="name"
+        id="name"
+        autocomplete="name"
+        placeholder="Name"
+        required
+      />
+      <span class="form-alert">Invalid name</span>
+    </div>
+
+    <div class="input-group">
+      <label for="email"></label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        autocomplete="email"
+        placeholder="name@example.com"
+        required
+      />
+      <span class="form-alert">Invalid email</span>
+    </div>
+
+    <div class="input-group">
+      <label for="password"></label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,}"
+        autocomplete="password"
+        placeholder="Password"
+        required
+      />
+      <span class="form-alert">Password does not meet requirements</span>
+    </div>
+
+    <div class="input-group">
+      <label for="confirm-password"></label>
+      <input
+        type="password"
+        name="confirmPassword"
+        id="confirm-password"
+        autocomplete="password"
+        placeholder="Confirm Password"
+        required
+      />
+      <span class="form-alert">Passwords do not match</span>
+    </div>
+
+    <!-- <p>Where did you hear about us?</p>
     <div class="form__input">
       <input
         type="radio"
@@ -61,7 +77,7 @@
       <label for="the universe">The Universe</label>
       <input type="radio" name="liveWhere" id="other" value="other" />
       <label for="other">Other</label>
-    </div>
+    </div> -->
 
     <input class="form__btn" type="submit" value="Sign Up" />
   </form>
