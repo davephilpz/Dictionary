@@ -1229,6 +1229,12 @@ form p {
 .input-group input:focus {
   box-shadow: 0 0 0 0.5rem var(--color-grey-dark);
 }
+.input-group.success input:focus {
+  box-shadow: 0 0 0 0.5rem var(--form-success);
+}
+.input-group.error input:focus {
+  box-shadow: 0 0 0 0.5rem var(--form-error);
+}
 
 .input-group .form-alert {
   display: none;

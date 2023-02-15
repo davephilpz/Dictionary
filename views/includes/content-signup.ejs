@@ -14,6 +14,7 @@
         id="name"
         autocomplete="name"
         placeholder="Name"
+        title="Please enter your name"
         required
       />
       <span class="form-alert">Invalid name</span>
@@ -27,6 +28,7 @@
         id="email"
         autocomplete="email"
         placeholder="name@example.com"
+        title="Please enter your email"
         required
       />
       <span class="form-alert">Invalid email</span>
@@ -41,6 +43,7 @@
         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,}"
         autocomplete="password"
         placeholder="Password"
+        title="Password must be at least 10 digits and contain a capital and lowercase letter, a number and a symbol (!@#$%^&*()_+)"
         required
       />
       <span class="form-alert">Password does not meet requirements</span>
@@ -54,6 +57,7 @@
         id="confirm-password"
         autocomplete="password"
         placeholder="Confirm Password"
+        title="Please retype password"
         required
       />
       <span class="form-alert">Passwords do not match</span>
@@ -79,6 +83,6 @@
       <label for="other">Other</label>
     </div> -->
 
-    <input class="form__btn" type="submit" value="Sign Up" />
+    <input class="form__btn" type="submit" value="Sign Up" id="signup-form" />
   </form>
 </section>
