@@ -3,6 +3,9 @@ const express = require("express");
 const path = require("path");
 const get404 = require("./controllers/get404.controller");
 
+//logging middleware declarations
+const winston = require("winston");
+
 //security middleware declarations
 //protect secrets in provess.env variables
 require("dotenv").config({ path: "./config.env" });
@@ -37,6 +40,16 @@ const authRouter = require("./routes/auth.router");
 
 //use express
 const app = express();
+
+//logging middleware for errors etc.
+const logger = winston.createLogger({
+  level: "info",
+  format: winston.format.json(),
+  defaultMeta: { service: "your-service-name" },
+  transports: [
+    new winston.transports.File({ filename: "error.log", level: "error" }),
+  ],
+});
 
 //compress i/o to lighten data usage
 app.use(compression());

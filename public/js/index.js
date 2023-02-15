@@ -1,4 +1,5 @@
 //DOM elements
+// const Error404Btn = document.querySelector("#redirect-404");
 const searchForm = document.querySelector("#search-form");
 const adminSearch = document.querySelector("#admin-search");
 const getUpdateForm = document.querySelector("#get-update-form");
@@ -16,6 +17,16 @@ const tooltip = document.querySelector(".tooltip");
 const closeButton = document.querySelector(".tooltip__close-button");
 
 // //delegation
+document.addEventListener("DOMContentLoaded", function () {
+  const Error404Btn = document.querySelector("#redirect-404");
+  if (Error404Btn) {
+    Error404Btn.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      window.history.back();
+    });
+  }
+});
 if (searchForm) {
   searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -70,7 +81,7 @@ if (submitUpdateForm) {
     event.preventDefault();
     console.log("submit update form ran");
 
-    const input = submitUpdateWord;
+    const input = submitUpdateForm;
     console.log("submit update input value:", input);
 
     if (input === "") {
