@@ -19,3 +19,14 @@ mongoose
 const server = app.listen(port, () => {
   console.log(`Server now running on ${port}`);
 });
+
+//catch all error safety net
+process.on("unhandledRejection", (err) => {
+  console.log(err.name, err.message);
+  console.log("Unhandled error. Shutting down server...");
+
+  //call server.close() to allow server to finish current executions before shutting down.
+  server.close(() => {
+    process.exit(1); //0 = success, 1=exception
+  });
+});

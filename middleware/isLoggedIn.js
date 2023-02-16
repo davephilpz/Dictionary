@@ -1,4 +1,3 @@
-const { generateToken } = require("../util/generateToken");
 const { getTokenFromHeader } = require("../util/getTokenFromHeader");
 const { verifyToken } = require("../util/verifyToken");
 

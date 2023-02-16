@@ -1,7 +1,6 @@
 //base router functionality declaractions
 const express = require("express");
 const path = require("path");
-const get404 = require("./controllers/get404.controller");
 
 //security middleware declarations
 //protect secrets in provess.env variables
@@ -14,6 +13,11 @@ const helmet = require("helmet"); //better html headers
 // TODO add CSRF handling
 // TODO enable https
 // TODO enable SSL/TSL encryption
+// TODO add global error handler
+
+//error handling declarations
+const get404 = require("./controllers/get404.controller");
+const globalErrorHandler = require("./controllers/errorController");
 
 //compression middleware declarations
 const compression = require("compression"); //compressor of text to lower i/o file size.
@@ -135,5 +139,10 @@ app.use(authRouter);
 
 //return 404 page when content not found.
 app.use(get404.get404);
+
+//global error handler
+//express automatically knows it is an error hanlder by specifying 4 arguments.
+//express will assume any argument passed into next() to be an error and will skip all other middleware.
+app.use(globalErrorHandler);
 
 module.exports = app;

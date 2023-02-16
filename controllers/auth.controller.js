@@ -1,19 +1,19 @@
 const User = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 const { generateToken } = require("../util/generateToken");
-const { getTokenFromHeader } = require("../util/getTokenFromHeader");
-const { verifyToken } = require("../util/verifyToken");
+const catchAsyncErrorHandler = require("../util/catchAsyncErrorHandler");
+const AppError = require("../util/AppError");
 
-exports.getRegisterUser = async (req, res) => {
+exports.getRegisterUser = catchAsyncErrorHandler(async (req, res, next) => {
   res.render("signup", {
     pageTitle: "User Sign Up",
     contentTitle: "User Sign Up",
     session: req.session,
   });
-};
+});
 
-exports.postRegisterUser = async (req, res) => {
-  const { name, email, role, password, confirmPassword } = req.body;
+exports.postRegisterUser = catchAsyncErrorHandler(async (req, res, next) => {
+  const { name, email, password, confirmPassword } = req.body;
 
   console.log("user reg req.body:", req.body);
 
@@ -21,9 +21,10 @@ exports.postRegisterUser = async (req, res) => {
 
   //check to see if user already exists or not
   if (userExists) {
-    res.json({
-      message: "User already exists",
-    });
+    // res.json({
+    //   message: "User already exists",
+    // });
+    return next(new AppError("User already exists", 400));
   }
 
   //double check password for strength requirements
@@ -63,17 +64,17 @@ exports.postRegisterUser = async (req, res) => {
       })
     );
   }
-};
+});
 
-exports.getLogin = async (req, res, next) => {
+exports.getLogin = catchAsyncErrorHandler(async (req, res, next) => {
   res.render("signin", {
     pageTitle: "User Sign In",
     contentTitle: "User Sign In",
     session: req.session,
   });
-};
+});
 
-exports.postLogin = async (req, res, next) => {
+exports.postLogin = catchAsyncErrorHandler(async (req, res, next) => {
   const { email, password } = req.body;
 
   const userFound = await User.findOne({ email: email }).exec();
@@ -98,21 +99,19 @@ exports.postLogin = async (req, res, next) => {
 
     console.log("login req.session:", req.session);
   } else {
-    res.json({
-      message: "Invalid login credentials",
-    });
+    return next(new AppError("Invalid login credentials", 401));
   }
-};
+});
 
-exports.getUserProfile = async (req, res) => {
+exports.getUserProfile = catchAsyncErrorHandler(async (req, res, next) => {
   res.render("user-profile", {
     pageTitle: "User Profile",
     contentTitle: "User Profile",
     session: req.session,
   });
-};
+});
 
-exports.getUserSignout = (req, res) => {
+exports.getUserSignout = catchAsyncErrorHandler(async (req, res, next) => {
   req.session.destroy((err) => {
     if (err) {
       console.error(err);
@@ -121,4 +120,4 @@ exports.getUserSignout = (req, res) => {
       res.redirect("/");
     }
   });
-};
+});

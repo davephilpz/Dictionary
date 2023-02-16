@@ -1,4 +1,5 @@
 const winston = require("winston");
+const AppError = require("../util/AppError");
 
 // Create a new logger instance for 404 errors
 const logger = winston.createLogger({
@@ -22,12 +23,13 @@ exports.get404 = (req, res, next) => {
 
   const originalURL = req.originalUrl.replace("/", "");
 
-  res.status(404).render("404", {
-    pageTitle: "Page Not Found",
-    contentTitle: "",
-    session: req.session,
-    originalURL: originalURL,
-  });
+  next(new AppError(`Oops! (${originalURL}) route does not exist`, 404));
+  // res.status(404).render("404", {
+  //   pageTitle: "Page Not Found",
+  //   contentTitle: "",
+  //   session: req.session,
+  //   originalURL: originalURL,
+  // });
 };
 
 //app.use handles all http requests and not specifying a route means that anything that is not matched to above routes (ran in order) will be caught in this middleware.
