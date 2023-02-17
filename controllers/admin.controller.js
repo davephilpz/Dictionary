@@ -33,7 +33,6 @@ exports.getEditWord = catchAsyncErrorHandler(async (req, res, next) => {
 
   console.log("query:", searchString);
 
-  // try {
   // Find words matching query exactly. Admin can find word in normal search with wildcards if they need to. This is to simplify CRUD operations.
   let searchResults = await Word.find({
     "日本語.日本語単語": searchString,
@@ -48,13 +47,6 @@ exports.getEditWord = catchAsyncErrorHandler(async (req, res, next) => {
     contentTitle: "Add New Word or Search to Update or Delete",
     session: req.session,
   });
-  // } catch (err) {
-  //   (err) => {
-  //     res.status(400).json({ message: err.message });
-  //     //400 means user error
-  //     console.log(err);
-  //   };
-  // }
 });
 
 exports.getCreateWord = catchAsyncErrorHandler(async (req, res, next) => {
@@ -86,7 +78,6 @@ exports.postCreateWord = catchAsyncErrorHandler(async (req, res, next) => {
     英語例文,
   } = req.body;
 
-  // try {
   const katakana = wanakana.toKatakana(平仮名);
   const romaji = wanakana.toRomaji(平仮名);
   const nihongoReibun = 日本語例文.split(";").join(",");
@@ -141,12 +132,6 @@ exports.postCreateWord = catchAsyncErrorHandler(async (req, res, next) => {
       // console.log(`error: ${err.code}`);
     }
   });
-  // } catch (err) {
-  //   (err) => {
-  //     res.status(400).json({ message: err.message });
-  //     console.log(err);
-  //   };
-  // }
 });
 
 exports.getUpdateWord = catchAsyncErrorHandler(async (req, res, next) => {
@@ -244,19 +229,9 @@ exports.postUpdateWord = catchAsyncErrorHandler(async (req, res, next) => {
 
     res.status(200).redirect("/admin");
   });
-  // .catch((err) => {
-  //   console.log(err);
-  //   res.status(400).json({ message: err.message });
-  // });
 });
 
 exports.getDeleteWord = catchAsyncErrorHandler(async (req, res, next) => {
-  // res.render("admin/admin-delete-word", {
-  //   pageTitle: "Delete Word",
-  //   contentTitle: "Admin Controls: Delete Word",
-  //   isAuthenticated: req.isLoggedIn,
-  // });
-
   //flash message for success or fail
   const flashMessage = req.flash("message");
 
@@ -280,10 +255,6 @@ exports.getDeleteWord = catchAsyncErrorHandler(async (req, res, next) => {
     searchResults,
     session: req.session,
   });
-
-  // res.status(400).json({ message: err.message });
-  //400 means user error
-  // console.log(err);
 });
 
 exports.postDeleteWord = catchAsyncErrorHandler(async (req, res, next) => {
@@ -298,8 +269,4 @@ exports.postDeleteWord = catchAsyncErrorHandler(async (req, res, next) => {
     req.flash("message", `Successfully added: (${searchString})`);
     res.status(200).redirect("/admin");
   });
-  // .catch((err) => {
-  //   console.log(err);
-  //   res.status(400).json({ message: err.message });
-  // });
 });

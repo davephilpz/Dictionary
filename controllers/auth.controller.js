@@ -21,9 +21,6 @@ exports.postRegisterUser = catchAsyncErrorHandler(async (req, res, next) => {
 
   //check to see if user already exists or not
   if (userExists) {
-    // res.json({
-    //   message: "User already exists",
-    // });
     return next(new AppError("User already exists", 400));
   }
 
