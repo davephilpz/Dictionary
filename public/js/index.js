@@ -83,12 +83,15 @@ if (submitUpdateForm) {
     event.preventDefault();
     console.log("submit update form ran");
 
-    const input = submitUpdateForm;
+    //get query from url
+    const urlParams = new URLSearchParams(window.location.search);
+    const input = urlParams.get("word");
     console.log("submit update input value:", input);
 
     if (input === "") {
       return;
     } else {
+      //set url the same as the original word to find before patching
       submitUpdateForm.action = `/admin/update-word?word=${input}`;
       submitUpdateForm.submit();
       console.log(submitUpdateForm.action);
@@ -119,12 +122,15 @@ if (submitDeleteConfirmation) {
     event.preventDefault();
     console.log("submit update form ran");
 
-    const input = submitDeleteWord;
-    console.log("submit update input value:", input);
+    //get query from url
+    const urlParams = new URLSearchParams(window.location.search);
+    const input = urlParams.get("word");
+    console.log("submit delete input value:", input);
 
     if (input === "") {
       return;
     } else {
+      //set url the same as the original word to find before deleting
       submitDeleteConfirmation.action = `/admin/delete-word?word=${input}`;
       submitDeleteConfirmation.submit();
       console.log(submitDeleteConfirmation.action);
