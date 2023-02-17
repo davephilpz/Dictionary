@@ -26,8 +26,9 @@ exports.getAdminControls = catchAsyncErrorHandler(async (req, res, next) => {
 });
 
 //Called by getAdminControls by taking in query from URL. Returns query string in GET request and word. User can then click update/delete to perform CRUD or add to add new word.
-exports.getEditWord = catchAsyncErrorHandler(async (req, res, next) => {
+exports.getEditWord = async (req, res, next) => {
   //get query from url
+  console.log("query string:", req.query.word);
   const searchString = req.query.word.toString();
 
   console.log("query:", searchString);
@@ -46,7 +47,7 @@ exports.getEditWord = catchAsyncErrorHandler(async (req, res, next) => {
     contentTitle: "Add New Word or Search to Update or Delete",
     session: req.session,
   });
-});
+};
 
 exports.getCreateWord = catchAsyncErrorHandler(async (req, res, next) => {
   //flash message for success or fail

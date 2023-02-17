@@ -783,6 +783,9 @@ button {
 } */
 
 .search__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-decoration: none;
   line-height: 1;
   cursor: pointer;
@@ -823,7 +826,7 @@ button {
   align-items: center;
 }
 
-#search-input {
+.search-input {
   width: 100%;
   padding: 10px;
   font-size: 16px;

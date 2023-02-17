@@ -1,7 +1,7 @@
 //DOM elements
 // const Error404Btn = document.querySelector("#redirect-404");
 const searchForm = document.querySelector("#search-form");
-const adminSearch = document.querySelector("#admin-search");
+const adminSearch = document.querySelector("#admin-search-form");
 const getUpdateForm = document.querySelector("#get-update-form");
 const submitUpdateForm = document.querySelector("#submit-update-form");
 const getDeleteConfirmation = document.querySelector(
@@ -49,6 +49,7 @@ if (adminSearch) {
     event.preventDefault();
 
     const searchInput = document.querySelector("#admin-search-input").value;
+    console.log("admin search input", searchInput);
 
     if (searchInput === "") {
       return;
