@@ -13,7 +13,7 @@ const helmet = require("helmet"); //better html headers
 // TODO add CSRF handling
 // TODO enable https
 // TODO enable SSL/TSL encryption
-// TODO add global error handler
+// TODO consider pm2 or systemd if hosting on server that does not have auto restart in prod
 
 //error handling declarations
 const get404 = require("./controllers/get404.controller");

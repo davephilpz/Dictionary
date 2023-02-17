@@ -2,6 +2,9 @@ const wanakana = require("wanakana");
 const catchAsyncErrorHandler = require("../util/catchAsyncErrorHandler");
 const AppError = require("../util/AppError");
 
+//to push EJS scripts into templates while adhering to CSP
+const crypto = require("crypto");
+
 const Word = require("../models/word.model");
 
 // TODO fix admin handlers to work with security policy
@@ -150,6 +153,11 @@ exports.getUpdateWord = catchAsyncErrorHandler(async (req, res, next) => {
 
   console.log("getUpdateWord Search Results:", searchResults);
 
+  // Generate nonce value for CSP header
+  const nonce = crypto.randomBytes(16).toString("base64");
+  const cspHeader = `script-src 'self' 'nonce-${nonce}'`;
+  res.set("Content-Security-Policy", cspHeader);
+
   res.render("admin/admin-update-word", {
     pageTitle: "Update Word",
     contentTitle: "",
@@ -157,6 +165,7 @@ exports.getUpdateWord = catchAsyncErrorHandler(async (req, res, next) => {
     searchString,
     searchResults,
     session: req.session,
+    nonce: nonce, // pass nonce to the template
   });
   console.log("final search string", searchString);
 });
