@@ -342,10 +342,17 @@ button {
   color: var(--color-dark) !important;
 }
 
-.errorMessage {
+.error-message__title {
   text-align: center;
   font-weight: 700;
   font-size: 3rem;
+  margin-bottom: 5rem;
+}
+
+.error-message__subtitle {
+  text-align: center;
+  font-weight: 700;
+  font-size: 2rem;
   margin-bottom: 5rem;
 }
 

@@ -59,7 +59,18 @@ module.exports = (err, req, res, next) => {
   err.status = err.status || "error";
 
   if (process.env.NODE_ENV === "development") {
-    sendDevError(err, res);
+    if (err.statusCode === 500) {
+      res.status(err.statusCode).render("500", {
+        error: err,
+        message:
+          "Failed to load page. Please try refreshing the page and report if problem persists. ",
+        pageTitle: "Dictionary",
+        contentTitle: "Word Search",
+        session: req.session,
+      });
+    } else {
+      sendDevError(err, res);
+    }
   } else if (process.env.NODE_ENV === "production") {
     let error = { ...err };
     if (error.code === 11000) {
@@ -69,6 +80,17 @@ module.exports = (err, req, res, next) => {
       });
     }
 
-    sendProdError(err, res);
+    if (err.statusCode === 500) {
+      res.status(err.statusCode).render("500", {
+        error: err,
+        message:
+          "Failed to load page. Please try refreshing the page and report if problem persists. ",
+        pageTitle: "Dictionary",
+        contentTitle: "Word Search",
+        session: req.session,
+      });
+    } else {
+      sendProdError(err, res);
+    }
   }
 };

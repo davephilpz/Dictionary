@@ -1,0 +1,16 @@
+<h1 class="error-message__title">
+  Oops! <%= message %>
+  <h2 class="error-message__subtitle">
+    Or, click below to return to previous page
+  </h2>
+
+  <form
+    action="/"
+    method="GET"
+    class="login"
+    role="form"
+    aria-label="500 internal server error return to previous page"
+  >
+    <input class="redirect__btn" id="redirect-404" value="Return" />
+  </form>
+</h1>
