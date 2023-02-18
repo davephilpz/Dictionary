@@ -14,7 +14,7 @@
       value="newWords"
       class="review__card--button-new"
     >
-      New Words
+      New Word
     </button>
     <button
       id="current-review-words"
@@ -23,17 +23,19 @@
       value="reviewWords"
       class="review__card--button-review"
     >
-      Review Words
+      Review Word
     </button>
   </form>
   <div class="review__card">
     <% searchResult.forEach(function(result) { %>
     <div class="review__card--review-type"><%= reviewType %></div>
     <h2 class="review__card--word"><%= result.日本語.日本語単語 %></h2>
+
     <div class="review__card--answer">
       <h3 class="review__card--yomikata"><%= result.日本語.平仮名 %></h3>
       <h3 class="review__card--english"><%= result.英語.英単語 %></h3>
     </div>
+
     <% }); %>
 
     <div class="review__card--submit">

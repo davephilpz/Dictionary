@@ -1,4 +1,8 @@
 <section class="section-review">
+  <h2>
+    Select new words to get flash cards for words not in your collection. Select
+    review words to random get words from your red/orange/yellow collections.
+  </h2>
   <form
     class="review__card--form"
     action="/review"
@@ -14,7 +18,7 @@
       value="newWords"
       class="review__card--button-new"
     >
-      New Words
+      New Word
     </button>
     <button
       id="current-review-words"
@@ -23,27 +27,7 @@
       value="reviewWords"
       class="review__card--button-review"
     >
-      Review Words
+      Review Word
     </button>
   </form>
-  <div class="review__card">
-    <div class="review__card--review-type"></div>
-    <h2 class="review__card--word"></h2>
-    <div class="review__card--answer">
-      <h3 class="review__card--yomikata"></h3>
-      <h3 class="review__card--english"></h3>
-    </div>
-    <form
-      class="review__card--form"
-      action="/review"
-      method="GET"
-      role="word review card"
-      aria-label="Word review card with Japanese and English"
-    >
-      <button class="review__card--button-red"></button>
-      <button class="review__card--button-orange"></button>
-      <button class="review__card--button-yellow"></button>
-      <button class="review__card--button-green"></button>
-    </form>
-  </div>
 </section>
