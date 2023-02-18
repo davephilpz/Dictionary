@@ -31,9 +31,16 @@
   <div class="review__card">
     <h2 class="review__card--word"><%= result.日本語.日本語単語 %></h2>
 
-    <div class="review__card--answer">
-      <h3 class="review__card--yomikata"><%= result.日本語.平仮名 %></h3>
-      <h3 class="review__card--english"><%= result.英語.英単語 %></h3>
+    <div class="review__card--answer-container">
+      <div class="div front face">
+        <h3 class="review__card--subtitle">Hover to see answer</h3>
+      </div>
+      <div class="back face">
+        <div class="review__card--answer">
+          <h3 class="review__card--yomikata"><%= result.日本語.平仮名 %></h3>
+          <h3 class="review__card--english"><%= result.英語.英単語 %></h3>
+        </div>
+      </div>
     </div>
 
     <div class="review__card--submit">
@@ -72,12 +79,9 @@
   <div class="review__card">
     <h2 class="review__card--word">No words in collection</h2>
 
-    <div class="review__card--answer">
-      <h3 class="review__card--yomikata">
-        Click new word and save to collection first.
-      </h3>
-    </div>
-    </div>
+    <h3 class="review__card--subtitle">
+      Click new word and save to collection first.
+    </h3>
   </div>
   <% } %>
 </section>

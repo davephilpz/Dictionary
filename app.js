@@ -11,6 +11,7 @@ const httpParamPollDef = require("hpp"); //http parameter pollution prevention
 const mongoSanitize = require("express-mongo-sanitize"); //mongo query injection defense
 const helmet = require("helmet"); //better html headers
 // TODO add CSRF handling
+// TODO decide on expiration timers for jwt, user session and CSRF session id
 // TODO enable https
 // TODO enable SSL/TSL encryption
 // TODO consider pm2 or systemd if hosting on server that does not have auto restart in prod
