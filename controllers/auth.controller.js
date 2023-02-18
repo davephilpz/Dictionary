@@ -75,7 +75,7 @@ exports.postLogin = catchAsyncErrorHandler(async (req, res, next) => {
   const { email, password } = req.body;
 
   const userFound = await User.findOne({ email: email }).exec();
-  console.log(userFound);
+  // console.log(userFound);
   if (userFound && (await bcrypt.compare(password, userFound?.password))) {
     res.cookie("jwt", generateToken(userFound?._id));
 
@@ -85,7 +85,7 @@ exports.postLogin = catchAsyncErrorHandler(async (req, res, next) => {
     req.session.userAuthId = userAuthId;
     req.session.isAdmin = userType;
 
-    console.log("login isadmin:", req.session.isAdmin);
+    // console.log("login isadmin:", req.session.isAdmin);
 
     res.render("index", {
       pageTitle: "Dictionary",
@@ -94,7 +94,7 @@ exports.postLogin = catchAsyncErrorHandler(async (req, res, next) => {
       session: req.session,
     });
 
-    console.log("login req.session:", req.session);
+    // console.log("login req.session:", req.session);
   } else {
     return next(new AppError("Invalid login credentials", 401));
   }
@@ -111,7 +111,11 @@ exports.getUserProfile = catchAsyncErrorHandler(async (req, res, next) => {
 exports.getUserSignout = catchAsyncErrorHandler(async (req, res, next) => {
   req.session.destroy((err) => {
     if (err) {
-      console.error(err);
+      return next(
+        new AppError(
+          "Error has occurred during logout. Please refresh browser and confirm that logout was sucvcessful."
+        )
+      );
     } else {
       res.clearCookie("jwt");
       res.redirect("/");

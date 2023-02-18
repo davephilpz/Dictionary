@@ -3,33 +3,29 @@ const catchAsyncErrorHandler = require("../util/catchAsyncErrorHandler");
 const AppError = require("../util/AppError");
 
 exports.getReviewWords = catchAsyncErrorHandler(async (req, res, next) => {
-  // const { message } = req.body;
-  // const page = req.query.page || 1;
-  // const pages = 10;
-  // const wordsPerPage = 1;
-  // let searchResults = [];
-  // searchResults = await Word.aggregate([{ $sample: { size: 10 } }])
-  //   .skip(page * (wordsPerPage - 1))
-  //   .limit(wordsPerPage)
-  //   .then((searchResults) => {
-  //     // console.log(searchResults);
-  //     // console.log(searchResults[0].日本語.日本語単語);
-  //     // console.log("Search Results:", searchResults);
-  //     res.render("review-results", {
-  //       pageTitle: "Review",
-  //       contentTitle: "Word Review",
-  //       searchResults,
-  //       pages,
-  //       session: req.session,
-  //     });
-  //   });
-  res.render("review", {
-    pageTitle: "Review",
-    contentTitle: "Word Review",
-    path: "/",
-    // searchResults,
-    session: req.session,
-  });
+  // const { newWords, reviewWords } = req.query.type || {};
+
+  console.log("get new word query:", req.query.type);
+
+  if (req.query.type === "newWords") {
+    searchResult = await Word.aggregate([{ $sample: { size: 1 } }]);
+
+    console.log("search results:", searchResult);
+
+    res.render("review-results", {
+      pageTitle: "New Review Words",
+      contentTitle: "New Word Review",
+      searchResult,
+      reviewType: req.query.type,
+      session: req.session,
+    });
+  } else {
+    res.render("review", {
+      pageTitle: "Review",
+      contentTitle: "Word Review",
+      session: req.session,
+    });
+  }
 });
 
 exports.postReviewWords = catchAsyncErrorHandler(async (req, res, next) => {

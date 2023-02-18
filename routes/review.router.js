@@ -1,6 +1,7 @@
 const express = require("express");
 const reviewController = require("../controllers/review.controller");
 
+//authorization middleware
 const { isLoggedIn } = require("../middleware/isLoggedIn");
 
 const router = express.Router();

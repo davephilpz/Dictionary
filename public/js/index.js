@@ -1,6 +1,10 @@
 //DOM elements
-// const Error404Btn = document.querySelector("#redirect-404");
+//public
 const searchForm = document.querySelector("#search-form");
+//private
+// const getNewReviewWords = document.querySelector("#new-review-words");
+const getReviewForm = document.querySelector("#get-review-words");
+//admin
 const adminSearch = document.querySelector("#admin-search-form");
 const getUpdateForm = document.querySelector("#get-update-form");
 const submitUpdateForm = document.querySelector("#submit-update-form");
@@ -29,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+//public handlers
 if (searchForm) {
   searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -44,6 +49,28 @@ if (searchForm) {
   });
 }
 
+//private handlers
+if (getReviewForm) {
+  getReviewForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const buttonClicked = event.target.activeElement;
+    const selectionInput = document.querySelector("#search-input").value;
+
+    if (selectionInput === "") {
+      return;
+    } else {
+      if (buttonClicked.id === "new-review-words") {
+        getReviewForm.action = "/review";
+      } else if (buttonClicked.id === "current-review-words") {
+        getReviewForm.action = "/review";
+      }
+      getReviewForm.submit();
+    }
+  });
+}
+
+//admin handlers
 if (adminSearch) {
   adminSearch.addEventListener("submit", function (event) {
     event.preventDefault();

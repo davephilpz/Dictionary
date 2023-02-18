@@ -907,9 +907,9 @@ button {
   background-color: var(--color-accent-primary);
   font-weight: 700;
   font-size: 2rem;
-  height: 6rem;
+  height: 4rem;
   border-radius: 1rem;
-  padding: 1rem 3rem;
+  padding: 1rem 2rem;
   transition: transform 300ms ease-in-out;
 }
 
@@ -1333,6 +1333,10 @@ form p {
 .review__card {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 45rem;
+  width: 30rem;
   background-color: var(--color-grey-light);
   padding: 4rem 3rem;
   border-radius: 1rem;
@@ -1374,11 +1378,16 @@ form p {
   font-size: 2rem;
 }
 
-.review__card--submit {
+.review__card--form {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  /* gap: 4rem; */
+  gap: 4rem;
+}
+
+.review__card--submit {
+  display: flex;
+  gap: 2rem;
 }
 
 .review__card--button-red {
@@ -1388,8 +1397,8 @@ form p {
   background-color: hsla(0, 100%, 50%, 0.8);
   font-weight: 700;
   font-size: 2rem;
-  height: 3rem;
-  width: 3rem;
+  height: 5rem;
+  width: 5rem;
   border-radius: 1rem;
   border: 0.2rem solid transparent;
   transition: transform 300ms ease-in-out;
@@ -1399,6 +1408,7 @@ form p {
   background-color: hsla(0, 100%, 50%, 0.5);
   border: 0.2rem solid var(--color-dark);
 }
+
 .review__card--button-orange {
   cursor: pointer;
   content: "";
@@ -1406,15 +1416,17 @@ form p {
   background-color: hsla(38, 84%, 49%, 0.8);
   font-weight: 700;
   font-size: 2rem;
-  height: 3rem;
-  width: 3rem;
+  height: 5rem;
+  width: 5rem;
   border-radius: 1rem;
   transition: transform 300ms ease-in-out;
 }
 
 .review__card--button-orange:hover {
   background-color: hsla(38, 84%, 49%, 0.5);
+  border: 0.2rem solid var(--color-dark);
 }
+
 .review__card--button-yellow {
   cursor: pointer;
   content: "";
@@ -1422,15 +1434,17 @@ form p {
   background-color: hsla(58, 86%, 58%, 0.8);
   font-weight: 700;
   font-size: 2rem;
-  height: 3rem;
-  width: 3rem;
+  height: 5rem;
+  width: 5rem;
   border-radius: 1rem;
   transition: transform 300ms ease-in-out;
 }
 
 .review__card--button-yellow:hover {
   background-color: hsla(58, 86%, 58%, 0.5);
+  border: 0.2rem solid var(--color-dark);
 }
+
 .review__card--button-green {
   cursor: pointer;
   content: "";
@@ -1438,14 +1452,15 @@ form p {
   background-color: hsla(105, 77%, 46%, 0.8);
   font-weight: 700;
   font-size: 2rem;
-  height: 3rem;
-  width: 3rem;
+  height: 5rem;
+  width: 5rem;
   border-radius: 1rem;
   transition: transform 300ms ease-in-out;
 }
 
 .review__card--button-green:hover {
   background-color: hsla(105, 77%, 46%, 0.5);
+  border: 0.2rem solid var(--color-dark);
 }
 
 .review__pagination {
@@ -1480,8 +1495,8 @@ form p {
 .pag-link:link,
 .pag-link:visited {
   font-size: 2rem;
-  height: 3rem;
-  width: 3rem;
+  height: 5rem;
+  width: 5rem;
   color: #343a40;
   text-decoration: none;
   border-radius: 50%;

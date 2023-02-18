@@ -1,14 +1,15 @@
 <section class="section-review">
   <form
-    class="form-word-search"
+    class="review__card--form"
     action="/review"
-    method="POST"
-    role="search window"
-    aria-label="word search window"
+    method="GET"
+    id="get-review-form"
+    role="word review card"
+    aria-label="Word review card with Japanese and English"
   >
     <button
-      id="new-words"
-      name="newWords"
+      id="new-review-words"
+      name="type"
       type="submit"
       value="newWords"
       class="review__card--button-new"
@@ -16,8 +17,8 @@
       New Words
     </button>
     <button
-      id="review-words"
-      name="reviewWords"
+      id="current-review-words"
+      name="type"
       type="submit"
       value="reviewWords"
       class="review__card--button-review"
@@ -32,62 +33,17 @@
       <h3 class="review__card--yomikata"></h3>
       <h3 class="review__card--english"></h3>
     </div>
-    <div class="review__card--submit">
+    <form
+      class="review__card--form"
+      action="/review"
+      method="GET"
+      role="word review card"
+      aria-label="Word review card with Japanese and English"
+    >
       <button class="review__card--button-red"></button>
       <button class="review__card--button-orange"></button>
       <button class="review__card--button-yellow"></button>
       <button class="review__card--button-green"></button>
-    </div>
-  </div>
-  <div class="review__pagination">
-    <button class="pag-btn">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        stroke="currentColor"
-        class="pag-icon l1"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M15.75 19.5L8.25 12l7.5-7.5"
-        />
-      </svg>
-    </button>
-    <a href="#" class="pag-link pag-link--current">1</a>
-    <a href="#" class="pag-link">2</a>
-    <a href="#" class="pag-link">3</a>
-    <button class="pag-btn">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        stroke="currentColor"
-        class="pag-icon r2"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M8.25 4.5l7.5 7.5-7.5 7.5"
-        />
-      </svg>
-    </button>
+    </form>
   </div>
 </section>
-
-<script defer>
-  const button = document.querySelector("#new-words");
-  button.addEventListener("click", () => {
-    fetch("/review", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: "newWords" }),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.error(error));
-  });
-</script>

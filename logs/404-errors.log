@@ -5,3 +5,6 @@
 {"level":"info","message":"404 error: /admin/edit-word?word=sdf","service":"my-app","timestamp":"2023-02-17T04:25:18.969Z"}
 {"level":"info","message":"404 error: /admin/edit-word?word=updatetest","service":"my-app","timestamp":"2023-02-17T04:25:32.867Z"}
 {"level":"info","message":"404 error: /admin/edit-word?word=updatetest","service":"my-app","timestamp":"2023-02-17T04:25:58.229Z"}
+{"level":"info","message":"404 error: /reviewsdf","service":"my-app","timestamp":"2023-02-18T02:09:34.911Z"}
+{"level":"info","message":"404 error: /reviewsdf","service":"my-app","timestamp":"2023-02-18T02:10:15.924Z"}
+{"level":"info","message":"404 error: /reviewsdf","service":"my-app","timestamp":"2023-02-18T02:10:24.449Z"}

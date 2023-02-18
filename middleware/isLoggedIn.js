@@ -4,11 +4,11 @@ const { verifyToken } = require("../util/verifyToken");
 exports.isLoggedIn = (req, res, next) => {
   //retrieve token
   const token = getTokenFromHeader(req);
-  console.log("token from header in logged in middleware:", token);
+  // console.log("token from header in logged in middleware:", token);
 
   //verify token
   const verifiedUserToken = verifyToken(token);
-  console.log("verified token in logged in middleware:", verifiedUserToken);
+  // console.log("verified token in logged in middleware:", verifiedUserToken);
 
   //check to see if token was returned from verification
   if (!verifiedUserToken) {
@@ -21,7 +21,7 @@ exports.isLoggedIn = (req, res, next) => {
   } else {
     //save user into req object
     req.userAuthId = verifiedUserToken?.id;
-    console.log("req user auth id set::::::::", req.userAuthId);
+    // console.log("req user auth id set::::::::", req.userAuthId);
     next();
   }
 };
