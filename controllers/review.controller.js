@@ -3,6 +3,7 @@ const User = require("../models/user.model");
 const catchAsyncErrorHandler = require("../util/catchAsyncErrorHandler");
 const AppError = require("../util/AppError");
 
+// TODO user gets redirected to newWord query after sumitting a review word. Need to check variables being passed into EJS templates, routing and logic to fix.
 exports.getReviewWords = async (req, res, next) => {
   console.log("get new word query:", req.query.type);
 
@@ -54,7 +55,11 @@ exports.getReviewWords = async (req, res, next) => {
       }
     }
 
-    searchResult = [searchResult.toObject()];
+    if (searchResult) {
+      searchResult = [searchResult.toObject()];
+    } else {
+      searchResult = [];
+    }
 
     console.log("search result after random:", searchResult);
 

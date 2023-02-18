@@ -26,8 +26,9 @@
       Review Word
     </button>
   </form>
+  <% if (searchResult.length > 0) { %> <% searchResult.forEach(function(result)
+  { %>
   <div class="review__card">
-    <% searchResult.forEach(function(result) { %>
     <h2 class="review__card--word"><%= result.日本語.日本語単語 %></h2>
 
     <div class="review__card--answer">
@@ -65,7 +66,18 @@
           id="green"
         ></button>
       </form>
-      <% }); %>
     </div>
   </div>
+  <% }); %> <% } else { %>
+  <div class="review__card">
+    <h2 class="review__card--word">No words in collection</h2>
+
+    <div class="review__card--answer">
+      <h3 class="review__card--yomikata">
+        Click new word and save to collection first.
+      </h3>
+    </div>
+    </div>
+  </div>
+  <% } %>
 </section>
