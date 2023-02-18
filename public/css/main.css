@@ -753,6 +753,7 @@ button {
   text-align: center;
   align-items: center;
   gap: 2rem;
+  margin-bottom: 5rem;
 }
 
 .form-word-search {

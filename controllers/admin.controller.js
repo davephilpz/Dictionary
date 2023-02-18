@@ -29,6 +29,7 @@ exports.getAdminControls = catchAsyncErrorHandler(async (req, res, next) => {
 exports.getEditWord = async (req, res, next) => {
   //get query from url
   console.log("query string:", req.query.word);
+  console.log("query:", req.query);
   const searchString = req.query.word.toString();
 
   console.log("query:", searchString);

@@ -9,14 +9,6 @@
     autocomplete="off"
   >
     <div class="form__search">
-      <!-- <picture class="tooltip__icon">
-        <source srcset="../img/icons/tooltip.webp" type="image/webp" />
-        <source srcset="../img/icons/tooltip.png" type="image/png" />
-        <img
-          src="../img/icons/tooltip.png"
-          alt="Tooltip icon for more information on search criteria."
-        />
-      </picture> -->
       <div class="search-container">
         <label for="search-box"></label>
         <input
@@ -27,28 +19,14 @@
           title=" Search may be performed in English or any Japanese alphabet. You may
         include a (*＊) in front or behind letters to perform a wildcard search."
         />
-        <ul id="live-search" class="search-predictions"></ul>
+        <ul
+          id="live-search"
+          class="search-predictions"
+          role="search predictions"
+          aria-label="list of words in database matching input that user may be searching for"
+        ></ul>
       </div>
-      <button class="search__btn" type="submit" onClick="addParams()">
-        Search
-      </button>
+      <button class="search__btn" type="submit">Search</button>
     </div>
   </form>
-
-  <ul
-    class="search__predictions"
-    id="live-search"
-    role="search predictions"
-    aria-label="list of words in database matching input that user may be searching for"
-  ></ul>
-
-  <!-- <div class="tooltip-wrapper" id="tooltip" role="tooltip" aria-hidden="true">
-    <div class="tooltip">
-      <p class="tooltip__text">
-        Search may be performed in English or any Japanese alphabet. You may
-        include a (*＊) in front or behind letters to perform a wildcard search.
-      </p>
-      <button class="tooltip__close-button">X</button>
-    </div>
-  </div> -->
 </section>

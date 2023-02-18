@@ -49,14 +49,15 @@ if (adminSearch) {
     event.preventDefault();
 
     const searchInput = document.querySelector("#admin-search-input").value;
-    console.log("admin search input", searchInput);
+    console.log("admin search input:", searchInput);
 
     if (searchInput === "") {
       return;
     } else {
       adminSearch.action = `/admin/edit-word?word=${searchInput}`;
       adminSearch.submit();
-      console.log(searchInput);
+      console.log("admin search input final:", searchInput);
+      console.log("admin search action:", adminSearch.action);
     }
   });
 }

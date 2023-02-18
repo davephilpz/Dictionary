@@ -1,27 +1,28 @@
 <script>
   let wordId = `<%= searchString._id %>`;
 </script>
-<section class="section-search margin-bottom">
+<section class="section-search">
   <form
     class="form-word-search"
     action="/admin/edit-word"
     method="GET"
     role="search window"
     aria-label="word search window"
-    id="admin-search"
+    id="admin-search-form"
   >
     <div class="form__search">
-      <label for="admin-search-input"></label>
-      <input
-        class="form__search-input"
-        type="text"
-        name="word"
-        id="admin-search-input"
-        required
-        placeholder="Search word"
-        alt="Search word in kanji,
-      hiragana, katakana, romaji or English."
-      />
+      <div class="search-container">
+        <label for="admin-search-input"></label>
+        <input
+          class="search-input"
+          type="text"
+          name="word"
+          id="admin-search-input"
+          placeholder="Enter word here"
+          title=" Search may be performed in English or any Japanese alphabet. You may
+        include a (*＊) in front or behind letters to perform a wildcard search."
+        />
+      </div>
       <button class="search__btn" type="submit">Search</button>
       <a class="search__btn" href="/admin/add-word">Add</a>
     </div>
