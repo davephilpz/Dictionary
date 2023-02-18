@@ -143,6 +143,6 @@ app.use(get404.get404);
 //global error handler
 //express automatically knows it is an error hanlder by specifying 4 arguments.
 //express will assume any argument passed into next() to be an error and will skip all other middleware.
-app.use(globalErrorHandler);
+// app.use(globalErrorHandler);
 
 module.exports = app;

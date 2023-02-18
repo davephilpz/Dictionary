@@ -2,8 +2,8 @@
 //public
 const searchForm = document.querySelector("#search-form");
 //private
-// const getNewReviewWords = document.querySelector("#new-review-words");
-const getReviewForm = document.querySelector("#get-review-words");
+const getReviewWordForm = document.querySelector("#get-review-word");
+const postReviewWordForm = document.querySelector("#post-review-word");
 //admin
 const adminSearch = document.querySelector("#admin-search-form");
 const getUpdateForm = document.querySelector("#get-update-form");
@@ -50,23 +50,39 @@ if (searchForm) {
 }
 
 //private handlers
-if (getReviewForm) {
-  getReviewForm.addEventListener("submit", function (event) {
+if (getReviewWordForm) {
+  getReviewWordForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
     const buttonClicked = event.target.activeElement;
-    const selectionInput = document.querySelector("#search-input").value;
 
-    if (selectionInput === "") {
-      return;
-    } else {
-      if (buttonClicked.id === "new-review-words") {
-        getReviewForm.action = "/review";
-      } else if (buttonClicked.id === "current-review-words") {
-        getReviewForm.action = "/review";
-      }
-      getReviewForm.submit();
+    if (buttonClicked.id === "new-review-word") {
+      getReviewWordForm.action = "/review";
+    } else if (buttonClicked.id === "current-review-word") {
+      getReviewWordForm.action = "/review";
     }
+    getReviewWordForm.submit();
+  });
+}
+
+if (postReviewWordForm) {
+  postReviewWordForm.addEventListener("click", function (event) {
+    event.preventDefault();
+    const buttonClicked = event.target;
+    if (!buttonClicked.matches(".review__card--button")) {
+      return;
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const type = urlParams.get("type");
+
+    const level = buttonClicked.id;
+    console.log("level:", level);
+    const word = postReviewWordForm.dataset.word;
+
+    postReviewWordForm.action = `/review?type=${type}&level=${level}&word=${word}`;
+    postReviewWordForm.method = "POST"; // Add this line to set method to POST
+    postReviewWordForm.submit();
   });
 }
 

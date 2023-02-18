@@ -1334,9 +1334,9 @@ form p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   height: 45rem;
-  width: 30rem;
+  width: 35rem;
   background-color: var(--color-grey-light);
   padding: 4rem 3rem;
   border-radius: 1rem;
@@ -1371,6 +1371,8 @@ form p {
 
 .review__card--word {
   font-size: 4rem;
+  max-width: 100%;
+  word-wrap: break-word;
 }
 
 .review__card--yomikata,
@@ -1390,77 +1392,47 @@ form p {
   gap: 2rem;
 }
 
-.review__card--button-red {
+.review__card--button {
   cursor: pointer;
   content: "";
-  color: var(--color-dark);
-  background-color: hsla(0, 100%, 50%, 0.8);
   font-weight: 700;
   font-size: 2rem;
   height: 5rem;
   width: 5rem;
+  margin: 0.5rem;
   border-radius: 1rem;
   border: 0.2rem solid transparent;
-  transition: transform 300ms ease-in-out;
+  transition: all 200ms ease-in-out;
 }
 
-.review__card--button-red:hover {
+.review__card--button:hover {
+  border-radius: 5rem;
+  border: 0.2rem solid var(--color-dark);
+}
+
+.red {
+  background-color: hsla(0, 100%, 50%, 0.8);
+}
+.red:hover {
   background-color: hsla(0, 100%, 50%, 0.5);
-  border: 0.2rem solid var(--color-dark);
 }
-
-.review__card--button-orange {
-  cursor: pointer;
-  content: "";
-  color: var(--color-dark);
+.orange {
   background-color: hsla(38, 84%, 49%, 0.8);
-  font-weight: 700;
-  font-size: 2rem;
-  height: 5rem;
-  width: 5rem;
-  border-radius: 1rem;
-  transition: transform 300ms ease-in-out;
 }
-
-.review__card--button-orange:hover {
+.orange:hover {
   background-color: hsla(38, 84%, 49%, 0.5);
-  border: 0.2rem solid var(--color-dark);
 }
-
-.review__card--button-yellow {
-  cursor: pointer;
-  content: "";
-  color: var(--color-dark);
+.yellow {
   background-color: hsla(58, 86%, 58%, 0.8);
-  font-weight: 700;
-  font-size: 2rem;
-  height: 5rem;
-  width: 5rem;
-  border-radius: 1rem;
-  transition: transform 300ms ease-in-out;
 }
-
-.review__card--button-yellow:hover {
+.yellow:hover {
   background-color: hsla(58, 86%, 58%, 0.5);
-  border: 0.2rem solid var(--color-dark);
 }
-
-.review__card--button-green {
-  cursor: pointer;
-  content: "";
-  color: var(--color-dark);
+.green {
   background-color: hsla(105, 77%, 46%, 0.8);
-  font-weight: 700;
-  font-size: 2rem;
-  height: 5rem;
-  width: 5rem;
-  border-radius: 1rem;
-  transition: transform 300ms ease-in-out;
 }
-
-.review__card--button-green:hover {
+.green:hover {
   background-color: hsla(105, 77%, 46%, 0.5);
-  border: 0.2rem solid var(--color-dark);
 }
 
 .review__pagination {

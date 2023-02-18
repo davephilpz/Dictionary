@@ -8,7 +8,7 @@
     aria-label="Word review card with Japanese and English"
   >
     <button
-      id="new-review-words"
+      id="new-review-word"
       name="type"
       type="submit"
       value="newWords"
@@ -17,7 +17,7 @@
       New Word
     </button>
     <button
-      id="current-review-words"
+      id="current-review-word"
       name="type"
       type="submit"
       value="reviewWords"
@@ -28,7 +28,6 @@
   </form>
   <div class="review__card">
     <% searchResult.forEach(function(result) { %>
-    <div class="review__card--review-type"><%= reviewType %></div>
     <h2 class="review__card--word"><%= result.日本語.日本語単語 %></h2>
 
     <div class="review__card--answer">
@@ -36,13 +35,37 @@
       <h3 class="review__card--english"><%= result.英語.英単語 %></h3>
     </div>
 
-    <% }); %>
-
     <div class="review__card--submit">
-      <button class="review__card--button-red"></button>
-      <button class="review__card--button-orange"></button>
-      <button class="review__card--button-yellow"></button>
-      <button class="review__card--button-green"></button>
+      <form
+        action="/review"
+        method="POST"
+        role="submit data form"
+        aria-label="Choose level of memorization for each word."
+        id="post-review-word"
+        data-word="<%= result.日本語.日本語単語 %>"
+      >
+        <button
+          class="review__card--button red"
+          type="button"
+          id="red"
+        ></button>
+        <button
+          class="review__card--button orange"
+          type="button"
+          id="orange"
+        ></button>
+        <button
+          class="review__card--button yellow"
+          type="button"
+          id="yellow"
+        ></button>
+        <button
+          class="review__card--button green"
+          type="button"
+          id="green"
+        ></button>
+      </form>
+      <% }); %>
     </div>
   </div>
 </section>

@@ -42,27 +42,27 @@ const server = app.listen(port, () => {
 });
 
 //catch all unhandled promise rejections
-process.on("unhandledRejection", (err) => {
-  console.log(err.name, err.message);
-  console.log("Unhandled rejection. Shutting down server...");
+// process.on("unhandledRejection", (err) => {
+//   console.log(err.name, err.message);
+//   console.log("Unhandled rejection. Shutting down server...");
 
-  unhandledRejectionLogger.error("Unhandled Rejection", err);
+//   unhandledRejectionLogger.error("Unhandled Rejection", err);
 
-  //call server.close() to allow server to finish current executions before shutting down.
-  server.close(() => {
-    process.exit(1); //0 = success, 1=exception
-  });
-});
+//   //call server.close() to allow server to finish current executions before shutting down.
+//   server.close(() => {
+//     process.exit(1); //0 = success, 1=exception
+//   });
+// });
 
-//catch all unhandled errors
-process.on("unhandledException", (err) => {
-  console.log(err.name, err.message);
-  console.log("Unhandled exception. Shutting down server...");
+// //catch all unhandled errors
+// process.on("unhandledException", (err) => {
+//   console.log(err.name, err.message);
+//   console.log("Unhandled exception. Shutting down server...");
 
-  unhandledExceptionLogger.error("Unhandled Exception", err);
+//   unhandledExceptionLogger.error("Unhandled Exception", err);
 
-  //call server.close() to allow server to finish current executions before shutting down.
-  server.close(() => {
-    process.exit(1); //0 = success, 1=exception
-  });
-});
+//   //call server.close() to allow server to finish current executions before shutting down.
+//   server.close(() => {
+//     process.exit(1); //0 = success, 1=exception
+//   });
+// });
