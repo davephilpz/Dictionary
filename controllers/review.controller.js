@@ -4,7 +4,7 @@ const catchAsyncErrorHandler = require("../util/catchAsyncErrorHandler");
 const AppError = require("../util/AppError");
 
 // TODO user gets redirected to newWord query after sumitting a review word. Need to check variables being passed into EJS templates, routing and logic to fix.
-exports.getReviewWords = async (req, res, next) => {
+exports.getReviewWords = catchAsyncErrorHandler(async (req, res, next) => {
   console.log("get new word query:", req.query.type);
 
   if (req.query.type === "newWords") {
@@ -77,9 +77,9 @@ exports.getReviewWords = async (req, res, next) => {
       session: req.session,
     });
   }
-};
+});
 
-exports.postReviewWords = async (req, res, next) => {
+exports.postReviewWords = catchAsyncErrorHandler(async (req, res, next) => {
   const word = req.query.word;
   const level = req.query.level;
   const type = req.query.type;
@@ -138,4 +138,4 @@ exports.postReviewWords = async (req, res, next) => {
       });
     }
   }
-};
+});
