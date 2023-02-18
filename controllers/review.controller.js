@@ -19,9 +19,44 @@ exports.getReviewWords = async (req, res, next) => {
       session: req.session,
     });
   } else if (req.query.type === "reviewWords") {
-    searchResult = await Word.aggregate([{ $sample: { size: 1 } }]);
+    const user = await User.findById(req.session.userAuthId).populate(
+      "myWords.red myWords.orange myWords.yellow"
+    );
+    console.log("user id", req.session.userAuthId);
+    console.log("user info:", user);
 
-    console.log("search results:", searchResult);
+    let searchResult = null;
+    if (
+      user &&
+      (user.myWords.red.length > 0 ||
+        user.myWords.orange.length > 0 ||
+        user.myWords.yellow.length > 0)
+    ) {
+      const randomReviewWord = Math.random();
+
+      if (randomReviewWord < 0.5 && user.myWords.red.length > 0) {
+        searchResult =
+          user.myWords.red[Math.floor(Math.random() * user.myWords.red.length)];
+      } else if (
+        randomReviewWord >= 0.5 &&
+        randomReviewWord < 0.8 &&
+        user.myWords.orange.length > 0
+      ) {
+        searchResult =
+          user.myWords.orange[
+            Math.floor(Math.random() * user.myWords.orange.length)
+          ];
+      } else if (user.myWords.yellow.length > 0) {
+        searchResult =
+          user.myWords.yellow[
+            Math.floor(Math.random() * user.myWords.yellow.length)
+          ];
+      }
+    }
+
+    searchResult = [searchResult.toObject()];
+
+    console.log("search result after random:", searchResult);
 
     res.render("review-results", {
       pageTitle: "Current Review Words",
@@ -66,15 +101,24 @@ exports.postReviewWords = async (req, res, next) => {
         return "user not found";
       }
 
-      const wordsArray = userFound.myWords[level];
-      const wordExists = wordsArray.some((wordObject) => {
-        return wordObject._id.toString() === wordFound[0]._id.toString();
+      const existingColor = Object.keys(userFound.myWords).find((color) => {
+        return userFound.myWords[color].includes(wordFound[0]._id);
       });
 
-      if (!wordExists) {
-        userFound.myWords[level].push(wordFound[0]._id);
-        await userFound.save();
+      if (existingColor && existingColor !== level) {
+        // word already exists in a different color category
+        const index = userFound.myWords[existingColor].indexOf(
+          wordFound[0]._id
+        );
+        userFound.myWords[existingColor].splice(index, 1);
       }
+
+      if (!existingColor || existingColor !== level) {
+        // word does not exist in current color category, add to it
+        userFound.myWords[level].push(wordFound[0]._id);
+      }
+
+      await userFound.save();
 
       searchResult = await Word.aggregate([{ $sample: { size: 1 } }]);
 
