@@ -1,7 +1,5 @@
 node_modules
 config.env
-.cache
-error.log
+.caches
 logs
-logs/404-errors.log
-logs/404-errors.log
+
