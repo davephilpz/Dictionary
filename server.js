@@ -26,7 +26,7 @@ const unhandledExceptionLogger = winston.createLogger({
 
 //database config with mongoose framework
 mongoose.set("strictQuery", false);
-const DB = process.env.LOCAL_DATABASE.replace(
+const DB = process.env.CLOUD_DATABASE.replace(
   "<DATABASE_PASSWORD>",
   process.env.DATABASE_PASSWORD
 );
