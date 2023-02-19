@@ -1576,7 +1576,7 @@ form p {
 }
 
 .how-it-works__new-word,
-.how-it-works__-word {
+.how-it-works__reivew-word {
   display: flex;
   flex-direction: column;
   gap: 4rem;
@@ -1600,10 +1600,18 @@ form p {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  width: 60%;
+  width: 80%;
 }
 
 .how-it-works__list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.how-it-works__sublist {
+  margin: 0 auto;
+  width: 80%;
   display: flex;
   flex-direction: column;
   gap: 2rem;

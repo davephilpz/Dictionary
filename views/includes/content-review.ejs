@@ -34,7 +34,7 @@
 <section class="section-review-how-it-works" aria-label="How it works">
   <h2 class="subtitle">How It Works</h2>
 
-  <article class="how-it-works__review-types">
+  <div class="how-it-works__review-types">
     <article class="how-it-works__new-word">
       <h3 class="tertiary-title">Test Your Knowledge</h3>
 
@@ -65,7 +65,7 @@
         collection. Words set to green category will never be drawn again.
       </p>
     </article>
-  </article>
+  </div>
 
   <article class="how-it-works__review-card-instructions">
     <h2 class="subtitle">How To Use Review Card</h2>
@@ -84,30 +84,35 @@
         definition.
       </li>
       <li class="how-it-works__list-text">
-        4. When dont with the word. Click a color to save in that category in
+        4. When done with the word, click a color to save in that category in
         your collection.
       </li>
       <li>
-        <ul>
+        <ul class="how-it-works__sublist">
           <li class="how-it-works__list-text">
-            <span class="review__card--button red">Red</span> means that you
-            have seen the word for the first time and are not familiar with it.
-            Words in this category have a 60% chance to be drawn.
+            &#x2022; <span class="review__card--button red">Red</span> means
+            that you have seen the word for the first time or are not familiar
+            with it. Words in this category have a 60% chance to be drawn (from
+            your collection).
           </li>
           <li class="how-it-works__list-text">
+            &#x2022;
             <span class="review__card--button orange">Orange</span> means that
             you are somewhat familiar with the word, but it is in your passive
-            memory. Words in this category have a 30% chance to be drawn.
+            memory. Words in this category have a 30% chance to be drawn (from
+            your collection).
           </li>
           <li class="how-it-works__list-text">
+            &#x2022;
             <span class="review__card--button yellow">Yellow</span> means that
             you are familiar with the word, but it may still be in your passive
             memory, or you are not 100% sure of its meaning or when to use it
-            etc. Words in this category have a 20% chance to be drawn.
+            etc. Words in this category have a 20% chance to be drawn (from your
+            collection).
           </li>
           <li class="how-it-works__list-text">
-            <span class="review__card--button green">Green</span> means that you
-            have mastered the word.
+            &#x2022; <span class="review__card--button green">Green</span> means
+            that you have mastered the word.
           </li>
         </ul>
       </li>
