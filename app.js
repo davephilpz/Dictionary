@@ -104,11 +104,11 @@ app.use(express.static(path.join(__dirname, "public")));
 //   collection: "sessions",
 // });
 //session middleware settings
+// store: store, //need to pass this in to below middleware once database connection resolved.
 app.use(
   session({
     secret: process.env.SESSION_KEY,
     cookie: { maxAge: 6000000 },
-    store: store,
     resave: false, //true forces sessions to be saved back to session store, even if the session was never modified during the request. False means only if modified and can improve performance.
     saveUninitialized: true, //true forces sessions that are initialized to be saved to the store
   })
