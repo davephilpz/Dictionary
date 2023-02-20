@@ -99,10 +99,10 @@ app.use(express.static(path.join(__dirname, "public")));
 
 //session middleware
 //backup sessions to Mongo DB
-const store = new MongoDBStore({
-  uri: "mongodb://localhost:27017/myapp",
-  collection: "sessions",
-});
+// const store = new MongoDBStore({
+//   uri: "mongodb://localhost:27017/myapp",
+//   collection: "sessions",
+// });
 //session middleware settings
 app.use(
   session({
