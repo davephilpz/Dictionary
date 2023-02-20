@@ -24,7 +24,7 @@ const unhandledExceptionLogger = winston.createLogger({
   ],
 });
 
-//database config with mongoose framework
+//database config with mongoose framework to Atlas cloud
 mongoose.set("strictQuery", false);
 const DB = process.env.CLOUD_DATABASE.replace(
   "<DATABASE_PASSWORD>",
