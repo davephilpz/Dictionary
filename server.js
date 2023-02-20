@@ -30,6 +30,7 @@ const DB = process.env.CLOUD_DATABASE.replace(
   "<DATABASE_PASSWORD>",
   process.env.ATLAS_PASSWORD
 );
+console.log(DB);
 mongoose
   .connect(DB, {
     useNewUrlParser: true,
