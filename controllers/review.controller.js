@@ -4,6 +4,7 @@ const catchAsyncErrorHandler = require("../util/catchAsyncErrorHandler");
 const AppError = require("../util/AppError");
 
 // TODO user gets redirected to newWord query after sumitting a review word. Need to check variables being passed into EJS templates, routing and logic to fix.
+// TODO add a more details button if user wants to see all details for word. Will basically just take word, plug into params and reroute to '/'.
 exports.getReviewWords = catchAsyncErrorHandler(async (req, res, next) => {
   console.log("get new word query:", req.query.type);
 
