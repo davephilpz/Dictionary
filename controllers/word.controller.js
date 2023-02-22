@@ -46,7 +46,7 @@ exports.postSearchWord = catchAsyncErrorHandler(async (req, res, next) => {
   const searchString = req.params.word;
 
   // const searchString = req.body.searchString.trim();
-  const sanitizedSearchString = searchString.replace(/[＊*]/g, "");
+  const sanitizedSearchString = searchString.replace(/[＊*]/g, ".");
   const query = {};
 
   console.log("url params:", searchString);
