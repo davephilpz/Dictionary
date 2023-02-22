@@ -3,6 +3,7 @@ const catchAsyncErrorHandler = require("../util/catchAsyncErrorHandler");
 const AppError = require("../util/AppError");
 
 // TODO query string persists when redirected to homepage from error or login etc. Does not cause any errors, but should be fixed. Also javascript errors occur on pages when user does not have access. Not sure if this is preventable or not.
+// TODO add query string to find words based on 2 English secondary arrays as well.
 
 exports.getSearchPage = catchAsyncErrorHandler(async (req, res, next) => {
   res.render("index", {
@@ -80,6 +81,8 @@ exports.postSearchWord = catchAsyncErrorHandler(async (req, res, next) => {
       { "日本語.片仮名": query.searchString },
       { "日本語.ローマ字": query.searchString },
       { "英語.英単語": query.searchString },
+      { "英語.二次的定義": query.searchString },
+      { "英語.複数定義": query.searchString },
     ],
   });
 
