@@ -20,6 +20,9 @@ const helmet = require("helmet"); //better html headers
 const get404 = require("./controllers/get404.controller");
 const globalErrorHandler = require("./controllers/errorController");
 
+//logging declarations
+const speedLogger = require("./middleware/speedLogger");
+
 //compression middleware declarations
 const compression = require("compression"); //compressor of text to lower i/o file size.
 
@@ -78,6 +81,9 @@ app.use(
     },
   })
 );
+
+//logging middleware
+app.use(speedLogger);
 
 //data parsing middleware
 app.use(express.json({ limit: "10kb" })); //built in middleware that parses post requests with json in body
