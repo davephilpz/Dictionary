@@ -96,7 +96,8 @@ if (searchInput) {
   //add clicked or carraige returned word into input field. Carraige return also submits.
   function selectPrediction() {
     if (selectedIndex >= 0) {
-      searchInput.value = predictionResults.children[selectedIndex].textContent;
+      searchInput.value =
+        predictionResults.children[selectedIndex].textContent.split(" : ")[0];
       predictionResults.innerHTML = "";
     }
   }
