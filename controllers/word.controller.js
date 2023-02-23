@@ -46,9 +46,8 @@ exports.postSearchWord = catchAsyncErrorHandler(async (req, res, next) => {
   const searchString = req.params.word;
 
   // const searchString = req.body.searchString.trim();
-  const sanitizedSearchString = searchString.replace(/[＊*]/g, " ");
+  const sanitizedSearchString = searchString.replace(/[＊*]/g, "");
   const query = {};
-  const options = { $options: "i" };
 
   console.log("url params:", searchString);
 
@@ -57,9 +56,17 @@ exports.postSearchWord = catchAsyncErrorHandler(async (req, res, next) => {
   console.log("search string:", searchString);
   console.log("sanitized search string:", sanitizedSearchString);
 
-  if (searchString[0] === "*" || searchString[0] === "＊") {
+  if (
+    searchString[searchString.length - 1] === "*" ||
+    (searchString[searchString.length - 1] === "＊" &&
+      searchString[0] === "*") ||
+    searchString[0] === "＊"
+  ) {
+    // If * is at the beginning and end of word, match all words including those letters
+    query.searchString = new RegExp(".*" + sanitizedSearchString + ".*");
+  } else if (searchString[0] === "*" || searchString[0] === "＊") {
     // If * is at the beginning, match any characters after the word
-    query.searchString = new RegExp(sanitizedSearchString + "$");
+    query.searchString = new RegExp(".*" + sanitizedSearchString + "$");
   } else if (
     searchString[searchString.length - 1] === "*" ||
     searchString[searchString.length - 1] === "＊"
@@ -74,21 +81,19 @@ exports.postSearchWord = catchAsyncErrorHandler(async (req, res, next) => {
   console.log("query.searchString:", query.searchString);
 
   // Find words matching query
-  let searchResults = await Word.find(
-    {
-      //search kanji, hiragana, katakana, romaji and English and return all results
-      $or: [
-        { "日本語.日本語単語": query.searchString },
-        { "日本語.平仮名": query.searchString },
-        { "日本語.片仮名": query.searchString },
-        { "日本語.ローマ字": query.searchString },
-        { "英語.英単語": query.searchString },
-        { "英語.二次的定義": query.searchString },
-        { "英語.複数定義": query.searchString },
-      ],
-    },
-    options
-  );
+  let searchResults = await Word.find({
+    //search kanji, hiragana, katakana, romaji and English and return all results
+    $or: [
+      { "日本語.日本語単語": query.searchString },
+      { "日本語.平仮名": query.searchString },
+      { "日本語.片仮名": query.searchString },
+      { "日本語.ローマ字": query.searchString },
+      { "日本語.助詞": query.searchString }, //remove after editing
+      { "英語.英単語": query.searchString },
+      { "英語.二次的定義": query.searchString },
+      { "英語.複数定義": query.searchString },
+    ],
+  });
 
   // limit search results to 5
   searchResults = searchResults.slice(0, 9999);
