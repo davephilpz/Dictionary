@@ -21,6 +21,8 @@ exports.postLiveSearch = catchAsyncErrorHandler(async (req, res) => {
     "日本語.片仮名",
     "日本語.ローマ字",
     "英語.英単語",
+    "英語.二次的定義",
+    "英語.複数定義",
   ];
   const query = {
     $or: fields.map((field) => ({
@@ -35,7 +37,7 @@ exports.postLiveSearch = catchAsyncErrorHandler(async (req, res) => {
 
   let searchPredictions = [];
   matchFound.forEach((word) => {
-    searchPredictions.push(word.日本語.日本語単語);
+    searchPredictions.push(`${word.日本語.日本語単語} : ${word.英語.英単語}`);
   });
 
   res.send({ searchPredictions });
