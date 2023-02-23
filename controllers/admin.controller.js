@@ -81,10 +81,10 @@ exports.postCreateWord = catchAsyncErrorHandler(async (req, res, next) => {
 
   const katakana = wanakana.toKatakana(平仮名);
   const romaji = wanakana.toRomaji(平仮名);
-  const nihongoReibun = 日本語例文.split(";").join(",");
+  const nihongoReibun = 日本語例文.split("。").join("。,");
   const nijitekiTeigi = 二次的定義.split(";").join(",");
   const fukusuuTeigi = 複数定義.split(";").join(",");
-  const eigoReibun = 英語例文.split(";").join(",");
+  const eigoReibun = 英語例文.split(".").join(".,");
 
   const newWordModel = new Word({
     日本語: {
@@ -188,10 +188,10 @@ exports.postUpdateWord = catchAsyncErrorHandler(async (req, res, next) => {
 
   const katakana = wanakana.toKatakana(平仮名);
   const romaji = wanakana.toRomaji(平仮名);
-  const nihongoReibun = 日本語例文.split(";").join(",");
+  const nihongoReibun = 日本語例文.split("。").join("。,");
   const nijitekiTeigi = 二次的定義.split(";").join(",");
   const fukusuuTeigi = 複数定義.split(";").join(",");
-  const eigoReibun = 英語例文.split(";").join(",");
+  const eigoReibun = 英語例文.split(".").join(".,");
 
   const word = await Word.find({ "日本語.日本語単語": searchString });
   console.log("submit update word word find:", word);
