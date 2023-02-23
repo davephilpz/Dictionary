@@ -46,7 +46,7 @@ exports.postSearchWord = catchAsyncErrorHandler(async (req, res, next) => {
   const searchString = req.params.word;
 
   // const searchString = req.body.searchString.trim();
-  const sanitizedSearchString = searchString.replace(/[＊*]/g, ".");
+  const sanitizedSearchString = searchString.replace(/[＊*]/g, " ");
   const query = {};
 
   console.log("url params:", searchString);
@@ -58,7 +58,7 @@ exports.postSearchWord = catchAsyncErrorHandler(async (req, res, next) => {
 
   if (searchString[0] === "*" || searchString[0] === "＊") {
     // If * is at the beginning, match any characters after the word
-    query.searchString = new RegExp(sanitizedSearchString + "$");
+    query.searchString = new RegExp(".*" + sanitizedSearchString + "$");
   } else if (
     searchString[searchString.length - 1] === "*" ||
     searchString[searchString.length - 1] === "＊"
