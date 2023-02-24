@@ -145,9 +145,7 @@ exports.getUpdateWord = catchAsyncErrorHandler(async (req, res, next) => {
   console.log("getUpdateWord query:", searchString);
 
   // Find words matching query exactly. Admin can find word in normal search with wildcards if they need to. This is to simplify CRUD operations.
-  let searchResults = await Word.find({
-    "日本語.日本語単語": searchString,
-  });
+  let searchResults = [await Word.findById(searchString)];
 
   console.log("getUpdateWord Search Results:", searchResults);
 
@@ -193,7 +191,7 @@ exports.postUpdateWord = catchAsyncErrorHandler(async (req, res, next) => {
   const fukusuuTeigi = 複数定義.split(";").join(",");
   const eigoReibun = 英語例文.split(".").join(".,");
 
-  const word = await Word.find({ "日本語.日本語単語": searchString });
+  const word = [await Word.findById(searchString)];
   console.log("submit update word word find:", word);
 
   const updatedWord = await Word.findOneAndUpdate(
@@ -242,9 +240,7 @@ exports.getDeleteWord = catchAsyncErrorHandler(async (req, res, next) => {
   console.log("get delete word query:", searchString);
 
   // Find words matching query exactly. Admin can find word in normal search with wildcards if they need to. This is to simplify CRUD operations.
-  let searchResults = await Word.find({
-    "日本語.日本語単語": searchString,
-  });
+  let searchResults = [await Word.findById(searchString)];
 
   console.log("get delete word Search Results:", searchResults);
 
@@ -258,16 +254,16 @@ exports.getDeleteWord = catchAsyncErrorHandler(async (req, res, next) => {
   });
 });
 
-exports.postDeleteWord = catchAsyncErrorHandler(async (req, res, next) => {
+exports.postDeleteWord = catchAsyncErrorHandler(async (req, res, 精密next) => {
   const searchString = req.query.word;
 
   console.log("submit delete word searchString:", searchString);
 
-  const word = await Word.findOneAndDelete({
-    "日本語.日本語単語": searchString,
-  }).then((deletedWord) => {
-    console.log("deleted word:", deletedWord);
-    req.flash("message", `Successfully added: (${searchString})`);
-    res.status(200).redirect("/admin");
-  });
+  const word = await Word.findByIdAndDelete(searchString).then(
+    (deletedWord) => {
+      console.log("deleted word:", deletedWord);
+      req.flash("message", `Successfully added: (${searchString})`);
+      res.status(200).redirect("/admin");
+    }
+  );
 });

@@ -56,53 +56,50 @@
     <div class="form__row">
       <div class="form__row--item">
         <label for="語類">語類</label>
-        <select
-          type="text"
-          name="語類"
-          id="語類"
-          required
-          value="<%= searchResult.日本語.語類 %>"
-        >
-          <option value="未定">未定</option>
-          <option value="文語">文語</option>
-          <option value="口語">口語</option>
-          <option value="両方">両方</option>
-        </select>
+       <select
+  type="text"
+  name="語類"
+  id="語類"
+  required
+>
+  <option value="未定" <% if (searchResult.日本語.語類 === '未定') { %>selected<% } %>>未定</option>
+  <option value="文語" <% if (searchResult.日本語.語類 === '文語') { %>selected<% } %>>文語</option>
+  <option value="口語" <% if (searchResult.日本語.語類 === '口語') { %>selected<% } %>>口語</option>
+  <option value="両方" <% if (searchResult.日本語.語類 === '両方') { %>selected<% } %>>両方</option>
+</select>
       </div>
 
       <div class="form__row--item">
-        <label for="日本語品詞">日本語品詞</label>
-        <select
-          type="text"
-          name="日本語品詞"
-          id="日本語品詞"
-          required
-          value="<%= searchResult.日本語.日本語品詞 %>"
-        >
-          <option value="名詞">名詞</option>
-          <option value="動詞">動詞</option>
-          <option value="形容詞">形容詞</option>
-          <option value="副詞">副詞</option>
-          <option value="両方">其の他</option>
-        </select>
-      </div>
+  <label for="日本語品詞">日本語品詞</label>
+  <select
+    type="text"
+    name="日本語品詞"
+    id="日本語品詞"
+    required
+  >
+    <option value="名詞" <% if (searchResult.日本語.日本語品詞 === '名詞') { %>selected<% } %>>名詞</option>
+    <option value="動詞" <% if (searchResult.日本語.日本語品詞 === '動詞') { %>selected<% } %>>動詞</option>
+    <option value="形容詞" <% if (searchResult.日本語.日本語品詞 === '形容詞') { %>selected<% } %>>形容詞</option>
+    <option value="副詞" <% if (searchResult.日本語.日本語品詞 === '副詞') { %>selected<% } %>>副詞</option>
+    <option value="両方" <% if (searchResult.日本語.日本語品詞 === '両方') { %>selected<% } %>>其の他</option>
+  </select>
+</div>
 
-      <div class="form__row--item">
-        <label for="英語品詞">英語品詞</label>
-        <select
-          type="text"
-          name="英語品詞"
-          id="英語品詞"
-          required
-          value="<%= searchResult.英語.英語品詞 %>"
-        >
-          <option value="名詞">名詞</option>
-          <option value="動詞">動詞</option>
-          <option value="形容詞">形容詞</option>
-          <option value="副詞">副詞</option>
-          <option value="両方">其の他</option>
-        </select>
-      </div>
+<div class="form__row--item">
+  <label for="英語品詞">英語品詞</label>
+  <select
+    type="text"
+    name="英語品詞"
+    id="英語品詞"
+    required
+  >
+    <option value="名詞" <% if (searchResult.英語.英語品詞 === '名詞') { %>selected<% } %>>名詞</option>
+    <option value="動詞" <% if (searchResult.英語.英語品詞 === '動詞') { %>selected<% } %>>動詞</option>
+    <option value="形容詞" <% if (searchResult.英語.英語品詞 === '形容詞') { %>selected<% } %>>形容詞</option>
+    <option value="副詞" <% if (searchResult.英語.英語品詞 === '副詞') { %>selected<% } %>>副詞</option>
+    <option value="両方" <% if (searchResult.英語.英語品詞 === '両方') { %>selected<% } %>>其の他</option>
+  </select>
+</div>
     </div>
 
     <div class="form__row">
