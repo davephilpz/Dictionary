@@ -81,10 +81,10 @@ exports.postCreateWord = catchAsyncErrorHandler(async (req, res, next) => {
 
   const katakana = wanakana.toKatakana(平仮名);
   const romaji = wanakana.toRomaji(平仮名);
-  // const nihongoReibun = 日本語例文.split("。").join("。,");
-  // const nijitekiTeigi = 二次的定義.split(";").join(",");
-  // const fukusuuTeigi = 複数定義.split(";").join(",");
-  // const eigoReibun = 英語例文.split(".").join(".,");
+  const nihongoReibun = 日本語例文.split("。").join("。,");
+  const nijitekiTeigi = 二次的定義.split(";").join(",");
+  const fukusuuTeigi = 複数定義.split(";").join(",");
+  const eigoReibun = 英語例文.split(".").join(".,");
 
   const newWordModel = new Word({
     日本語: {
@@ -97,14 +97,14 @@ exports.postCreateWord = catchAsyncErrorHandler(async (req, res, next) => {
       助詞: 助詞,
       略語: 略語,
       備考欄: 備考欄,
-      日本語例文: 日本語例文,
+      日本語例文: nihongoReibun,
     },
     英語: {
       英単語: 英単語,
-      二次的定義: 二次的定義,
-      複数定義: 複数定義,
+      二次的定義: nijitekiTeigi,
+      複数定義: fukusuuTeigi,
       英語品詞: 英語品詞,
-      英語例文: 英語例文,
+      英語例文: eigoReibun,
     },
   });
 
@@ -186,10 +186,10 @@ exports.postUpdateWord = catchAsyncErrorHandler(async (req, res, next) => {
 
   const katakana = wanakana.toKatakana(平仮名);
   const romaji = wanakana.toRomaji(平仮名);
-  // const nihongoReibun = 日本語例文.split("。").join("。,");
-  // const nijitekiTeigi = 二次的定義.split(";").join(",");
-  // const fukusuuTeigi = 複数定義.split(";").join(",");
-  // const eigoReibun = 英語例文.split(".").join(".,");
+  const nihongoReibun = 日本語例文.split("。").join("。,");
+  const nijitekiTeigi = 二次的定義.split(";").join(",");
+  const fukusuuTeigi = 複数定義.split(";").join(",");
+  const eigoReibun = 英語例文.split(".").join(".,");
 
   const word = [await Word.findById(searchString)];
   console.log("submit update word word find:", word);
@@ -208,14 +208,14 @@ exports.postUpdateWord = catchAsyncErrorHandler(async (req, res, next) => {
           助詞: 助詞,
           略語: 略語,
           備考欄: 備考欄,
-          日本語例文: 日本語例文,
+          日本語例文: nihongoReibun,
         },
         英語: {
           英単語: 英単語,
-          二次的定義: 二次的定義,
-          複数定義: 複数定義,
+          二次的定義: nijitekiTeigi,
+          複数定義: fukusuuTeigi,
           英語品詞: 英語品詞,
-          英語例文: 英語例文,
+          英語例文: eigoReibun,
         },
       },
     },

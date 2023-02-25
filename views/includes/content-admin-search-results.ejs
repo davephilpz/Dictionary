@@ -152,7 +152,8 @@
         <div class="accordian__item">
           <h3 class="accordian__item--title">日本語例文</h3>
           <span class="accordian__item--text"
-            ><%= searchResult.日本語.日本語例文 %></span
+            ><%= searchResult.日本語.日本語例文.join('').replaceAll(',','')
+            %></span
           >
         </div>
         <% } %> <% if (searchResult.英語.英語例文 == '' ) { %>
@@ -161,7 +162,7 @@
         <div class="accordian__item">
           <h3 class="accordian__item--title">英語例文</h3>
           <div class="accordian__item--text">
-            <%= searchResult.英語.英語例文 %>
+            <%= searchResult.英語.英語例文.join('').replaceAll(',','') %>
           </div>
         </div>
         <% } %>
