@@ -27,7 +27,7 @@ const unhandledExceptionLogger = winston.createLogger({
 //database config with mongoose framework to Atlas cloud
 mongoose.set("strictQuery", false);
 const DB = process.env.CLOUD_DATABASE;
-console.log(DB);
+
 mongoose
   .connect(DB, {
     useNewUrlParser: true,
