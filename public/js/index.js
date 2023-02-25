@@ -6,6 +6,7 @@ const getReviewWordForm = document.querySelector("#get-review-word");
 const postReviewWordForm = document.querySelector("#post-review-word");
 //admin
 const adminSearch = document.querySelector("#admin-search-form");
+const submitAddForm = document.querySelector("#submit-add-form");
 const getUpdateForm = document.querySelector("#get-update-form");
 const submitUpdateForm = document.querySelector("#submit-update-form");
 const getDeleteConfirmation = document.querySelector(
@@ -105,6 +106,20 @@ if (adminSearch) {
   });
 }
 
+if (submitAddForm) {
+  submitAddForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const submitButton = document.activeElement;
+    if (submitButton.value !== "Add Word") {
+      console.log("denied submittal of non-button-field");
+      return;
+    }
+
+    submitAddForm.submit();
+  });
+}
+
 if (getUpdateForm) {
   getUpdateForm.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -128,6 +143,13 @@ if (submitUpdateForm) {
     event.preventDefault();
     console.log("submit update form ran");
 
+    // Check if the clicked button value is "Update Word"
+    const submitButton = document.activeElement;
+    if (submitButton.value !== "Update Word") {
+      console.log("denied submittal of non-button-field");
+      return;
+    }
+
     //get query from url
     const urlParams = new URLSearchParams(window.location.search);
     const input = urlParams.get("word");
@@ -143,6 +165,27 @@ if (submitUpdateForm) {
     }
   });
 }
+
+// if (submitUpdateForm) {
+//   submitUpdateForm.addEventListener("submit", function (event) {
+//     event.preventDefault();
+//     console.log("submit update form ran");
+
+//     //get query from url
+//     const urlParams = new URLSearchParams(window.location.search);
+//     const input = urlParams.get("word");
+//     console.log("submit update input value:", input);
+
+//     if (input === "") {
+//       return;
+//     } else {
+//       //set url the same as the original word to find before patching
+//       submitUpdateForm.action = `/admin/update-word?word=${input}`;
+//       submitUpdateForm.submit();
+//       console.log(submitUpdateForm.action);
+//     }
+//   });
+// }
 
 if (getDeleteConfirmation) {
   getDeleteConfirmation.addEventListener("submit", function (event) {

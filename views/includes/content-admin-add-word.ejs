@@ -4,6 +4,7 @@
     method="POST"
     class="input-form"
     role="form"
+    id="submit-add-form"
     aria-label="admin add word form"
   >
     <label for="日本語単語"></label>
@@ -116,6 +117,11 @@
     <label for="備考欄"></label>
     <input type="text" name="備考欄" id="備考欄" placeholder="備考欄" />
 
-    <input class="form__btn" type="submit" value="Add Word" />
+    <input
+      class="form__btn"
+      type="submit"
+      name="submitAddWordButton"
+      value="Add Word"
+    />
   </form>
 </section>

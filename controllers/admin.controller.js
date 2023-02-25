@@ -194,8 +194,8 @@ exports.postUpdateWord = catchAsyncErrorHandler(async (req, res, next) => {
   const word = [await Word.findById(searchString)];
   console.log("submit update word word find:", word);
 
-  const updatedWord = await Word.findOneAndUpdate(
-    { "日本語.日本語単語": searchString },
+  const updatedWord = await Word.findByIdAndUpdate(
+    searchString,
     {
       $set: {
         日本語: {
