@@ -33,7 +33,7 @@ const session = require("express-session");
 const connectFlash = require("connect-flash");
 
 //session backup declarations
-const MongoDBStore = require("connect-mongodb-session")(session);
+const MongoStore = require("connect-mongodb-session")(session);
 
 //route declarations
 const adminRouter = require("./routes/admin.router");
@@ -104,21 +104,31 @@ app.set("views", "views");
 app.use(express.static(path.join(__dirname, "public")));
 
 //session middleware
-//backup sessions to Mongo DB
-// const store = new MongoDBStore({
-//   uri: "mongodb://localhost:27017/myapp",
-//   collection: "sessions",
-// });
-//session middleware settings
-// store: store, //need to pass this in to below middleware once database connection resolved.
 app.use(
   session({
     secret: process.env.SESSION_KEY,
     cookie: { maxAge: 3 * 24 * 60 * 60 * 1000 }, // 3 days in milliseconds
     resave: false, //true forces sessions to be saved back to session store, even if the session was never modified during the request. False means only if modified and can improve performance.
     saveUninitialized: true, //true forces sessions that are initialized to be saved to the store
+    store: new MongoStore({
+      url: process.env.CLOUD_DATABASE,
+      autoReconnect: true,
+      collection: "sessions",
+      ttl: 3 * 24 * 60 * 60, // TTL of 3 days (in seconds)
+      autoRemove: "interval",
+      autoRemoveInterval: 10, // remove expired sessions every 10 minutes
+    }),
   })
 );
+//
+// app.use(
+//   session({
+//     secret: process.env.SESSION_KEY,
+//     cookie: { maxAge: 3 * 24 * 60 * 60 * 1000 }, // 3 days in milliseconds
+//     resave: false, //true forces sessions to be saved back to session store, even if the session was never modified during the request. False means only if modified and can improve performance.
+//     saveUninitialized: true, //true forces sessions that are initialized to be saved to the store
+//   })
+// );
 
 //flash message middleware
 app.use(connectFlash());

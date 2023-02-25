@@ -5,26 +5,36 @@
     class="input-form"
     role="form"
     aria-label="user login form"
+    id="signin-form"
   >
-    <label for="email"></label>
-    <input
-      type="email"
-      name="email"
-      id="email"
-      autocomplete="email"
-      placeholder="Email"
-      required
-    />
+    <div class="input-group">
+      <label for="email"></label>
+      <input
+        type="email"
+        name="email"
+        id="signin-email"
+        autocomplete="email"
+        placeholder="Email"
+        required
+      />
+      <span class="form-alert">Invalid email address</span>
+    </div>
 
-    <label for="password"></label>
-    <input
-      type="password"
-      name="password"
-      id="password"
-      autocomplete="password"
-      placeholder="Password"
-      required
-    />
+    <div class="input-group">
+      <label for="password"></label>
+      <input
+        type="password"
+        name="password"
+        id="signin-password"
+        autocomplete="password"
+        placeholder="Password"
+        required
+      />
+      <span class="form-alert"
+        >Password does not meet strength requirements</span
+      >
+    </div>
+
     <input class="form__btn" type="submit" value="Sign In" />
   </form>
 </section>

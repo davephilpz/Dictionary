@@ -1,8 +1,12 @@
 //live validation
+//signup form
 const nameInput = document.getElementById("name");
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 const confirmPasswordInput = document.getElementById("confirm-password");
+//signin form
+const signInEmailInput = document.getElementById("signin-email");
+const signInPasswordInput = document.getElementById("signin-password");
 
 if (nameInput) {
   nameInput.addEventListener("input", () => {
@@ -32,6 +36,20 @@ if (emailInput) {
   });
 }
 
+if (signInEmailInput) {
+  signInEmailInput.addEventListener("input", () => {
+    if (!validateEmail(signInEmailInput.value)) {
+      signInEmailInput.parentElement.classList.remove("success");
+      signInEmailInput.parentElement.classList.add("error");
+      signInEmailInput.nextElementSibling.style.display = "block";
+    } else {
+      signInEmailInput.parentElement.classList.remove("error");
+      signInEmailInput.parentElement.classList.add("success");
+      signInEmailInput.nextElementSibling.style.display = "none";
+    }
+  });
+}
+
 if (passwordInput) {
   passwordInput.addEventListener("input", () => {
     if (!validatePassword(passwordInput.value)) {
@@ -42,6 +60,20 @@ if (passwordInput) {
       passwordInput.parentElement.classList.remove("error");
       passwordInput.parentElement.classList.add("success");
       passwordInput.nextElementSibling.style.display = "none";
+    }
+  });
+}
+
+if (signInPasswordInput) {
+  signInPasswordInput.addEventListener("input", () => {
+    if (!validatePassword(signInPasswordInput.value)) {
+      signInPasswordInput.parentElement.classList.remove("success");
+      signInPasswordInput.parentElement.classList.add("error");
+      signInPasswordInput.nextElementSibling.style.display = "block";
+    } else {
+      signInPasswordInput.parentElement.classList.remove("error");
+      signInPasswordInput.parentElement.classList.add("success");
+      signInPasswordInput.nextElementSibling.style.display = "none";
     }
   });
 }
