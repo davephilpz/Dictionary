@@ -1,11 +1,13 @@
-<h1 class="errorMessage">User Profile Incomplete</h1>
+<!-- <h1 class="errorMessage">User Profile Incomplete</h1> -->
 
-<form
-  action="/"
-  method="GET"
-  class="login"
-  role="form"
-  aria-label="redirect to home page"
->
-  <input class="redirect__btn" type="submit" value="Return Home" />
-</form>
+<h2 class="subtitle">
+  Welcome back <%= user.name[0].toUpperCase() + user.name.substring(1) %>
+</h2>
+<p class="generic-text">Member since <%= formattedDate %></p>
+
+<h2 class="subtitle">Words in my collection</h2>
+<p class="generic-text">Total: <%= myWords %></p>
+<p class="generic-text">My words: <%= red %></p>
+<p class="generic-text">My words: <%= orange %></p>
+<p class="generic-text">My words: <%= yellow %></p>
+<p class="generic-text">Words mastered: <%= green %></p>

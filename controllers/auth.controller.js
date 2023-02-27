@@ -101,10 +101,44 @@ exports.postLogin = catchAsyncErrorHandler(async (req, res, next) => {
 });
 
 exports.getUserProfile = catchAsyncErrorHandler(async (req, res, next) => {
+  //get user from session
+  const userId = req.session.userAuthId;
+  //get user object from database
+  const user = await User.findById(userId);
+  //word logic on backend
+  const myWords =
+    user.myWords.red.length +
+    user.myWords.orange.length +
+    user.myWords.yellow.length +
+    user.myWords.green.length;
+  const red = user.myWords.red.length;
+  const orange = user.myWords.orange.length;
+  const yellow = user.myWords.yellow.length;
+  const green = user.myWords.green.length;
+  //format date
+  const isoDateString = "2023-02-21T00:33:34.986Z"; //original date string
+  const date = new Date(isoDateString); //create Date object from string
+  const options = {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  };
+  const formattedDate = date.toLocaleDateString("en-US", options); //format date string
+
+  console.log("user:", user);
+
   res.render("user-profile", {
     pageTitle: "User Profile",
     contentTitle: "User Profile",
     session: req.session,
+    user,
+    myWords,
+    red,
+    orange,
+    yellow,
+    green,
+    formattedDate,
   });
 });
 

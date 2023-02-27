@@ -1562,6 +1562,13 @@ form p {
   font-size: 1.8rem;
 }
 
+.generic-text {
+  text-align: center;
+  margin: 0 auto;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
 .section-review-how-it-works {
   display: flex;
   flex-direction: column;
