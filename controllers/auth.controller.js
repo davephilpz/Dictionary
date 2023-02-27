@@ -1,4 +1,5 @@
 const User = require("../models/user.model");
+const Study = require("../models/study.model");
 const bcrypt = require("bcryptjs");
 const { generateToken } = require("../util/generateToken");
 const catchAsyncErrorHandler = require("../util/catchAsyncErrorHandler");
@@ -126,6 +127,16 @@ exports.getUserProfile = catchAsyncErrorHandler(async (req, res, next) => {
   };
   const formattedDate = date.toLocaleDateString("en-US", options); //format date string
 
+  const wordOfTheDayMatchDate = new Date();
+  const wordOfTheDayFormattedDate = wordOfTheDayMatchDate
+    .toISOString()
+    .substring(0, 10);
+
+  const wordOfTheDay = await Study.find({
+    [`wordOfTheDay.${wordOfTheDayFormattedDate}`]: { $exists: true },
+  });
+
+  console.log("word of the day:", wordOfTheDay);
   console.log("user:", user);
 
   res.render("user-profile", {
@@ -139,6 +150,7 @@ exports.getUserProfile = catchAsyncErrorHandler(async (req, res, next) => {
     yellow,
     green,
     formattedDate,
+    wordOfTheDay,
   });
 });
 
