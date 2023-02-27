@@ -9,18 +9,49 @@ exports.getReviewWords = catchAsyncErrorHandler(async (req, res, next) => {
   console.log("get new word query:", req.query.type);
 
   if (req.query.type === "newWords") {
-    searchResult = await Word.aggregate([{ $sample: { size: 1 } }]);
+    let searchResult = null;
+    const user = await User.findById(req.session.userAuthId).populate(
+      "myWords.red myWords.orange myWords.yellow myWords.green"
+    );
+    const allWords = [
+      ...user.myWords.red,
+      ...user.myWords.orange,
+      ...user.myWords.yellow,
+      ...user.myWords.green,
+    ];
+
+    const allWordsIds = allWords.map((word) => word._id);
+
+    const availableWords = await Word.find({ _id: { $nin: allWordsIds } });
+
+    if (availableWords.length > 0) {
+      searchResult =
+        availableWords[Math.floor(Math.random() * availableWords.length)];
+    }
 
     console.log("search results:", searchResult);
 
     res.render("review-results", {
       pageTitle: "New Review Words",
       contentTitle: "New Word Review",
-      searchResult,
+      searchResult: searchResult ? [searchResult.toObject()] : [],
       reviewType: req.query.type,
       session: req.session,
     });
-  } else if (req.query.type === "reviewWords") {
+  }
+
+  // searchResult = await Word.aggregate([{ $sample: { size: 1 } }]);
+
+  // console.log("search results:", searchResult);
+
+  // res.render("review-results", {
+  //   pageTitle: "New Review Words",
+  //   contentTitle: "New Word Review",
+  //   searchResult,
+  //   reviewType: req.query.type,
+  //   session: req.session,
+  // });
+  else if (req.query.type === "reviewWords") {
     const user = await User.findById(req.session.userAuthId).populate(
       "myWords.red myWords.orange myWords.yellow"
     );
@@ -126,14 +157,34 @@ exports.postReviewWords = catchAsyncErrorHandler(async (req, res, next) => {
 
       await userFound.save();
 
-      searchResult = await Word.aggregate([{ $sample: { size: 1 } }]);
+      // searchResult = await Word.aggregate([{ $sample: { size: 1 } }]);
+
+      let searchResult = null;
+      const user = await User.findById(req.session.userAuthId).populate(
+        "myWords.red myWords.orange myWords.yellow myWords.green"
+      );
+      const allWords = [
+        ...user.myWords.red,
+        ...user.myWords.orange,
+        ...user.myWords.yellow,
+        ...user.myWords.green,
+      ];
+
+      const allWordsIds = allWords.map((word) => word._id);
+
+      const availableWords = await Word.find({ _id: { $nin: allWordsIds } });
+
+      if (availableWords.length > 0) {
+        searchResult =
+          availableWords[Math.floor(Math.random() * availableWords.length)];
+      }
 
       // console.log("word found:", wordFound);
 
       res.render("review-results", {
         pageTitle: "New Review Words",
         contentTitle: "New Word Review",
-        searchResult,
+        searchResult: searchResult ? [searchResult.toObject()] : [],
         reviewType: req.query.type,
         session: req.session,
       });
