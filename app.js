@@ -111,7 +111,7 @@ app.use(
     resave: false, //true forces sessions to be saved back to session store, even if the session was never modified during the request. False means only if modified and can improve performance.
     saveUninitialized: true, //true forces sessions that are initialized to be saved to the store
     store: new MongoStore({
-      url: process.env.CLOUD_DATABASE,
+      uri: process.env.CLOUD_DATABASE,
       autoReconnect: true,
       collection: "sessions",
       ttl: 3 * 24 * 60 * 60, // TTL of 3 days (in seconds)
