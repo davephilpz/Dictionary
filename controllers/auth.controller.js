@@ -135,8 +135,12 @@ exports.getUserProfile = catchAsyncErrorHandler(async (req, res, next) => {
   const wordOfTheDay = await Study.find({
     [`wordOfTheDay.${wordOfTheDayFormattedDate}`]: { $exists: true },
   });
+  const parsedWordOfTheDay = wordOfTheDay[0].wordOfTheDay;
+  const mappedWordOfTheDay = parsedWordOfTheDay.get(wordOfTheDayFormattedDate);
 
   console.log("word of the day:", wordOfTheDay);
+  console.log("word of the day parsed:", parsedWordOfTheDay);
+  console.log("word of the day mapped:", mappedWordOfTheDay);
   console.log("user:", user);
 
   res.render("user-profile", {
@@ -150,7 +154,7 @@ exports.getUserProfile = catchAsyncErrorHandler(async (req, res, next) => {
     yellow,
     green,
     formattedDate,
-    wordOfTheDay,
+    mappedWordOfTheDay,
   });
 });
 
