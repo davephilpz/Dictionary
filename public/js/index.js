@@ -4,6 +4,9 @@ const searchForm = document.querySelector("#search-form");
 //private
 const getReviewWordForm = document.querySelector("#get-review-word");
 const postReviewWordForm = document.querySelector("#post-review-word");
+const postReviewMoreDetails = document.querySelector(
+  "#post-review-more-details-form"
+);
 //admin
 const adminSearch = document.querySelector("#admin-search-form");
 const submitAddForm = document.querySelector("#submit-add-form");
@@ -84,6 +87,33 @@ if (postReviewWordForm) {
     postReviewWordForm.action = `/review?type=${type}&level=${level}&word=${word}`;
     postReviewWordForm.method = "POST"; // Add this line to set method to POST
     postReviewWordForm.submit();
+  });
+}
+
+if (postReviewMoreDetails) {
+  postReviewForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const word = document.getElementById("post-review-word").value;
+    console.log("word:", word);
+
+    const encodedWord = encodeURIComponent(word);
+
+    fetch(`/search/${encodedWord}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ word }),
+    })
+      .then((response) => {
+        // Open the response in a new window
+        window.open(response.url, "_blank");
+      })
+      .catch((error) => {
+        // Handle error
+        console.error(error);
+      });
   });
 }
 

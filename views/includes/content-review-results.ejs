@@ -43,6 +43,22 @@
       </div>
     </div>
 
+    <form action="/search" method="POST" id="post-review-more-details-form">
+      <input
+        type="hidden"
+        name="word"
+        value="<%= result.日本語.日本語単語 %>"
+      />
+      <button
+        type="submit"
+        id="post-review-more-details"
+        aria-label="Get more details about <%= result.日本語.日本語単語 %>"
+        class="review__card--button-review"
+      >
+        More Details
+      </button>
+    </form>
+
     <div class="review__card--submit">
       <form
         action="/review"

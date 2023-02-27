@@ -1353,6 +1353,7 @@ form p {
 
 .review__card--button-new,
 .review__card--button-review {
+  text-decoration: none;
   cursor: pointer;
   color: var(--color-dark);
   background-color: var(--color-accent-primary);
