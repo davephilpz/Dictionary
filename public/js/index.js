@@ -91,29 +91,21 @@ if (postReviewWordForm) {
 }
 
 if (postReviewMoreDetails) {
-  postReviewForm.addEventListener("submit", function (event) {
+  postReviewMoreDetails.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const word = document.getElementById("post-review-word").value;
+    const word = document.getElementById("post-review-more-details").value;
     console.log("word:", word);
 
-    const encodedWord = encodeURIComponent(word);
+    if (word === "") {
+      return;
+    } else {
+      postReviewMoreDetails.action = `/search/${word}`;
+      postReviewMoreDetails.target = "_blank";
+      postReviewMoreDetails.submit();
 
-    fetch(`/search/${encodedWord}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ word }),
-    })
-      .then((response) => {
-        // Open the response in a new window
-        window.open(response.url, "_blank");
-      })
-      .catch((error) => {
-        // Handle error
-        console.error(error);
-      });
+      console.log("more details:", postReviewMoreDetails.action);
+    }
   });
 }
 
