@@ -8,7 +8,11 @@ exports.startCronJob = () => {
     try {
       //create date for new word of the day
       const date = new Date();
-      const formattedDate = date.toISOString().substring(0, 10);
+      const utcDate = new Date(
+        date.getTime() + date.getTimezoneOffset() * 60000
+      );
+      utcDate.setDate(utcDate.getDate() + 1);
+      const formattedDate = utcDate.toISOString().substring(0, 10);
 
       // Select a random word from somewhere
       const randomWord = await Word.aggregate([{ $sample: { size: 1 } }]);
