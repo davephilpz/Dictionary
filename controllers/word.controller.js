@@ -51,9 +51,13 @@ exports.postSearchWord = catchAsyncErrorHandler(async (req, res, next) => {
   const sanitizedSearchString = searchString.replace(/[＊*]/g, "");
   const query = {};
 
-  console.log("url params:", searchString);
+  //pagination
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  const startIndex = (page - 1) * limit;
+  const endIndex = page * limit;
 
-  // try {
+  console.log("url params:", searchString);
   console.log("req.body:", req.body);
   console.log("search string:", searchString);
   console.log("sanitized search string:", sanitizedSearchString);
@@ -97,15 +101,20 @@ exports.postSearchWord = catchAsyncErrorHandler(async (req, res, next) => {
     ],
   });
 
-  // limit search results to 5
-  searchResults = searchResults.slice(0, 9999);
-  const idStrings = searchResults.map((result) => result._id.toString());
+  //return total matches and pass in for info and render logic
+  const totalSearchResults = searchResults.length;
 
-  console.log("word ids:", idStrings);
+  //return only first page initially
+  searchResults = searchResults.slice(startIndex, endIndex);
 
   res.render(`search`, {
+    totalSearchResults,
     searchResults,
     searchString,
+    currentPage: page,
+    totalPages: Math.ceil(totalSearchResults / limit),
+    currentPageStartIndex: startIndex + 1,
+    currentPageEndIndex: Math.min(endIndex, totalSearchResults),
     pageTitle: `${searchString}`,
     contentTitle: "Word Search",
     session: req.session,

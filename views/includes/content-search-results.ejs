@@ -4,15 +4,16 @@
     <h1 class="search__title">Must Enter Search</h1>
   </ul>
 
-  <% } else if (searchResults.length > 0) { %>
+  <% } else if (totalSearchResults > 0) { %>
   <ul class="search__results">
-    <% if (searchResults.length === 1) { %>
+    <% if (totalSearchResults === 1) { %>
     <h1 class="search__title">
-      <%= searchResults.length %> Search Result for: (<%= searchString %>)
+      <%= totalSearchResults %> Search Result for: (<%= searchString %>)
     </h1>
     <% } else { %>
     <h1 class="search__title">
-      <%= searchResults.length %> Search Results for: (<%= searchString %>)
+      Search Results <%= currentPageStartIndex %> to <%= currentPageEndIndex %>
+      of <%= totalSearchResults %> for: (<%= searchString %>)
     </h1>
     <% } %> <% for (let searchResult of searchResults) { %>
     <li class="search__result">
