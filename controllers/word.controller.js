@@ -99,9 +99,13 @@ exports.postSearchWord = catchAsyncErrorHandler(async (req, res, next) => {
       { "英語.二次的定義": query.searchString },
       { "英語.複数定義": query.searchString },
     ],
-  });
+  })
+    .skip(startIndex)
+    // .limit(limit)
+    .lean()
+    .exec();
 
-  //return total matches and pass in for info and render logic
+  // //return total matches and pass in for info and render logic
   const totalSearchResults = searchResults.length;
 
   //return only first page initially
@@ -111,6 +115,8 @@ exports.postSearchWord = catchAsyncErrorHandler(async (req, res, next) => {
     totalSearchResults,
     searchResults,
     searchString,
+    page,
+    limit,
     currentPage: page,
     totalPages: Math.ceil(totalSearchResults / limit),
     currentPageStartIndex: startIndex + 1,

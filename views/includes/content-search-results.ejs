@@ -12,7 +12,7 @@
     </h1>
     <% } else { %>
     <h1 class="search__title">
-      Search Results <%= currentPageStartIndex %> to <%= currentPageEndIndex %>
+      Search results <%= currentPageStartIndex %> to <%= currentPageEndIndex %>
       of <%= totalSearchResults %> for: (<%= searchString %>)
     </h1>
     <% } %> <% for (let searchResult of searchResults) { %>
@@ -132,3 +132,45 @@
   </ul>
   <% } %>
 </section>
+
+<div class="pagination">
+  <form id="pagination-form" method="POST">
+    <% if (currentPage !== 1) { %>
+    <button type="submit" name="page" value="1" class="page-link">
+      &#171; First
+    </button>
+    <button
+      type="submit"
+      name="page"
+      value="<%= currentPage - 1 %>"
+      class="page-link"
+    >
+      &laquo; Previous
+    </button>
+    <% } %> <% for (let i = 1; i <= totalPages; i++) { %> <% if (i ===
+    currentPage) { %>
+    <span class="current-page page-link"><%= i %></span>
+    <% } else if (i >= currentPage - 2 && i <= currentPage + 2) { %>
+    <button type="submit" name="page" value="<%= i %>" class="page-link">
+      <%= i %>
+    </button>
+    <% } %> <% } %> <% if (currentPage !== totalPages) { %>
+    <button
+      type="submit"
+      name="page"
+      value="<%= currentPage + 1 %>"
+      class="page-link"
+    >
+      Next &raquo;
+    </button>
+    <button
+      type="submit"
+      name="page"
+      value="<%= totalPages %>"
+      class="page-link"
+    >
+      Last &raquo;
+    </button>
+    <% } %>
+  </form>
+</div>
