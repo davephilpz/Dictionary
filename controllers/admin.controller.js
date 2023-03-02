@@ -100,11 +100,11 @@ exports.postCreateWord = catchAsyncErrorHandler(async (req, res, next) => {
       日本語例文: nihongoReibun,
     },
     英語: {
-      英単語: 英単語,
-      二次的定義: nijitekiTeigi,
-      複数定義: fukusuuTeigi,
+      英単語: 英単語.toLowerCase(),
+      二次的定義: nijitekiTeigi.toLowerCase(),
+      複数定義: fukusuuTeigi.toLowerCase(),
       英語品詞: 英語品詞,
-      英語例文: eigoReibun,
+      英語例文: eigoReibun.toLowerCase(),
     },
   });
 
@@ -211,11 +211,11 @@ exports.postUpdateWord = catchAsyncErrorHandler(async (req, res, next) => {
           日本語例文: nihongoReibun,
         },
         英語: {
-          英単語: 英単語,
-          二次的定義: nijitekiTeigi,
-          複数定義: fukusuuTeigi,
+          英単語: 英単語.toLowerCase(),
+          二次的定義: nijitekiTeigi.toLowerCase(),
+          複数定義: fukusuuTeigi.toLowerCase(),
           英語品詞: 英語品詞,
-          英語例文: eigoReibun,
+          英語例文: eigoReibun.toLowerCase(),
         },
       },
     },

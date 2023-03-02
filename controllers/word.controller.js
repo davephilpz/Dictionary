@@ -14,7 +14,7 @@ exports.getSearchPage = catchAsyncErrorHandler(async (req, res, next) => {
 });
 
 exports.postLiveSearch = catchAsyncErrorHandler(async (req, res) => {
-  let liveSearchQuery = req.body.liveSearchQuery;
+  let liveSearchQuery = req.body.liveSearchQuery.toLowerCase();
   const fields = [
     "日本語.日本語単語",
     "日本語.平仮名",
@@ -24,16 +24,14 @@ exports.postLiveSearch = catchAsyncErrorHandler(async (req, res) => {
     "英語.二次的定義",
     "英語.複数定義",
   ];
+  //create query for words beginning with this. Did wildcards, but current version below only appears when an exact match is found and not partials. Maybe can add more logic to have both?
   const query = {
     $or: fields.map((field) => ({
       [field]: { $regex: new RegExp("^" + liveSearchQuery + ".*", "i") },
     })),
   };
 
-  let matchFound = await Word.find(query).exec();
-
-  //limit to 5 results
-  matchFound = matchFound.slice(0, 5);
+  let matchFound = await Word.find(query).limit(5).exec();
 
   let searchPredictions = [];
   matchFound.forEach((word) => {
