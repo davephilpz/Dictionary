@@ -1,6 +1,7 @@
 //DOM elements
 //public
 const searchForm = document.querySelector("#search-form");
+const paginationForm = document.querySelector("#pagination-form");
 //private
 const getReviewWordForm = document.querySelector("#get-review-word");
 const postReviewWordForm = document.querySelector("#post-review-word");
@@ -50,6 +51,21 @@ if (searchForm) {
       searchForm.action = `/search/${searchInput}`;
       searchForm.submit();
     }
+  });
+}
+
+if (paginationForm) {
+  paginationForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const word = paginationForm.dataset.word;
+    const page = parseInt(document.querySelector("#page").value);
+    // const limit = req.params;
+    console.log(word);
+
+    paginationForm.action = `/search/${word}?page=${page}`;
+    paginationForm.method = "POST"; // Add this line to set method to POST
+    paginationForm.submit();
   });
 }
 

@@ -134,7 +134,7 @@
 </section>
 
 <div class="pagination">
-  <form id="pagination-form" method="POST">
+  <form id="pagination-form" data-word="<%= searchString %>" method="POST">
     <% if (currentPage !== 1) { %>
     <button type="submit" name="page" value="1" class="page-link">
       &#171; First
@@ -151,12 +151,19 @@
     currentPage) { %>
     <span class="current-page page-link"><%= i %></span>
     <% } else if (i >= currentPage - 2 && i <= currentPage + 2) { %>
-    <button type="submit" name="page" value="<%= i %>" class="page-link">
+    <button
+      type="submit"
+      id="page"
+      name="page"
+      value="<%= i %>"
+      class="page-link"
+    >
       <%= i %>
     </button>
     <% } %> <% } %> <% if (currentPage !== totalPages) { %>
     <button
       type="submit"
+      id="page"
       name="page"
       value="<%= currentPage + 1 %>"
       class="page-link"
@@ -165,6 +172,7 @@
     </button>
     <button
       type="submit"
+      id="page"
       name="page"
       value="<%= totalPages %>"
       class="page-link"
