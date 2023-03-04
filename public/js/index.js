@@ -54,52 +54,6 @@ if (searchForm) {
   });
 }
 
-// if (paginationForm) {
-//   paginationForm.addEventListener("submit", function (event) {
-//     event.preventDefault();
-
-//     const word = paginationForm.dataset.word;
-//     // const page = parseInt(paginationForm.querySelector("#page").value);
-//     const page = parseInt(event.target.value);
-//     // const limit = req.params;
-//     console.log("event target:", event.target);
-//     console.log(word);
-//     console.log("page:", page);
-
-//     paginationForm.action = `/search/${word}?page=${page}`;
-//     paginationForm.method = "POST";
-//     paginationForm.submit();
-//   });
-// }
-
-// function submitForm(page) {
-//   const paginationForm = document.querySelector("#pagination-form");
-//   const word = paginationForm.dataset.word;
-//   const pageInput = paginationForm.querySelector("#page");
-//   pageInput.value = page;
-//   paginationForm.action = `/search/${word}?page=${page}`;
-//   paginationForm.method = "POST";
-//   paginationForm.submit();
-// }
-
-//working version with CSP
-// if (paginationForm) {
-//   const paginationForm = document.querySelector("#pagination-form");
-//   const pageButtons = paginationForm.querySelectorAll(".page-link");
-//   pageButtons.forEach((button) => {
-//     button.addEventListener("click", (event) => {
-//       event.preventDefault();
-//       const page = button.dataset.page;
-//       const word = paginationForm.dataset.word;
-//       const pageInput = paginationForm.querySelector("#page");
-//       pageInput.value = page;
-//       paginationForm.action = `/search/${word}?page=${page}`;
-//       paginationForm.method = "POST";
-//       paginationForm.submit();
-//     });
-//   });
-// }
-
 if (paginationForm) {
   const paginationForm = document.querySelector("#pagination-form");
   const pageButtons = paginationForm.querySelectorAll(".page-link");
