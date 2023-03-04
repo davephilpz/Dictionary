@@ -82,6 +82,24 @@ if (searchForm) {
 //   paginationForm.submit();
 // }
 
+//working version with CSP
+// if (paginationForm) {
+//   const paginationForm = document.querySelector("#pagination-form");
+//   const pageButtons = paginationForm.querySelectorAll(".page-link");
+//   pageButtons.forEach((button) => {
+//     button.addEventListener("click", (event) => {
+//       event.preventDefault();
+//       const page = button.dataset.page;
+//       const word = paginationForm.dataset.word;
+//       const pageInput = paginationForm.querySelector("#page");
+//       pageInput.value = page;
+//       paginationForm.action = `/search/${word}?page=${page}`;
+//       paginationForm.method = "POST";
+//       paginationForm.submit();
+//     });
+//   });
+// }
+
 if (paginationForm) {
   const paginationForm = document.querySelector("#pagination-form");
   const pageButtons = paginationForm.querySelectorAll(".page-link");
@@ -92,10 +110,23 @@ if (paginationForm) {
       const word = paginationForm.dataset.word;
       const pageInput = paginationForm.querySelector("#page");
       pageInput.value = page;
-      paginationForm.action = `/search/${word}?page=${page}`;
+      const limitSelect = paginationForm.querySelector("#limit-select");
+      const limit = limitSelect.value;
+      paginationForm.action = `/search/${word}?page=${page}&limit=${limit}`;
       paginationForm.method = "POST";
       paginationForm.submit();
     });
+  });
+  const limitSelect = paginationForm.querySelector("#limit-select");
+  limitSelect.addEventListener("change", () => {
+    const word = paginationForm.dataset.word;
+    const pageInput = paginationForm.querySelector("#page");
+    const limit = limitSelect.value;
+    const limitQueryParam = `&limit=${limit}`;
+    const currentPageQueryParam = `&page=${pageInput.value}`;
+    const searchUrl = `/search/${word}?${limitQueryParam}${currentPageQueryParam}`;
+    paginationForm.action = searchUrl;
+    paginationForm.submit();
   });
 }
 
