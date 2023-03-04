@@ -73,14 +73,14 @@ app.use(
 //removes all $ and :. to prevent injections.
 app.use(mongoSanitize());
 //adds sercurity for headers. Add additional scripts/sources as app grows or needs other CDN, hooks, APIs etc.
-// app.use(
-//   helmet.contentSecurityPolicy({
-//     directives: {
-//       defaultSrc: ["'self'"],
-//       scriptSrc: ["'self'"],
-//     },
-//   })
-// );
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'"],
+    },
+  })
+);
 
 //logging middleware
 app.use(speedLogger);
