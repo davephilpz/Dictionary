@@ -55,6 +55,9 @@ exports.postSearchWord = catchAsyncErrorHandler(async (req, res, next) => {
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;
 
+  //filtration
+  const partOfSpeechFilter = req.query.filter;
+
   console.log("url params:", searchString);
   console.log("req.body:", req.body);
   console.log("search string:", searchString);
@@ -86,20 +89,23 @@ exports.postSearchWord = catchAsyncErrorHandler(async (req, res, next) => {
 
   // Find words matching query
   let allSearchResults = await Word.find({
-    //search kanji, hiragana, katakana, romaji and English and return all results
-    $or: [
-      { "日本語.日本語単語": query.searchString },
-      { "日本語.平仮名": query.searchString },
-      { "日本語.片仮名": query.searchString },
-      { "日本語.ローマ字": query.searchString },
-      { "日本語.助詞": query.searchString }, //remove after editing
-      { "英語.英単語": query.searchString },
-      { "英語.二次的定義": query.searchString },
-      { "英語.複数定義": query.searchString },
+    $and: [
+      {
+        //search kanji, hiragana, katakana, romaji and English and return all results
+        $or: [
+          { "日本語.日本語単語": query.searchString },
+          { "日本語.平仮名": query.searchString },
+          { "日本語.片仮名": query.searchString },
+          { "日本語.ローマ字": query.searchString },
+          { "日本語.助詞": query.searchString }, //remove after editing
+          { "英語.英単語": query.searchString },
+          { "英語.二次的定義": query.searchString },
+          { "英語.複数定義": query.searchString },
+        ],
+      },
+      partOfSpeechFilter ? { "日本語.日本語品詞": partOfSpeechFilter } : {},
     ],
   })
-    // .skip(startIndex)
-    // .limit(limit)
     .lean()
     .exec();
 
@@ -115,6 +121,7 @@ exports.postSearchWord = catchAsyncErrorHandler(async (req, res, next) => {
     searchString,
     page,
     limit,
+    partOfSpeechFilter,
     currentPage: page,
     totalPages: Math.ceil(totalSearchResults / limit),
     currentPageStartIndex: startIndex + 1,

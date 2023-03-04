@@ -1,33 +1,43 @@
 <div class="pagination">
   <form id="pagination-form" data-word="<%= searchString %>" method="POST">
     <% if (currentPage !== 1) { %>
-    <button type="button" class="page-link" data-page="1">&#171; First</button>
-    <button type="button" class="page-link" data-page="<%= currentPage - 1 %>">
+    <button type="button" class="page-button" data-page="1">&#171; First</button>
+    <button type="button" class="page-button" data-page="<%= currentPage - 1 %>">
       &laquo; Previous
     </button>
     <% } %> <% for (let i = 1; i <= totalPages; i++) { %> <% if (i ===
     currentPage) { %>
-    <span class="current-page page-link"><%= i %></span>
+    <span class="current-page page-button"><%= i %></span>
     <% } else if (i >= currentPage - 2 && i <= currentPage + 2) { %>
-    <button type="button" class="page-link" data-page="<%= i %>">
+    <button type="button" class="page-button" data-page="<%= i %>">
       <%= i %>
     </button>
     <% } %> <% } %> <% if (currentPage !== totalPages) { %>
-    <button type="button" class="page-link" data-page="<%= currentPage + 1 %>">
+    <button type="button" class="page-button" data-page="<%= currentPage + 1 %>">
       Next &raquo;
     </button>
-    <button type="button" class="page-link" data-page="<%= totalPages %>">
+    <button type="button" class="page-button" data-page="<%= totalPages %>">
       Last &raquo;
     </button>
     <% } %>
     <input type="hidden" id="page" name="page" value="" />
-    <select name="limit" id="limit-select">
+
+    <select name="limit" id="result-number-filter">
       <option value="5" <%= limit == 5 ? "selected" : "" %>>5</option>
       <option value="10" <%= limit == 10 ? "selected" : "" %>>10</option>
       <option value="15" <%= limit == 15 ? "selected" : "" %>>15</option>
       <option value="20" <%= limit == 20 ? "selected" : "" %>>20</option>
       <option value="25" <%= limit == 25 ? "selected" : "" %>>25</option>
        <option value="<%= totalSearchResults %>" <%= limit == totalSearchResults.toString() ? "selected" : "" %>>All</option>
+    </select>
+
+    <select name="partOfSpeechFilter" id="part-of-speech-filter">
+      <option value="">全品詞</option>
+      <option value="名詞" <%= partOfSpeechFilter === "名詞" ? "selected" : "" %>>名詞</option>
+      <option value="動詞" <%= partOfSpeechFilter === "動詞" ? "selected" : "" %>>動詞</option>
+      <option value="形容詞" <%= partOfSpeechFilter === "形容詞" ? "selected" : "" %>>形容詞</option>
+      <option value="副詞" <%= partOfSpeechFilter === "副詞" ? "selected" : "" %>>副詞</option>
+      <% /* Add any additional options as needed */ %>
     </select>
   </form>
 </div>
@@ -170,7 +180,7 @@
 <div class="pagination">
   <form id="pagination-form" data-word="<%= searchString %>" method="POST">
     <% if (currentPage !== 1) { %>
-    <button type="submit" id="page" name="page" value="1" class="page-link">
+    <button type="submit" id="page" name="page" value="1" class="page-button">
       &#171; First
     </button>
     <button
@@ -178,20 +188,20 @@
       id="page"
       name="page"
       value="<%= currentPage - 1 %>"
-      class="page-link"
+      class="page-button"
     >
       &laquo; Previous
     </button>
     <% } %> <% for (let i = 1; i <= totalPages; i++) { %> <% if (i ===
     currentPage) { %>
-    <span class="current-page page-link"><%= i %></span>
+    <span class="current-page page-button"><%= i %></span>
     <% } else if (i >= currentPage - 2 && i <= currentPage + 2) { %>
     <button
       type="submit"
       id="page"
       name="page"
       value="<%= i %>"
-      class="page-link"
+      class="page-button"
     >
       <%= i %>
     </button>
@@ -201,7 +211,7 @@
       id="page"
       name="page"
       value="<%= currentPage + 1 %>"
-      class="page-link"
+      class="page-button"
     >
       Next &raquo;
     </button>
@@ -210,7 +220,7 @@
       id="page"
       name="page"
       value="<%= totalPages %>"
-      class="page-link"
+      class="page-button"
     >
       Last &raquo;
     </button>
