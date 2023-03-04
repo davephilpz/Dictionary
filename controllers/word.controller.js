@@ -85,7 +85,7 @@ exports.postSearchWord = catchAsyncErrorHandler(async (req, res, next) => {
   console.log("query.searchString:", query.searchString);
 
   // Find words matching query
-  let searchResults = await Word.find({
+  let allSearchResults = await Word.find({
     //search kanji, hiragana, katakana, romaji and English and return all results
     $or: [
       { "日本語.日本語単語": query.searchString },
@@ -98,16 +98,16 @@ exports.postSearchWord = catchAsyncErrorHandler(async (req, res, next) => {
       { "英語.複数定義": query.searchString },
     ],
   })
-    .skip(startIndex)
+    // .skip(startIndex)
     // .limit(limit)
     .lean()
     .exec();
 
   // //return total matches and pass in for info and render logic
-  const totalSearchResults = searchResults.length;
+  const totalSearchResults = allSearchResults.length;
 
   //return only first page initially
-  searchResults = searchResults.slice(startIndex, endIndex);
+  const searchResults = allSearchResults.slice(startIndex, endIndex);
 
   res.render(`search`, {
     totalSearchResults,

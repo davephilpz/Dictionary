@@ -59,14 +59,27 @@ if (paginationForm) {
     event.preventDefault();
 
     const word = paginationForm.dataset.word;
-    const page = parseInt(document.querySelector("#page").value);
+    // const page = parseInt(paginationForm.querySelector("#page").value);
+    const page = parseInt(event.target.value);
     // const limit = req.params;
+    console.log("event target:", event.target);
     console.log(word);
+    console.log("page:", page);
 
     paginationForm.action = `/search/${word}?page=${page}`;
-    paginationForm.method = "POST"; // Add this line to set method to POST
+    paginationForm.method = "POST";
     paginationForm.submit();
   });
+}
+
+function submitForm(page) {
+  const paginationForm = document.querySelector("#pagination-form");
+  const word = paginationForm.dataset.word;
+  const pageInput = paginationForm.querySelector("#page");
+  pageInput.value = page;
+  paginationForm.action = `/search/${word}?page=${page}`;
+  paginationForm.method = "POST";
+  paginationForm.submit();
 }
 
 //private handlers
