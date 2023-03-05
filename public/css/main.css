@@ -1636,12 +1636,7 @@ form p {
 /* Pagination */
 
 /* .pagination {
-  margin: 0 auto;
-  margin-bottom: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
+
 } */
 
 .pages {
@@ -1651,6 +1646,11 @@ form p {
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  /* background-color: var(--color-grey-light); */
+  /* border: 0.2rem solid var(--color-grey-dark); */
+  /* border-radius: 5rem; */
+  /* width: min-content; */
+  /* padding: 0.5rem 2rem; */
 }
 
 .filters {
@@ -1679,52 +1679,27 @@ form p {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  border: 0.2rem solid transparent;
 }
+
 .current-page {
-  border: 0.2rem solid var(--color-accent-primary);
+  border: 0.3rem solid var(--color-accent-primary);
   font-family: var(--font-family-secondary);
   font-size: 2rem;
   font-weight: 800;
 }
 
 .page-icon {
-  height: 3rem;
-  width: 3rem;
+  height: 4rem;
+  width: 4rem;
   stroke: var(--color-accent-primary);
+  border-radius: 50%;
 }
 
 .page-button:hover {
-  background-color: var(--color-accent-primary);
+  border: 0.2rem solid var(--color-dark);
 }
 
 .page-button:hover .page-icon {
-  background-color: var(--color-accent-primary);
-  stroke: #fff;
-}
-
-/* .dots {
-  color: var(--color-accent-primary);
-  align-items: center;
-  font-size: 36px;
-  padding-bottom: 20px;
-} */
-
-.page-link:link,
-.page-link:visited {
-  font-size: 24px;
-  height: 36px;
-  width: 36px;
-  color: #343a40;
-  text-decoration: none;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.page-link:hover,
-.page-link:active,
-.page-link.current-page {
-  color: #fff;
-  background-color: var(--color-accent-primary);
+  stroke: var(--color-accent-primary);
 }

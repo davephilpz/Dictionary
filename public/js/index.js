@@ -1,8 +1,6 @@
 //DOM elements
 //public
 const searchForm = document.querySelector("#search-form");
-// const paginationForm = document.querySelector("#pagination-form");
-// const paginationForm = document.querySelectorAll(".pagination");
 //private
 const getReviewWordForm = document.querySelector("#get-review-word");
 const postReviewWordForm = document.querySelector("#post-review-word");
@@ -105,71 +103,6 @@ const paginationForms = document.querySelectorAll(".pagination");
 if (paginationForms) {
   paginationForms.forEach(registerPaginationListeners);
 }
-
-// if (paginationForm) {
-//   paginationForm.forEach((form) => {
-//     form.addEventListener("submit", (event) => {
-//       //query selector declarations
-//       const pageButtons = paginationForm.querySelectorAll(".page-button");
-//       const resultNumberFilter = paginationForm.querySelector(
-//         "#result-number-filter"
-//       );
-//       const partOfSpeechFilter = paginationForm.querySelector(
-//         "#part-of-speech-filter"
-//       );
-
-//       const word = paginationForm.dataset.word;
-
-//       //page navigation
-//       pageButtons.forEach((button) => {
-//         button.addEventListener("click", (event) => {
-//           event.preventDefault();
-
-//           const page = button.dataset.page;
-//           const limit = resultNumberFilter.value;
-//           const filter = partOfSpeechFilter.value;
-
-//           //plug variables into URL query
-//           paginationForm.action = `/search/${word}?page=${page}&limit=${limit}${
-//             filter ? `&filter=${filter}` : ""
-//           }`;
-
-//           //POST to server
-//           paginationForm.method = "POST";
-//           paginationForm.submit();
-//         });
-//       });
-
-//       //limit number of search results
-//       resultNumberFilter.addEventListener("change", () => {
-//         const limit = resultNumberFilter.value;
-//         const filter = partOfSpeechFilter.value;
-
-//         //plug variables into URL query
-//         paginationForm.action = `/search/${word}?&page=1&limit=${limit}${
-//           filter ? `&filter=${filter}` : ""
-//         }`;
-
-//         //POST to server
-//         paginationForm.submit();
-//       });
-
-//       //filter for particular part of speech
-//       partOfSpeechFilter.addEventListener("change", () => {
-//         const limit = resultNumberFilter.value;
-//         const filter = partOfSpeechFilter.value;
-
-//         //plug variables into URL query
-//         paginationForm.action = `/search/${word}?&page=1&limit=${limit}${
-//           filter ? `&filter=${filter}` : ""
-//         }`;
-
-//         //POST to server
-//         paginationForm.submit();
-//       });
-//     });
-//   });
-// }
 
 //private handlers
 if (getReviewWordForm) {
