@@ -238,3 +238,83 @@
   </ul>
   <% } %>
 </section>
+
+<form class="pagination margin-bottom" id="pagination-form" data-word="<%= searchString %>" method="POST">
+    <div class="pages">
+    <% if (currentPage !== 1) { %>
+    <button type="button" class="page-button" data-page="1">   
+      <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="page-icon l2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5"
+          />
+        </svg>
+      </button>
+    <button type="button" class="page-button" data-page="<%= currentPage - 1 %>">
+     <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="page-icon l1"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 19.5L8.25 12l7.5-7.5"
+          />
+        </svg>
+    </button>
+    <% } %> <% for (let i = 1; i <= totalPages; i++) { %> <% if (i ===
+    currentPage) { %>
+    <span class="page-button current-page"><%= i %></span>
+    <% } else if (i >= currentPage - 2 && i <= currentPage + 2) { %>
+    <button type="button" class="page-button" data-page="<%= i %>">
+      <%= i %>
+    </button>
+    <% } %> <% } %> <% if (currentPage !== totalPages) { %>
+    <button type="button" class="page-button" data-page="<%= currentPage + 1 %>">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="page-icon r2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M8.25 4.5l7.5 7.5-7.5 7.5"
+          />
+        </svg>
+    </button>
+    <button type="button" class="page-button" data-page="<%= totalPages %>">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="page-icon r1"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"
+          />
+        </svg>
+    </button>
+    <% } %>
+    <input type="hidden" id="page" name="page" value="" />
+  </div>
+  </form>
