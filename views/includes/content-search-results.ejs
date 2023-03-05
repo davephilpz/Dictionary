@@ -1,27 +1,104 @@
-<div class="pagination">
-  <form id="pagination-form" data-word="<%= searchString %>" method="POST">
+<section class="section-search-results">
+  <% if (searchString.length === 0) { %>
+  <ul class="search__results">
+    <h2 class="search__title">Must Enter Search</h2>
+  </ul>
+
+  <% } else if (totalSearchResults > 0) { %>
+  <ul class="search__results">
+    <% if (totalSearchResults === 1) { %>
+    <h2 class="search__title">
+      <%= totalSearchResults %> Search Result for: (<%= searchString %>)
+    </h2>
+    <% } else { %>
+    <h2 class="search__title">
+      Search results <%= currentPageStartIndex %> to <%= currentPageEndIndex %>
+      of <%= totalSearchResults %> for: (<%= searchString %>)
+    </h2>
+    <% } %> 
+    
+
+  <form class="pagination" id="pagination-form" data-word="<%= searchString %>" method="POST">
+    <div class="pages">
     <% if (currentPage !== 1) { %>
-    <button type="button" class="page-button" data-page="1">&#171; First</button>
+    <button type="button" class="page-button" data-page="1">   
+      <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="page-icon l2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5"
+          />
+        </svg>
+      </button>
     <button type="button" class="page-button" data-page="<%= currentPage - 1 %>">
-      &laquo; Previous
+     <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="page-icon l1"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 19.5L8.25 12l7.5-7.5"
+          />
+        </svg>
     </button>
     <% } %> <% for (let i = 1; i <= totalPages; i++) { %> <% if (i ===
     currentPage) { %>
-    <span class="current-page page-button"><%= i %></span>
+    <span class="page-button current-page"><%= i %></span>
     <% } else if (i >= currentPage - 2 && i <= currentPage + 2) { %>
     <button type="button" class="page-button" data-page="<%= i %>">
       <%= i %>
     </button>
     <% } %> <% } %> <% if (currentPage !== totalPages) { %>
     <button type="button" class="page-button" data-page="<%= currentPage + 1 %>">
-      Next &raquo;
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="page-icon r2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M8.25 4.5l7.5 7.5-7.5 7.5"
+          />
+        </svg>
     </button>
     <button type="button" class="page-button" data-page="<%= totalPages %>">
-      Last &raquo;
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="page-icon r1"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"
+          />
+        </svg>
     </button>
     <% } %>
     <input type="hidden" id="page" name="page" value="" />
+  </div>
 
+    <div class="filters">
+    <h4>Results per page:</h4>
     <select name="limit" id="result-number-filter">
       <option value="5" <%= limit == 5 ? "selected" : "" %>>5</option>
       <option value="10" <%= limit == 10 ? "selected" : "" %>>10</option>
@@ -31,6 +108,7 @@
        <option value="<%= totalSearchResults %>" <%= limit == totalSearchResults.toString() ? "selected" : "" %>>All</option>
     </select>
 
+    <h4>Part of speech:</h4>
     <select name="partOfSpeechFilter" id="part-of-speech-filter">
       <option value="">全品詞</option>
       <option value="名詞" <%= partOfSpeechFilter === "名詞" ? "selected" : "" %>>名詞</option>
@@ -39,27 +117,11 @@
       <option value="副詞" <%= partOfSpeechFilter === "副詞" ? "selected" : "" %>>副詞</option>
       <% /* Add any additional options as needed */ %>
     </select>
+    </div>
   </form>
-</div>
 
-<section class="section-search-results">
-  <% if (searchString.length === 0) { %>
-  <ul class="search__results">
-    <h1 class="search__title">Must Enter Search</h1>
-  </ul>
-
-  <% } else if (totalSearchResults > 0) { %>
-  <ul class="search__results">
-    <% if (totalSearchResults === 1) { %>
-    <h1 class="search__title">
-      <%= totalSearchResults %> Search Result for: (<%= searchString %>)
-    </h1>
-    <% } else { %>
-    <h1 class="search__title">
-      Search results <%= currentPageStartIndex %> to <%= currentPageEndIndex %>
-      of <%= totalSearchResults %> for: (<%= searchString %>)
-    </h1>
-    <% } %> <% for (let searchResult of searchResults) { %>
+    
+    <% for (let searchResult of searchResults) { %>
     <li class="search__result">
       <div class="search__result--top-row">
         <h2><%= searchResult.日本語.日本語単語 %></h2>
@@ -176,54 +238,3 @@
   </ul>
   <% } %>
 </section>
-
-<div class="pagination">
-  <form id="pagination-form" data-word="<%= searchString %>" method="POST">
-    <% if (currentPage !== 1) { %>
-    <button type="submit" id="page" name="page" value="1" class="page-button">
-      &#171; First
-    </button>
-    <button
-      type="submit"
-      id="page"
-      name="page"
-      value="<%= currentPage - 1 %>"
-      class="page-button"
-    >
-      &laquo; Previous
-    </button>
-    <% } %> <% for (let i = 1; i <= totalPages; i++) { %> <% if (i ===
-    currentPage) { %>
-    <span class="current-page page-button"><%= i %></span>
-    <% } else if (i >= currentPage - 2 && i <= currentPage + 2) { %>
-    <button
-      type="submit"
-      id="page"
-      name="page"
-      value="<%= i %>"
-      class="page-button"
-    >
-      <%= i %>
-    </button>
-    <% } %> <% } %> <% if (currentPage !== totalPages) { %>
-    <button
-      type="submit"
-      id="page"
-      name="page"
-      value="<%= currentPage + 1 %>"
-      class="page-button"
-    >
-      Next &raquo;
-    </button>
-    <button
-      type="submit"
-      id="page"
-      name="page"
-      value="<%= totalPages %>"
-      class="page-button"
-    >
-      Last &raquo;
-    </button>
-    <% } %>
-  </form>
-</div>
