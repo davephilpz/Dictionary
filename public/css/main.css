@@ -1459,11 +1459,18 @@ form p {
   border: 0.2rem solid var(--color-dark);
 }
 
+.red-font {
+  color: hsla(0, 100%, 50%, 0.8);
+}
 .red {
   background-color: hsla(0, 100%, 50%, 0.8);
 }
 .red:hover {
   background-color: hsla(0, 100%, 50%, 0.5);
+}
+
+.orange-font {
+  color: hsla(38, 84%, 49%, 0.8);
 }
 .orange {
   background-color: hsla(38, 84%, 49%, 0.8);
@@ -1471,11 +1478,19 @@ form p {
 .orange:hover {
   background-color: hsla(38, 84%, 49%, 0.5);
 }
+
+.yellow-font {
+  color: hsla(58, 86%, 58%, 0.8);
+}
 .yellow {
   background-color: hsla(58, 86%, 58%, 0.8);
 }
 .yellow:hover {
   background-color: hsla(58, 86%, 58%, 0.5);
+}
+
+.green-font {
+  color: hsla(105, 77%, 46%, 0.8);
 }
 .green {
   background-color: hsla(105, 77%, 46%, 0.8);

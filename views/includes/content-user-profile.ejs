@@ -8,7 +8,18 @@
 
 <h2 class="subtitle">Words in my collection</h2>
 <p class="generic-text">Total: <%= myWords %></p>
-<p class="generic-text">My words: <%= red %></p>
-<p class="generic-text">My words: <%= orange %></p>
-<p class="generic-text">My words: <%= yellow %></p>
-<p class="generic-text">Words mastered: <%= green %></p>
+<p class="generic-text">
+  <span class="review__card--button red">Red</span> Unfamiliar words: <%= red %>
+</p>
+<p class="generic-text">
+  <span class="review__card--button orange">Orange</span> Somewhat familiar
+  words: <%= orange %>
+</p>
+<p class="generic-text">
+  <span class="review__card--button yellow">Yellow</span> Familiar words: <%=
+  yellow %>
+</p>
+<p class="generic-text">
+  <span class="review__card--button green">Green</span> Mastered words: <%=
+  green %>
+</p>
