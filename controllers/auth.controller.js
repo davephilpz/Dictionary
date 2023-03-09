@@ -135,27 +135,49 @@ exports.getUserProfile = catchAsyncErrorHandler(async (req, res, next) => {
   const wordOfTheDay = await Study.find({
     [`wordOfTheDay.${wordOfTheDayFormattedDate}`]: { $exists: true },
   });
+
   console.log("word of the day:", wordOfTheDay);
-  const parsedWordOfTheDay = wordOfTheDay[0].wordOfTheDay;
-  const mappedWordOfTheDay = parsedWordOfTheDay.get(wordOfTheDayFormattedDate);
 
-  console.log("word of the day parsed:", parsedWordOfTheDay);
-  console.log("word of the day mapped:", mappedWordOfTheDay);
-  console.log("user:", user);
+  if (wordOfTheDay.length === 0) {
+    let mappedWordOfTheDay = "";
 
-  res.render("user-profile", {
-    pageTitle: "User Profile",
-    contentTitle: "User Profile",
-    session: req.session,
-    user,
-    myWords,
-    red,
-    orange,
-    yellow,
-    green,
-    formattedDate,
-    mappedWordOfTheDay,
-  });
+    res.render("user-profile", {
+      pageTitle: "User Profile",
+      contentTitle: "User Profile",
+      session: req.session,
+      user,
+      myWords,
+      red,
+      orange,
+      yellow,
+      green,
+      formattedDate,
+      mappedWordOfTheDay,
+    });
+  } else {
+    const parsedWordOfTheDay = wordOfTheDay[0].wordOfTheDay;
+    const mappedWordOfTheDay = parsedWordOfTheDay.get(
+      wordOfTheDayFormattedDate
+    );
+
+    console.log("word of the day parsed:", parsedWordOfTheDay);
+    console.log("word of the day mapped:", mappedWordOfTheDay);
+    console.log("user:", user);
+
+    res.render("user-profile", {
+      pageTitle: "User Profile",
+      contentTitle: "User Profile",
+      session: req.session,
+      user,
+      myWords,
+      red,
+      orange,
+      yellow,
+      green,
+      formattedDate,
+      mappedWordOfTheDay,
+    });
+  }
 });
 
 exports.getUserSignout = catchAsyncErrorHandler(async (req, res, next) => {

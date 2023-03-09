@@ -1,11 +1,10 @@
-<!-- <h1 class="errorMessage">User Profile Incomplete</h1> -->
-
 <h2 class="subtitle">
   Welcome back <%= user.name[0].toUpperCase() + user.name.substring(1) %>
 </h2>
 <p class="generic-text">Member since: <%= formattedDate %></p>
+<% if (mappedWordOfTheDay) { %>
 <p class="generic-text">Word of the day: <%= mappedWordOfTheDay %></p>
-
+<% } else { %><% } %>
 <h2 class="subtitle">Words in my collection</h2>
 <p class="generic-text">Total: <%= myWords %></p>
 <p class="generic-text">
