@@ -212,6 +212,16 @@
           </div>
         </div>
         <% } %>
+        <% if (searchResult.日本語.備考欄 == '' ) { %>
+        <div class="accordian__item"></div>
+        <% } else { %>
+        <div class="accordian__item">
+          <h3 class="accordian__item--title">備考欄</h3>
+          <div class="accordian__item--text">
+            <%= searchResult.日本語.備考欄.join('').replace(/,/g,'') %>
+          </div>
+        </div>
+        <% } %>
       </div>
 
       <svg
