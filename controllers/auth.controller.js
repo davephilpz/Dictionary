@@ -127,19 +127,27 @@ exports.getUserProfile = catchAsyncErrorHandler(async (req, res, next) => {
   };
   const formattedDate = date.toLocaleDateString("en-US", options); //format date string
 
-  const wordOfTheDayMatchDate = new Date();
-  const wordOfTheDayFormattedDate = wordOfTheDayMatchDate
-    .toISOString()
-    .substring(0, 10);
-  console.log(wordOfTheDayFormattedDate);
+  //get today's date
+  const todaysDate = new Date();
+  const formattedWordDate = todaysDate.toISOString().substring(0, 10);
+
+  console.log(formattedWordDate);
+
+  //find word/sentence of the day for today's date
   const wordOfTheDay = await Study.find({
-    [`wordOfTheDay.${wordOfTheDayFormattedDate}`]: { $exists: true },
+    [`wordOfTheDay.${formattedWordDate}`]: { $exists: true },
+  });
+  const sentenceOfTheDay = await Study.find({
+    [`sentenceOfTheDay.${formattedWordDate}`]: { $exists: true },
   });
 
   console.log("word of the day:", wordOfTheDay);
+  console.log("sentence of the day:", sentenceOfTheDay);
 
+  //temp until perpetual server and cron function enabled
   if (wordOfTheDay.length === 0) {
     let mappedWordOfTheDay = "";
+    let mappedSentenceOfTheDay = "";
 
     res.render("user-profile", {
       pageTitle: "User Profile",
@@ -153,15 +161,18 @@ exports.getUserProfile = catchAsyncErrorHandler(async (req, res, next) => {
       green,
       formattedDate,
       mappedWordOfTheDay,
+      mappedSentenceOfTheDay,
     });
   } else {
     const parsedWordOfTheDay = wordOfTheDay[0].wordOfTheDay;
-    const mappedWordOfTheDay = parsedWordOfTheDay.get(
-      wordOfTheDayFormattedDate
-    );
+    const mappedWordOfTheDay = parsedWordOfTheDay.get(formattedDate);
+    const parsedSentenceOfTheDay = sentenceOfTheDay[0].sentenceOfTheDay;
+    const mappedSentenceOfTheDay = parsedSentenceOfTheDay.get(formattedDate);
 
     console.log("word of the day parsed:", parsedWordOfTheDay);
     console.log("word of the day mapped:", mappedWordOfTheDay);
+    console.log("sentence of the day parsed:", parsedSentenceOfTheDay);
+    console.log("sentence of the day mapped:", mappedSentenceOfTheDay);
     console.log("user:", user);
 
     res.render("user-profile", {
@@ -176,6 +187,7 @@ exports.getUserProfile = catchAsyncErrorHandler(async (req, res, next) => {
       green,
       formattedDate,
       mappedWordOfTheDay,
+      mappedSentenceOfTheDay,
     });
   }
 });

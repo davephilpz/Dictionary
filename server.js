@@ -4,7 +4,10 @@ const app = require("./app");
 require("dotenv").config({ path: "./config.env" });
 
 //cron jobs
-const { startCronJob } = require("./controllers/study.controller");
+const {
+  startWordCronJob,
+  startSentenceCronJob,
+} = require("./controllers/study.controller");
 
 //logger
 const winston = require("winston");
@@ -38,7 +41,8 @@ mongoose
   .then(() => console.log("DB connection successful"));
 
 //run cron jobs
-startCronJob();
+startWordCronJob();
+startSentenceCronJob();
 
 //run server
 const server = app.listen(port, () => {

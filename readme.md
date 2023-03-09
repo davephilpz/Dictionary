@@ -10,8 +10,7 @@ Search:
 3. ***May add a new button in each word card to add the card to collection if logged in. Possibly a modal window and 4 colors. This will save user from having to hit random until they eventually come across that word.
 
 User profile:
-1. ***Update collection categories.
-2. ***Add example sentence of day.
+1. ***Add example sentence of day.
    
 Review:
 1. ***No way to remove words from green (mastered) yet after a possible misclick
