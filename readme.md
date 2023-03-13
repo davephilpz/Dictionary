@@ -13,7 +13,7 @@ Search:
 4. Change main search to get and not post so can easily call it and paste in words. Need to check how to also do live search on route without get conflicts.
 
 User profile:
-1. Add example sentence of day.
+1. Setup server cron jobs.
    
 Review:
 1. No way to remove words from green (mastered) yet after a possible misclick.
