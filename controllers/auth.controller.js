@@ -127,11 +127,11 @@ exports.getUserProfile = catchAsyncErrorHandler(async (req, res, next) => {
   };
   const formattedDate = date.toLocaleDateString("en-US", options); //format date string
 
-  //get today's date
+  //get today's date for word/sentence of the day
   const todaysDate = new Date();
   const formattedWordDate = todaysDate.toISOString().substring(0, 10);
 
-  console.log(formattedWordDate);
+  console.log("formatted date:", formattedWordDate);
 
   //find word/sentence of the day for today's date
   const wordOfTheDay = await Study.find({
@@ -144,52 +144,31 @@ exports.getUserProfile = catchAsyncErrorHandler(async (req, res, next) => {
   console.log("word of the day:", wordOfTheDay);
   console.log("sentence of the day:", sentenceOfTheDay);
 
-  //temp until perpetual server and cron function enabled
-  if (wordOfTheDay.length === 0) {
-    let mappedWordOfTheDay = "";
-    let mappedSentenceOfTheDay = "";
+  const parsedWordOfTheDay = wordOfTheDay[0].wordOfTheDay;
+  const mappedWordOfTheDay = parsedWordOfTheDay.get(formattedWordDate);
+  const parsedSentenceOfTheDay = sentenceOfTheDay[0].sentenceOfTheDay;
+  const mappedSentenceOfTheDay = parsedSentenceOfTheDay.get(formattedWordDate);
 
-    res.render("user-profile", {
-      pageTitle: "User Profile",
-      contentTitle: "User Profile",
-      session: req.session,
-      user,
-      myWords,
-      red,
-      orange,
-      yellow,
-      green,
-      formattedDate,
-      mappedWordOfTheDay,
-      mappedSentenceOfTheDay,
-    });
-  } else {
-    const parsedWordOfTheDay = wordOfTheDay[0].wordOfTheDay;
-    const mappedWordOfTheDay = parsedWordOfTheDay.get(formattedDate);
-    const parsedSentenceOfTheDay = sentenceOfTheDay[0].sentenceOfTheDay;
-    const mappedSentenceOfTheDay = parsedSentenceOfTheDay.get(formattedDate);
+  console.log("word of the day parsed:", parsedWordOfTheDay);
+  console.log("word of the day mapped:", mappedWordOfTheDay);
+  console.log("sentence of the day parsed:", parsedSentenceOfTheDay);
+  console.log("sentence of the day mapped:", mappedSentenceOfTheDay);
+  console.log("user:", user);
 
-    console.log("word of the day parsed:", parsedWordOfTheDay);
-    console.log("word of the day mapped:", mappedWordOfTheDay);
-    console.log("sentence of the day parsed:", parsedSentenceOfTheDay);
-    console.log("sentence of the day mapped:", mappedSentenceOfTheDay);
-    console.log("user:", user);
-
-    res.render("user-profile", {
-      pageTitle: "User Profile",
-      contentTitle: "User Profile",
-      session: req.session,
-      user,
-      myWords,
-      red,
-      orange,
-      yellow,
-      green,
-      formattedDate,
-      mappedWordOfTheDay,
-      mappedSentenceOfTheDay,
-    });
-  }
+  res.render("user-profile", {
+    pageTitle: "User Profile",
+    contentTitle: "User Profile",
+    session: req.session,
+    user,
+    myWords,
+    red,
+    orange,
+    yellow,
+    green,
+    formattedDate,
+    mappedWordOfTheDay,
+    mappedSentenceOfTheDay,
+  });
 });
 
 exports.getUserSignout = catchAsyncErrorHandler(async (req, res, next) => {

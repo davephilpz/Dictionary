@@ -19,10 +19,6 @@ exports.startWordCronJob = () => {
       const formattedWord = randomWord[0].日本語.日本語単語;
 
       // Create a new WordOfTheDay document and save it to the database
-      // const wordOfTheDay = { [formattedDate]: formattedWord };
-      // const newWordOfTheDay = new Study({ wordOfTheDay });
-      // await newWordOfTheDay.save();
-
       const update = {
         $set: { [`wordOfTheDay.${formattedDate}`]: formattedWord },
       };
@@ -54,10 +50,9 @@ exports.startSentenceCronJob = () => {
       );
 
       // Put all example sentences into an array
-      let exampleSentences = [];
-      wordsWithExamples.forEach((word) => {
-        exampleSentences = exampleSentences.concat(word.日本語.日本語例文);
-      });
+      let exampleSentences = wordsWithExamples.flatMap(
+        (word) => word.日本語.日本語例文
+      );
 
       // Select a random example sentence
       const randomIndex = Math.floor(Math.random() * exampleSentences.length);

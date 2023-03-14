@@ -5,7 +5,16 @@
 
 <p class="generic-text">Word of the day: <%= mappedWordOfTheDay %></p>
 
-<p class="generic-text">Sentence of the day: <%= mappedSentenceOfTheDay %></p>
+<% if (mappedSentenceOfTheDay.includes(',')) { %>
+<p class="generic-text">
+  Sentence of the day: <%= mappedSentenceOfTheDay.replace(/,/g,
+  '').split('。')[0] %>。
+</p>
+<% } else { %>
+<p class="generic-text">
+  Sentence of the day: <%= mappedSentenceOfTheDay.split('。')[0] %>。
+</p>
+<% } %>
 
 <h2 class="subtitle">Words in my collection</h2>
 <p class="generic-text">Total: <%= myWords %></p>
