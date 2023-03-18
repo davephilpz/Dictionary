@@ -67,6 +67,10 @@ const usersSchema = new mongoose.Schema(
         },
       ],
     },
+    photo: {
+      type: String,
+      default: "dummy-profile-icon.png",
+    },
   },
   {
     timestamps: true,

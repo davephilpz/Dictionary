@@ -1,0 +1,10 @@
+/********************/
+/* User Profile */
+/********************/
+
+.section-user-profile {
+}
+
+.user-profile__header {
+  background-color: var(--color-grey-light);
+}

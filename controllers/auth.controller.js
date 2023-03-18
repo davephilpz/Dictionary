@@ -117,7 +117,7 @@ exports.getUserProfile = catchAsyncErrorHandler(async (req, res, next) => {
   const yellow = user.myWords.yellow.length;
   const green = user.myWords.green.length;
   //format date
-  const isoDateString = "2023-02-21T00:33:34.986Z"; //original date string
+  const isoDateString = user.createdAt; //original date string
   const date = new Date(isoDateString); //create Date object from string
   const options = {
     weekday: "long",

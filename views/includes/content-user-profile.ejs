@@ -1,6 +1,39 @@
-<h2 class="subtitle">
-  Welcome back <%= user.name[0].toUpperCase() + user.name.substring(1) %>
-</h2>
+<section class="user-profile">
+  <header class="user-profile__header">
+    <picture>
+      <source
+        media="(min-width:800px)"
+        srcset="img/profile-picture-full.webp"
+        type="image/webp"
+      />
+      <source
+        media="(min-width:800px)"
+        srcset="img/profile-picture-full.jpg"
+        type="image/png"
+      />
+      <source
+        media="(max-width:800px)"
+        srcset="img/profile-picture-mobile.webp"
+        type="image/webp"
+      />
+      <source
+        media="(max-width:800px)"
+        srcset="img/profile-picture-mobile.jpg"
+        type="image/png"
+      />
+      <img
+        class="profile__img"
+        src="img/users/profile-picture.jpg"
+        alt="user profile picture"
+      />
+    </picture>
+
+    <h2 class="subtitle">
+      Welcome back <%= user.name[0].toUpperCase() + user.name.substring(1) %>
+    </h2>
+  </header>
+</section>
+
 <p class="generic-text">Member since: <%= formattedDate %></p>
 
 <p class="generic-text">Word of the day: <%= mappedWordOfTheDay %></p>
