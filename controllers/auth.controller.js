@@ -105,7 +105,10 @@ exports.getUserProfile = catchAsyncErrorHandler(async (req, res, next) => {
   //get user from session
   const userId = req.session.userAuthId;
   //get user object from database
-  const user = await User.findById(userId);
+  const user = await User.findById(userId).populate({
+    path: "myWords.red myWords.orange myWords.yellow myWords.green",
+    model: "Word",
+  });
   //word logic on backend
   const myWords =
     user.myWords.red.length +

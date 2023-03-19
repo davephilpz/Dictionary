@@ -41,12 +41,12 @@
 
 .content-tabs {
   position: relative;
-  margin: 1rem auto;
+  padding: 0 2rem;
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 5rem;
+  justify-content: flex-start;
+  gap: 2rem;
   border-bottom: 0.2rem solid rgba(229, 229, 229);
   font-size: 2rem;
   font-weight: 700;
@@ -66,11 +66,22 @@
   color: var(--color-accent-primary);
 }
 
+.content-tabs__divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-grey-light);
+  height: 2.5rem;
+  width: 0.25rem;
+  border-radius: 1rem;
+  content: "";
+}
+
 .content-tabs__line {
   position: absolute;
   top: 6rem;
-  left: 29rem;
-  width: 10rem;
+  left: 0rem;
+  width: 4rem;
   height: 0.5rem;
   background-color: var(--color-accent-primary);
   border-radius: 1rem;
