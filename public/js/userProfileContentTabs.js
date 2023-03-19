@@ -76,8 +76,7 @@ if (myWordsTabs && myWordsAllContent && myWordsTabUnderline) {
       //move underline to active tab
       const activeTab = myWordsTabs[index];
       myWordsTabUnderline.style.width = activeTab.offsetWidth + "px";
-      myWordsTabUnderline.style.left =
-        activeTab.getBoundingClientRect().left + "px";
+      myWordsTabUnderline.style.left = activeTab.offsetLeft + "px";
 
       //remove active from all content classes
       myWordsAllContent.forEach((content) => {
