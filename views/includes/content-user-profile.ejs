@@ -1,68 +1,85 @@
 <section class="user-profile">
-  <header class="user-profile__header">
+  <div class="user-profile__header">
     <picture>
       <source
         media="(min-width:800px)"
-        srcset="img/profile-picture-full.webp"
+        srcset="img/users/<%= user.photo.slice(0, user.photo.lastIndexOf('.')) + '.webp' %>"
         type="image/webp"
       />
       <source
         media="(min-width:800px)"
-        srcset="img/profile-picture-full.jpg"
+        srcset="img/users/<%= user.photo %>"
         type="image/png"
       />
       <source
         media="(max-width:800px)"
-        srcset="img/profile-picture-mobile.webp"
+        srcset="img/users/<%= user.photo.slice(0, user.photo.lastIndexOf('.')) + '.webp' %>"
         type="image/webp"
       />
       <source
         media="(max-width:800px)"
-        srcset="img/profile-picture-mobile.jpg"
+        srcset="img/users/<%= user.photo %>"
         type="image/png"
       />
       <img
-        class="profile__img"
-        src="img/users/profile-picture.jpg"
+        class="user-profile__profile-img"
+        srcset="img/users/<%= user.photo %>"
         alt="user profile picture"
       />
     </picture>
 
-    <h2 class="subtitle">
-      Welcome back <%= user.name[0].toUpperCase() + user.name.substring(1) %>
-    </h2>
-  </header>
+    <div class="user-profile__profile-info">
+      <h2 class="user-profile__profile-title">
+        Welcome back <%= user.name[0].toUpperCase() + user.name.substring(1) %>
+      </h2>
+      <p class="user-profile__profile-text">
+        Member since: <%= formattedDate %>
+      </p>
+    </div>
+  </div>
+
+  <div class="profile-content-container"></div>
+  <div class="content-tabs">
+    <button class="content-tabs__btn active">Overview</button>
+    <button class="content-tabs__btn">My Words</button>
+    <div class="content-tabs__line"></div>
+  </div>
+
+  <div class="content-box">
+    <div class="content active">
+      <p class="generic-text">Word of the day: <%= mappedWordOfTheDay %></p>
+
+      <% if (mappedSentenceOfTheDay.includes(',')) { %>
+      <p class="generic-text">
+        Sentence of the day: <%= mappedSentenceOfTheDay.replace(/,/g,
+        '').split('。')[0] %>。
+      </p>
+      <% } else { %>
+      <p class="generic-text">
+        Sentence of the day: <%= mappedSentenceOfTheDay.split('。')[0] %>。
+      </p>
+      <% } %>
+
+      <h2 class="subtitle">Words in my collection</h2>
+      <p class="generic-text">Total: <%= myWords %></p>
+      <p class="generic-text">
+        <span class="review__card--button red">Red</span> Unfamiliar words: <%=
+        red %>
+      </p>
+      <p class="generic-text">
+        <span class="review__card--button orange">Orange</span> Somewhat
+        familiar words: <%= orange %>
+      </p>
+      <p class="generic-text">
+        <span class="review__card--button yellow">Yellow</span> Familiar words:
+        <%= yellow %>
+      </p>
+      <p class="generic-text">
+        <span class="review__card--button green">Green</span> Mastered words:
+        <%= green %>
+      </p>
+    </div>
+
+    <div class="content">My words</div>
+  </div>
 </section>
-
-<p class="generic-text">Member since: <%= formattedDate %></p>
-
-<p class="generic-text">Word of the day: <%= mappedWordOfTheDay %></p>
-
-<% if (mappedSentenceOfTheDay.includes(',')) { %>
-<p class="generic-text">
-  Sentence of the day: <%= mappedSentenceOfTheDay.replace(/,/g,
-  '').split('。')[0] %>。
-</p>
-<% } else { %>
-<p class="generic-text">
-  Sentence of the day: <%= mappedSentenceOfTheDay.split('。')[0] %>。
-</p>
-<% } %>
-
-<h2 class="subtitle">Words in my collection</h2>
-<p class="generic-text">Total: <%= myWords %></p>
-<p class="generic-text">
-  <span class="review__card--button red">Red</span> Unfamiliar words: <%= red %>
-</p>
-<p class="generic-text">
-  <span class="review__card--button orange">Orange</span> Somewhat familiar
-  words: <%= orange %>
-</p>
-<p class="generic-text">
-  <span class="review__card--button yellow">Yellow</span> Familiar words: <%=
-  yellow %>
-</p>
-<p class="generic-text">
-  <span class="review__card--button green">Green</span> Mastered words: <%=
-  green %>
-</p>

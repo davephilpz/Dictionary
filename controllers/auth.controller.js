@@ -116,6 +116,7 @@ exports.getUserProfile = catchAsyncErrorHandler(async (req, res, next) => {
   const orange = user.myWords.orange.length;
   const yellow = user.myWords.yellow.length;
   const green = user.myWords.green.length;
+  console.log(user.photo);
   //format date
   const isoDateString = user.createdAt; //original date string
   const date = new Date(isoDateString); //create Date object from string
