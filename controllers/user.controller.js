@@ -1,0 +1,80 @@
+const User = require("../models/user.model");
+const Study = require("../models/study.model");
+const catchAsyncErrorHandler = require("../util/catchAsyncErrorHandler");
+const AppError = require("../util/AppError");
+
+exports.getUserProfile = catchAsyncErrorHandler(async (req, res, next) => {
+  //get user from session
+  const userId = req.session.userAuthId;
+  //get user object from database
+  const user = await User.findById(userId).populate({
+    path: "myWords.red myWords.orange myWords.yellow myWords.green",
+    model: "Word",
+  });
+  //word logic on backend
+  const myWords =
+    user.myWords.red.length +
+    user.myWords.orange.length +
+    user.myWords.yellow.length +
+    user.myWords.green.length;
+  const red = user.myWords.red.length;
+  const orange = user.myWords.orange.length;
+  const yellow = user.myWords.yellow.length;
+  const green = user.myWords.green.length;
+  console.log(user.photo);
+  //format date
+  const isoDateString = user.createdAt; //original date string
+  const date = new Date(isoDateString); //create Date object from string
+  const options = {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  };
+  const formattedDate = date.toLocaleDateString("en-US", options); //format date string
+
+  //get today's date for word/sentence of the day
+  const todaysDate = new Date();
+  const formattedWordDate = todaysDate.toISOString().substring(0, 10);
+
+  console.log("formatted date:", formattedWordDate);
+
+  //find word/sentence of the day for today's date
+  const wordOfTheDay = await Study.find({
+    [`wordOfTheDay.${formattedWordDate}`]: { $exists: true },
+  });
+  const sentenceOfTheDay = await Study.find({
+    [`sentenceOfTheDay.${formattedWordDate}`]: { $exists: true },
+  });
+
+  console.log("word of the day:", wordOfTheDay);
+  console.log("sentence of the day:", sentenceOfTheDay);
+
+  const parsedWordOfTheDay = wordOfTheDay[0].wordOfTheDay;
+  const mappedWordOfTheDay = parsedWordOfTheDay.get(formattedWordDate);
+  const parsedSentenceOfTheDay = sentenceOfTheDay[0].sentenceOfTheDay;
+  const mappedSentenceOfTheDay = parsedSentenceOfTheDay.get(formattedWordDate);
+
+  console.log("word of the day parsed:", parsedWordOfTheDay);
+  console.log("word of the day mapped:", mappedWordOfTheDay);
+  console.log("sentence of the day parsed:", parsedSentenceOfTheDay);
+  console.log("sentence of the day mapped:", mappedSentenceOfTheDay);
+  console.log("user:", user);
+
+  res.render("user-profile", {
+    pageTitle: "User Profile",
+    contentTitle: "User Profile",
+    session: req.session,
+    user,
+    myWords,
+    red,
+    orange,
+    yellow,
+    green,
+    formattedDate,
+    mappedWordOfTheDay,
+    mappedSentenceOfTheDay,
+  });
+});
+
+exports.postUser;

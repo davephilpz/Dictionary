@@ -47,37 +47,177 @@
 
   <div class="content-box">
     <div class="content active">
-      <p class="generic-text">Word of the day: <%= mappedWordOfTheDay %></p>
+      <div class="myWords-stats">
+        <div class="myWords-stats__stat">
+          <div class="skill">
+            <svg>
+              <circle cx="100" cy="100" r="70"></circle>
+              <circle
+                cx="100"
+                cy="100"
+                r="70"
+                class="progress"
+                data-value="100"
+                data-stroke="#48d01b"
+                data-time="60"
+              ></circle>
+              <circle
+                cx="100"
+                cy="100"
+                r="70"
+                class="progress"
+                data-value="<%= yellow + orange + red %>"
+                data-stroke="#f0ea38"
+                data-time="60"
+              ></circle>
+              <circle
+                cx="100"
+                cy="100"
+                r="70"
+                class="progress"
+                data-value="<%= orange + red %>"
+                data-stroke="#e69914"
+                data-time="60"
+              ></circle>
+              <circle
+                cx="100"
+                cy="100"
+                r="70"
+                class="progress"
+                data-value="<%= red %>"
+                data-stroke="#ff0000"
+                data-time="60"
+              ></circle>
+            </svg>
+            <span class="data-progress" data-value="<%= myWords %>"></span>
+            <h3 class="tertiary-title">All Words</h3>
+          </div>
+        </div>
 
+        <div class="myWords-stats__stat">
+          <div class="skill">
+            <svg>
+              <circle cx="100" cy="100" r="70"></circle>
+              <circle
+                cx="100"
+                cy="100"
+                r="70"
+                class="progress"
+                data-value="100"
+                data-stroke="#f1efef"
+                data-time="60"
+              ></circle>
+              <circle
+                cx="100"
+                cy="100"
+                r="70"
+                class="progress"
+                data-value="<%= Math.floor((green / myWords) *100) %>"
+                data-stroke="#48d01b"
+                data-time="60"
+              ></circle>
+            </svg>
+            <span class="data-progress" data-value="<%= green %>"></span>
+            <h3 class="tertiary-title">Green Words</h3>
+          </div>
+        </div>
+
+        <div class="myWords-stats__stat">
+          <div class="skill">
+            <svg>
+              <circle cx="100" cy="100" r="70"></circle>
+              <circle
+                cx="100"
+                cy="100"
+                r="70"
+                class="progress"
+                data-value="100"
+                data-stroke="#f1efef"
+                data-time="60"
+              ></circle>
+              <circle
+                cx="100"
+                cy="100"
+                r="70"
+                class="progress"
+                data-value="<%= Math.floor((yellow / myWords) *100) %>"
+                data-stroke="#f0ea38"
+                data-time="60"
+              ></circle>
+            </svg>
+            <span class="data-progress" data-value="<%= yellow %>"></span>
+            <h3 class="tertiary-title">Yellow Words</h3>
+          </div>
+        </div>
+
+        <div class="myWords-stats__stat">
+          <div class="skill">
+            <svg>
+              <circle cx="100" cy="100" r="70"></circle>
+              <circle
+                cx="100"
+                cy="100"
+                r="70"
+                class="progress"
+                data-value="100"
+                data-stroke="#f1efef"
+                data-time="60"
+              ></circle>
+              <circle
+                cx="100"
+                cy="100"
+                r="70"
+                class="progress"
+                data-value="<%= Math.floor((orange / myWords) *100) %>"
+                data-stroke="#e69914"
+                data-time="60"
+              ></circle>
+            </svg>
+            <span class="data-progress" data-value="<%= orange %>"></span>
+            <h3 class="tertiary-title">Orange Words</h3>
+          </div>
+        </div>
+
+        <div class="myWords-stats__stat">
+          <div class="skill">
+            <svg>
+              <circle cx="100" cy="100" r="70"></circle>
+              <circle
+                cx="100"
+                cy="100"
+                r="70"
+                class="progress"
+                data-value="100"
+                data-stroke="#f1efef"
+                data-time="60"
+              ></circle>
+              <circle
+                cx="100"
+                cy="100"
+                r="70"
+                class="progress"
+                data-value="<%= red / myWords %>"
+                data-stroke="#ff0000"
+                data-time="60"
+              ></circle>
+            </svg>
+            <span class="data-progress" data-value="<%= red %>"></span>
+            <h3 class="tertiary-title">Red Words</h3>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="subtitle">Word of the day: <%= mappedWordOfTheDay %></h2>
       <% if (mappedSentenceOfTheDay.includes(',')) { %>
-      <p class="generic-text">
+      <h2 class="subtitle">
         Sentence of the day: <%= mappedSentenceOfTheDay.replace(/,/g,
         '').split('。')[0] %>。
-      </p>
+      </h2>
       <% } else { %>
-      <p class="generic-text">
+      <h2 class="subtitle">
         Sentence of the day: <%= mappedSentenceOfTheDay.split('。')[0] %>。
-      </p>
+      </h2>
       <% } %>
-
-      <h2 class="subtitle">Words in my collection</h2>
-      <p class="generic-text">Total: <%= myWords %></p>
-      <p class="generic-text">
-        <span class="review__card--button red">Red</span> Unfamiliar words: <%=
-        red %>
-      </p>
-      <p class="generic-text">
-        <span class="review__card--button orange">Orange</span> Somewhat
-        familiar words: <%= orange %>
-      </p>
-      <p class="generic-text">
-        <span class="review__card--button yellow">Yellow</span> Familiar words:
-        <%= yellow %>
-      </p>
-      <p class="generic-text">
-        <span class="review__card--button green">Green</span> Mastered words:
-        <%= green %>
-      </p>
     </div>
 
     <div class="content">
@@ -246,6 +386,7 @@
                 <% break; case "未定": %>
                 <span class="search__result--word-type"></span>
                 <% break; default: break; } %>
+                <button class="edit__btn" type="submit">Edit</button>
               </div>
               <% if (word.日本語.略語 == '') { %>
               <span class="search__result--part-of-speech"></span>
@@ -375,6 +516,7 @@
                 <span class="search__result--word-type"></span>
                 <% break; default: break; } %>
               </div>
+
               <% if (word.日本語.略語 == '') { %>
               <span class="search__result--part-of-speech"></span>
               <% } else { %>
