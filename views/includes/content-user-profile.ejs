@@ -207,17 +207,27 @@
         </div>
       </div>
 
-      <h2 class="subtitle">Word of the day: <%= mappedWordOfTheDay %></h2>
-      <% if (mappedSentenceOfTheDay.includes(',')) { %>
-      <h2 class="subtitle">
-        Sentence of the day: <%= mappedSentenceOfTheDay.replace(/,/g,
-        '').split('。')[0] %>。
-      </h2>
-      <% } else { %>
-      <h2 class="subtitle">
-        Sentence of the day: <%= mappedSentenceOfTheDay.split('。')[0] %>。
-      </h2>
-      <% } %>
+      <div class="daily-study">
+        <div class="daily-study__titles">
+          <h2 class="daily-study__title">Word of the day</h2>
+
+          <h2 class="daily-study__title">Sentence of the day</h2>
+        </div>
+
+        <div class="daily-study__contents">
+          <h2 class="daily-study__content"><%= mappedWordOfTheDay %></h2>
+          <% if (mappedSentenceOfTheDay.includes(',')) { %>
+          <h2 class="daily-study__content">
+            <%= mappedSentenceOfTheDay.replace(/,/g, '').split('。')[0] %>。
+          </h2>
+
+          <% } else { %>
+          <h2 class="daily-study__content">
+            <%= mappedSentenceOfTheDay.split('。')[0] %>。
+          </h2>
+          <% } %>
+        </div>
+      </div>
     </div>
 
     <div class="content">
