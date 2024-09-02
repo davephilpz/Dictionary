@@ -107,14 +107,14 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(
   session({
     secret: process.env.SESSION_KEY,
-    cookie: { maxAge: 3 * 24 * 60 * 60 * 1000 }, // 3 days in milliseconds
+    cookie: { maxAge: 365 * 24 * 60 * 60 * 1000 }, // 3 days in milliseconds
     resave: false, //true forces sessions to be saved back to session store, even if the session was never modified during the request. False means only if modified and can improve performance.
     saveUninitialized: true, //true forces sessions that are initialized to be saved to the store
     store: new MongoStore({
       uri: process.env.CLOUD_DATABASE,
       autoReconnect: true,
       collection: "sessions",
-      ttl: 3 * 24 * 60 * 60, // TTL of 3 days (in seconds)
+      ttl: 365 * 24 * 60 * 60, // TTL of 3 days (in seconds)
       autoRemove: "interval",
       autoRemoveInterval: 10, // remove expired sessions every 10 minutes
     }),
