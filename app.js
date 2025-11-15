@@ -37,6 +37,7 @@ const MongoStore = require("connect-mongodb-session")(session);
 
 //route declarations
 const adminRouter = require("./routes/admin.router");
+const aiRouter = require("./routes/ai.router");
 const wordRouter = require("./routes/word.router");
 const reviewRouter = require("./routes/review.router");
 const authRouter = require("./routes/auth.router");
@@ -147,6 +148,7 @@ app.use((req, res, next) => {
 
 //admin routes
 app.use("/admin", adminRouter);
+app.use("/ai", aiRouter);
 //search routes
 app.use(wordRouter);
 //review routes

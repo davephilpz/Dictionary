@@ -15,6 +15,11 @@ const wordsSchema = new mongoose.Schema(
         enum: ["文語", "口語", "両方", "未定"],
         message: "type must be written, spoken, both or unsure.",
       },
+      俗語: {
+        type: String,
+        enum: ["俗語", "造語", ""],
+        default: "",
+      },
       振り仮名: {
         type: [String], // have a space deliminated string for furigana for each word
       },
@@ -33,6 +38,35 @@ const wordsSchema = new mongoose.Schema(
         type: [String],
       },
       略語: {
+        type: [String],
+      },
+      定義: {
+        type: [String],
+        required: [true, "Must enter definition for the word."],
+      },
+      使用場面: {
+        type: String,
+        enum: ["フォーマル", "カジュアル"],
+        required: [true, "Must enter use situation."],
+      },
+      使用場面追加: {
+        type: [String],
+        required: [true, "Must enter use situation opposite use info."],
+      },
+      フォーマル度: {
+        type: [String],
+        required: [true, "Must input level of formality."],
+      },
+      希少度: {
+        type: Number,
+        min: [1, "希少度は1以上である必要があります。"],
+        max: [10, "希少度は10以下である必要があります。"],
+        required: [true, "Must input rareness of word."],
+      },
+      動詞ペア: {
+        type: [String],
+      },
+      類語: {
         type: [String],
       },
       備考欄: {

@@ -110,6 +110,15 @@ exports.postCreateWord = catchAsyncErrorHandler(async (req, res, next) => {
 
   console.log(newWordModel);
 
+  // 保存前に、すでに同じ「日本語単語」が存在するかチェック
+  const duplicateWord = await Word.findOne({ "日本語.日本語単語": 日本語単語 });
+
+  if (duplicateWord) {
+    return next(
+      new AppError(`Duplicate word not allowed: (${日本語単語})`, 400)
+    );
+  }
+
   const newWord = await newWordModel.save((err) => {
     if (!err) {
       req.flash("message", `Successfully added: (${req.body.日本語単語})`);
